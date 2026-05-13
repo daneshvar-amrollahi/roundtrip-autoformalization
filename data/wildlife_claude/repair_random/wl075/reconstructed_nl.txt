@@ -1,0 +1,19 @@
+A person who uses a crab trap on a public water body must ensure that the trap has an attached tag, unless the person has subchapter authorization and the trap does not have an attached tag.
+
+Wait, let me re-analyze the formula more carefully.
+
+The formula states:
+
+If (crab trap) ∧ (uses device) ∧ (on public water) ∧ ¬(has_subchapter_authorization ∧ ¬has_attached_tag) → has_attached_tag
+
+The negated condition `¬(has_subchapter_authorization ∧ ¬has_attached_tag)` is equivalent to `(¬has_subchapter_authorization ∨ has_attached_tag)`.
+
+So the antecedent requires: crab trap ∧ uses ∧ public water ∧ (¬has_subchapter_authorization ∨ has_attached_tag).
+
+Case 1: If has_attached_tag is true, the consequent is trivially satisfied.
+Case 2: If has_attached_tag is false, then the antecedent requires ¬has_subchapter_authorization. In that case, the consequent demands has_attached_tag — contradiction. So has_attached_tag must be true.
+Case 3: If has_subchapter_authorization is true and has_attached_tag is false, the inner negation fails, so the antecedent is false — no constraint.
+
+So effectively: a person using a crab trap on public water must have an attached tag on the trap, unless the person has subchapter authorization.
+
+A person who uses a crab trap on a public water body must ensure that the trap has an attached tag, unless the person has subchapter authorization.

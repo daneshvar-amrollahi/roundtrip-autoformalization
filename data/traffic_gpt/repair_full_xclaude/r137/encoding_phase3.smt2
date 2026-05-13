@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (and (approaching_intersection v i t)
+           (or (executing_turn_at_intersection v TD_Left i t)
+               (executing_turn_at_intersection v TD_Right i t))
+           (cutting_through_property v i t))
+      (and (not (on_sidewalk_or_trail v t))
+           (not (crossing_sidewalk v t)))))

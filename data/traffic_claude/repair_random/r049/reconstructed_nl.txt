@@ -1,0 +1,1 @@
+A vehicle that has stopped at a railroad crossing where a stop condition is present must remain stopped until it is both permitted to proceed and safe to proceed.

@@ -1,0 +1,13 @@
+A vehicle may not stand or park within 30 feet of a flashing signal, stop sign, yield sign, or traffic signal, unless the vehicle is stopped in the act of stopping.
+
+Wait, let me re-read the formula more carefully.
+
+The formula says: for all vehicles and times, if (the vehicle is within 30 feet of a flashing signal, stop sign, yield sign, or traffic signal) AND (it is NOT the case that the vehicle's stop action is "stop" and the vehicle is stopped), then the vehicle must not be standing and must not be parked.
+
+So the exception is when the vehicle is performing a "stop" action and is stopped.
+
+A vehicle may not stand or park within 30 feet of a flashing signal, stop sign, yield sign, or traffic signal, unless the vehicle is making a lawful stop and is stopped.
+
+Hmm, let me be more precise and literal:
+
+A vehicle within 30 feet of a flashing signal, stop sign, yield sign, or traffic signal may not stand or park unless the vehicle is stopped as part of a stopping action.

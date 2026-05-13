@@ -1,0 +1,7 @@
+(exists ((v1 Vehicle) (v2 Vehicle) (l Lane) (t Int))
+  (and (not (= v1 v2))
+       (= (kind v1) VK_Motorcycle)
+       (= (kind v2) VK_Motorcycle)
+       (on_lane v1 l t)
+       (on_lane v2 l t)
+       (operating_abreast v1 v2 l t)))

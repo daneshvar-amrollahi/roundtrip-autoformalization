@@ -1,0 +1,1 @@
+The ego vehicle, when not on official business and following a fire apparatus that has its emergency signals active, and where the ego vehicle and the fire apparatus are distinct vehicles, must maintain a distance strictly greater than 500 feet from that fire apparatus.

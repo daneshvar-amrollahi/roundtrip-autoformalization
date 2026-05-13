@@ -1,0 +1,1 @@
+If the ego vehicle is executing a left turn at an intersection on a two-way roadway, the ego vehicle must position itself as close as practicable to the left edge of the roadway.

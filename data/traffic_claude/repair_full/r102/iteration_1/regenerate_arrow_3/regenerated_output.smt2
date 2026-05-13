@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (or (< (dist_to_feature v PF_FlashingSignal t) ft_30)
+               (< (dist_to_feature v PF_StopSign t) ft_30)
+               (< (dist_to_feature v PF_YieldSign t) ft_30)
+               (< (dist_to_feature v PF_TrafficSignal t) ft_30))
+           (not (= (stop_action v t) SA_Stop)))
+      (and (not (= (stop_action v t) SA_Stand))
+           (not (= (stop_action v t) SA_Park)))))

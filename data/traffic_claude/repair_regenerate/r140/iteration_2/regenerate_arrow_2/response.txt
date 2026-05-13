@@ -1,0 +1,19 @@
+When a vehicle is being passed on the right, the vehicle being passed must not move closer to the right edge of the roadway upon receiving an audible signal from the passing vehicle, and the vehicle being passed must not refrain from accelerating while being passed.
+
+Wait, let me re-analyze the formula more carefully.
+
+The formula states: for all passed and passer vehicles at any time, if the passer is passing on the right, then both:
+1. `(not (=> audible_signal → close_to_right_edge_practicable))` — i.e., `audible_signal AND NOT close_to_right_edge_practicable`
+2. `(not (=> passing → NOT is-accelerating))` — i.e., `passing AND is-accelerating`
+
+This means: when being passed on the right, the passed vehicle must have received an audible signal yet must not move close to the right edge as practicable, and the passed vehicle must be accelerating.
+
+But this seems like an unusual rule encoding. Let me re-read — the negation of an implication `¬(A → B)` equals `A ∧ ¬B`.
+
+So:
+1. audible_signal ∧ ¬close_to_right_edge_practicable
+2. passing ∧ is-accelerating
+
+This appears to encode obligations/conditions on the passed vehicle during a right-side pass.
+
+When a vehicle is being passed on the right, the vehicle being passed must not move to the right edge of the roadway as practicable even when given an audible signal by the passing vehicle, and the vehicle being passed must accelerate while being passed.

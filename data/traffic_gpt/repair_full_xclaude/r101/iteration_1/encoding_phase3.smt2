@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (i Intersection) (r Roadway) (t Int))
+  (=> (and (intersection_on_roadway i r)
+           (on_roadway v r t)
+           (in_intersection v i t)
+           (or (standing_vehicle v t) (parked v t))
+           (<= (dist_to_feature v PF_Crosswalk t) ft_20))
+      (not (stopping_or_sudden_decrease_speed v t))))

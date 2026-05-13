@@ -1,0 +1,6 @@
+(forall ((p Person) (s Substance) (w WaterBody) (t Int))
+  (=> (and (places_in_water p s w t)
+           (substance_kind s SK_Explosive)
+           (for_construction p t)
+           (has_written_authorization p t))
+      (places_in_water p s w t)))

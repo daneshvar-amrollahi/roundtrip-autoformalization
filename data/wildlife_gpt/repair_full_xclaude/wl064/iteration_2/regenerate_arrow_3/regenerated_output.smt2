@@ -1,0 +1,13 @@
+(forall ((a Animal))
+  (=> (is_named_in_protected_fish_list a)
+      (forall ((p Person) (t Int))
+        (and
+          (not (buys p a t))
+          (not (offers_to_buy p a t))
+          (not (sells p a t))
+          (not (offers_to_sell p a t))
+          (not (barters p a t))
+          (not (exchanges p a t))
+          (not (and (possesses p a t) (for_sale p a t)))
+          (not (and (transports p a t) (for_sale p a t)))
+          (not (and (ships p a t) (for_sale p a t)))))))

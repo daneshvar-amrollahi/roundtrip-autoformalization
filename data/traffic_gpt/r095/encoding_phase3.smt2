@@ -1,0 +1,13 @@
+(forall ((v Vehicle) (z Zone) (r Roadway) (t Int))
+  (=> (is_safety_zone z)
+      (and
+        (=> (and (in_zone v z t)
+                 (driving_through_safety_zone v z t))
+            (not (or (= (stop_action v t) SA_Stop)
+                     (= (stop_action v t) SA_Stand)
+                     (= (stop_action v t) SA_Park))))
+        (=> (and (on_roadway v r t)
+                 (<= (dist_to_feature v PF_SafetyZone t) ft_30))
+            (not (or (= (stop_action v t) SA_Stop)
+                     (= (stop_action v t) SA_Stand)
+                     (= (stop_action v t) SA_Park)))))))

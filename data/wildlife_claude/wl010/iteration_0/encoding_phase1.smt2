@@ -1,0 +1,18 @@
+(forall ((hunter Person) (a Animal) (d Device) (assistant Person) (t Int))
+  (=>
+    (and
+      (has_physical_disability hunter t)
+      (is_hunting hunter t)
+      (hunts hunter a t)
+      (uses_device hunter d t)
+      (device_kind d DK_LaserSightingDevice)
+      (during_lawful_hunting_hours t)
+      (during_open_season AK_WildGameAnimal t)
+      (assisted_by hunter assistant t)
+      (not (has_physical_disability assistant t))
+      (has_document_kind assistant DOK_HuntingLicense t)
+      (>= (age_of assistant) 13)
+    )
+    (uses_device hunter d t)
+  )
+)

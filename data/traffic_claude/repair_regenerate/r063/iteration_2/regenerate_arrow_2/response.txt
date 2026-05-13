@@ -1,0 +1,1 @@
+An operator intending to turn left or right must give a continuous turn signal for at least 100 feet in the direction of the intended turn.

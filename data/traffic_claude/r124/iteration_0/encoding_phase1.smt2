@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (or (= (kind v) VK_Truck)
+               (= (kind v) VK_Bus)
+               (= (kind v) VK_HeavyEquipment))
+           (on_roadway v r t)
+           (on_downgrade v r t))
+      (not (= (gear_state v t) GS_ClutchDisengaged))))

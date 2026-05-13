@@ -1,0 +1,1 @@
+When the ego vehicle is on a roadway and another vehicle is approaching from the opposite direction on the same roadway, the ego vehicle must drive on the right half of the roadway.

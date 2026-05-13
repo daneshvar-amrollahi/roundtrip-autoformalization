@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (passenger_interferes_view v t)
+           (or (view_obstructed_by_load v t)
+               (driving_mechanism_interfered v t)))
+      (stopped v t)))

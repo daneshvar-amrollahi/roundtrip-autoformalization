@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (approaching_crossing v c t)
+           (rail_stop_condition_holds v c t))
+      (and (stopped v t)
+           (<= (* ft_15 ft_15) (dist_to_nearest_rail_sq v c t))
+           (<= (dist_to_nearest_rail_sq v c t) (* ft_50 ft_50)))))

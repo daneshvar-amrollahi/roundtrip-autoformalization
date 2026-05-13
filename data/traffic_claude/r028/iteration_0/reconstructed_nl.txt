@@ -1,0 +1,1 @@
+A vehicle may not change lanes unless the movement can be made safely.

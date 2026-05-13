@@ -1,0 +1,7 @@
+(forall ((v_target Vehicle) (v_signal Vehicle) (t Int))
+  (=> (and (police_signal_given v_signal v_target t)
+           (not (= v_signal v_target))
+           (not (= (kind v_signal) VK_PoliceVehicle))
+           (or (fleeing_police v_target t)
+               (not (stopped v_target t))))
+      true))

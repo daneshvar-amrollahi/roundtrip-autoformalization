@@ -1,0 +1,33 @@
+(forall ((v_turner Vehicle) (v_oncoming Vehicle) (i Intersection) (t Int))
+  (=> (and (is_ego v_turner)
+           (not (= v_turner v_oncoming))
+           (or (executing_turn_at_intersection v_turner TD_Left i t)
+               (and (executing_turn v_turner TD_Left t)
+                    (exists ((a Access))
+                      (and (turning_into v_turner a t)
+                           (or (= (access_kind a) AK_Alley)
+                               (= (access_kind a) AK_PrivateRoad)
+                               (= (access_kind a) AK_Driveway))))))
+           (approaching_opposite v_turner v_oncoming t)
+           (or (in_intersection v_oncoming i t)
+               (is_immediate_hazard v_oncoming v_turner i t)))
+      (yield_right_of_way_to_pedestrian v_turner t)))
+
+Wait, I need to reconsider. The rule says "yield the right-of-way to a vehicle," not to a pedestrian. Let me look at the schema more carefully. The schema has `yield_right_of_way_to_pedestrian` but no general `yield_right_of_way_to_vehicle`. The closest encoding would need to express yielding behavior through motion constraints (not proceeding / stopping / decelerating).
+
+Let me re-encode properly:
+
+(forall ((v_turner Vehicle) (v_oncoming Vehicle) (i Intersection) (t Int))
+  (=> (and (is_ego v_turner)
+           (not (= v_turner v_oncoming))
+           (or (executing_turn_at_intersection v_turner TD_Left i t)
+               (and (executing_turn v_turner TD_Left t)
+                    (exists ((a Access))
+                      (and (turning_into v_turner a t)
+                           (or (= (access_kind a) AK_Alley)
+                               (= (access_kind a) AK_PrivateRoad)
+                               (= (access_kind a) AK_Driveway))))))
+           (approaching_opposite v_turner v_oncoming t)
+           (or (in_intersection v_oncoming i t)
+               (is_immediate_hazard v_oncoming v_turner i t)))
+      (not (entering_intersection v_turner i t))))

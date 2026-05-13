@@ -1,0 +1,1 @@
+If a vehicle is passing another vehicle, then from the time the passing begins until the passing vehicle has completely passed the other vehicle, the passed vehicle must not accelerate.

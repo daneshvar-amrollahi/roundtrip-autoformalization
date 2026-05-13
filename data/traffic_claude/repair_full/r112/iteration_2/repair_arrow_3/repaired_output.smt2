@@ -1,0 +1,1 @@
+(forall ((v Vehicle) (r Roadway) (t Int)) (=> (and (is_ego v) (on_roadway v r t) (special_hazard_exists v r t)) (reduced_speed_appropriate v t)))

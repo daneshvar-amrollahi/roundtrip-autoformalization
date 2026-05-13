@@ -1,0 +1,8 @@
+(forall ((v_ego Vehicle) (v_other Vehicle) (i Intersection) (t Int))
+  (=> (and (not (= v_ego v_other))
+           (approaching_intersection v_ego i t)
+           (= (intersection_control i) IC_StopSign)
+           (stopped v_ego t)
+           (or (in_intersection v_other i t)
+               (is_immediate_hazard v_other v_ego i t)))
+      (not (entering_intersection v_ego i t))))

@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (w WaterBody) (t Int))
+  (=> (and (is_kind a AK_Fish)
+           (takes p a t)
+           (on_water_body p w t)
+           (water_kind w WK_PublicWater)
+           (is_in_edible_condition a t)
+           (not (has_intent_to_retain p a t)))
+      (not (leaves_to_die p a t))))

@@ -1,0 +1,13 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (is_kind a AK_DangerousWildAnimal)
+      (and
+        (=> (and (in_captivity a t))
+            (and (not (kills p a t))
+                 (not (attempts_to_kill p a t))
+                 (not (attempts_to_injure p a t))))
+        (=> (released_for_killing a t)
+            (and (not (kills p a t))
+                 (not (attempts_to_kill p a t))
+                 (not (attempts_to_injure p a t))))
+        (=> (or (in_captivity a t) (released_for_killing a t))
+            (not (participates_in_killing_activity p t))))))

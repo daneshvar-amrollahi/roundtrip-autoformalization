@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (using_opposing_direction_lane_to_pass v t))
+      (and (in_authorized_lane v t)
+           (left_side_clear_for_passing v r t))))

@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (is_ego v)
+           (or (exists ((i Intersection)) (approaching_intersection v i t))
+               (exists ((i Intersection)) (in_intersection v i t))
+               (exists ((c Crossing)) (approaching_crossing v c t))))
+      (reduced_speed_appropriate v t)))

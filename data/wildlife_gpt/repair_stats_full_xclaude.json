@@ -1,0 +1,614 @@
+{
+  "ablation_mode": "full",
+  "max_iterations": 3,
+  "model": "gpt-5.2",
+  "provider": "openai",
+  "total_rules": 77,
+  "attempted_repair": 25,
+  "achieved_unsat": 21,
+  "skipped": 52,
+  "total_llm_calls": 127,
+  "llm_calls_per_unsat": 6.05,
+  "repair_rate": 84.0,
+  "per_rule": {
+    "wl001": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 2,
+      "arrows_repaired": [
+        3
+      ]
+    },
+    "wl002": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl003": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 4,
+      "arrows_repaired": [
+        1
+      ]
+    },
+    "wl004": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl005": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl006": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl007": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl008": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl009": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl010": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 2,
+      "arrows_repaired": [
+        3
+      ]
+    },
+    "wl011": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl012": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 2,
+      "arrows_repaired": [
+        3
+      ]
+    },
+    "wl013": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 2,
+      "arrows_repaired": [
+        3
+      ]
+    },
+    "wl014": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl016": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl017": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl018": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl019": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 2,
+      "arrows_repaired": [
+        3
+      ]
+    },
+    "wl020": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 4,
+      "arrows_repaired": [
+        1
+      ]
+    },
+    "wl021": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 2,
+      "llm_calls": 4,
+      "arrows_repaired": [
+        3,
+        3
+      ]
+    },
+    "wl022": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 2,
+      "llm_calls": 5,
+      "arrows_repaired": [
+        2,
+        3
+      ]
+    },
+    "wl023": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl024": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 2,
+      "llm_calls": 6,
+      "arrows_repaired": [
+        1,
+        3
+      ]
+    },
+    "wl025": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl026": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl027": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl028": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl029": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl030": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl031": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl032": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl033": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 2,
+      "arrows_repaired": [
+        3
+      ]
+    },
+    "wl034": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 4,
+      "arrows_repaired": [
+        1
+      ]
+    },
+    "wl035": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl036": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl037": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl038": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl039": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl040": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl041": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl042": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl043": {
+      "pre_repair": "SAT",
+      "post_repair": "SAT",
+      "iterations": 1,
+      "llm_calls": 4,
+      "arrows_repaired": [
+        1
+      ]
+    },
+    "wl044": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl045": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl046": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 2,
+      "arrows_repaired": [
+        3
+      ]
+    },
+    "wl047": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl048": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl049": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl050": {
+      "pre_repair": "SAT",
+      "post_repair": "SAT",
+      "iterations": 3,
+      "llm_calls": 12,
+      "arrows_repaired": [
+        1,
+        1,
+        1
+      ]
+    },
+    "wl051": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl052": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl053": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl054": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl055": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 2,
+      "arrows_repaired": [
+        3
+      ]
+    },
+    "wl056": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 4,
+      "arrows_repaired": [
+        1
+      ]
+    },
+    "wl057": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl058": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 3,
+      "llm_calls": 8,
+      "arrows_repaired": [
+        3,
+        3,
+        1
+      ]
+    },
+    "wl059": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 2,
+      "llm_calls": 7,
+      "arrows_repaired": [
+        2,
+        1
+      ]
+    },
+    "wl060": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl061": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl062": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl063": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl064": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 2,
+      "llm_calls": 7,
+      "arrows_repaired": [
+        1,
+        2
+      ]
+    },
+    "wl065": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 3,
+      "llm_calls": 10,
+      "arrows_repaired": [
+        1,
+        1,
+        3
+      ]
+    },
+    "wl066": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl067": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 1,
+      "llm_calls": 2,
+      "arrows_repaired": [
+        3
+      ]
+    },
+    "wl068": {
+      "pre_repair": "SAT",
+      "post_repair": "SAT",
+      "iterations": 3,
+      "llm_calls": 10,
+      "arrows_repaired": [
+        1,
+        3,
+        1
+      ]
+    },
+    "wl069": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl070": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl071": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl072": {
+      "pre_repair": "SAT",
+      "post_repair": "SAT",
+      "iterations": 3,
+      "llm_calls": 10,
+      "arrows_repaired": [
+        1,
+        3,
+        1
+      ]
+    },
+    "wl073": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl074": {
+      "pre_repair": "SAT",
+      "post_repair": "UNSAT",
+      "iterations": 3,
+      "llm_calls": 10,
+      "arrows_repaired": [
+        2,
+        1,
+        2
+      ]
+    },
+    "wl075": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl076": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    },
+    "wl077": {
+      "pre_repair": "UNSAT",
+      "post_repair": "UNSAT",
+      "iterations": 0,
+      "llm_calls": 0,
+      "arrows_repaired": []
+    }
+  }
+}

@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (= (kind v) VK_Regular)
+           (on_sidewalk_or_trail v t)
+           (not (directed_by_police v t))
+           (not (directed_by_traffic_control_device v t)))
+      (or (turning_into v a t) (emerging_from v a t))))

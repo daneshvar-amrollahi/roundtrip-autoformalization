@@ -1,0 +1,5 @@
+(forall ((p Person) (d Device) (t Int))
+  (=> (and (device_kind d DK_ElectricityDevice)
+           (or (manufactures_device p d t)
+               (sells_device p d t)))
+      false))

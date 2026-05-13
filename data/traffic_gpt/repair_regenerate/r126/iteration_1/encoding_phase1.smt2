@@ -1,0 +1,7 @@
+(forall ((v_follower Vehicle) (v_ambulance Vehicle) (t Int))
+  (=> (and (not (= v_follower v_ambulance))
+           (following v_follower v_ambulance t)
+           (= (kind v_ambulance) VK_Ambulance)
+           (emergency_signals_active v_ambulance t)
+           (not (on_official_business v_follower t)))
+      (<= ft_500_sq (distance v_follower v_ambulance t))))

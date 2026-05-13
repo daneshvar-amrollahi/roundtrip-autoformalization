@@ -1,0 +1,7 @@
+(forall ((hunter Person) (a Animal) (t Int) (light Device))
+  (=> (and (hunts hunter a t)
+           (or (is_kind a AK_GameAnimal) (is_kind a AK_GameBird))
+           (protected_by_code a)
+           (uses_device hunter light t)
+           (device_kind light DK_ArtificialLight))
+      (not (illuminates light a t))))

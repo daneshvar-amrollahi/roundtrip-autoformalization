@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (and (approaching_intersection v i t)
+           (or (= (intersection_control i) IC_StopSign)
+               (= (intersection_control i) IC_YieldSign)))
+      (and (stopped v t)
+           (yield_right_of_way_to_pedestrian v t)
+           (intersection_can_be_safely_entered v i t))))

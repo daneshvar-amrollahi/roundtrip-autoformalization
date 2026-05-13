@@ -1,0 +1,6 @@
+(exists ((p Person) (t Int))
+  (and (has_document_kind p DOK_FishingLicense t)
+       (has_document_kind p DOK_FreshwaterFishingStamp t)
+       (exists ((w WaterBody))
+         (and (on_water_body p w t)
+              (water_kind w WK_PublicFreshWater)))))

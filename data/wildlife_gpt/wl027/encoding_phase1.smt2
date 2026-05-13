@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (possesses p a t)
+           (or (is_kind a AK_ExoticAnimal)
+               (and (is_kind a AK_Carcass)
+                    (exists ((ex Animal))
+                      (and (is_kind ex AK_ExoticAnimal)
+                           (is_part_of a ex))))))
+      false))

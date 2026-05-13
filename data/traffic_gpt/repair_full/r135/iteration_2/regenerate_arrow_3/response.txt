@@ -1,0 +1,7 @@
+(forall ((v_op Vehicle) (v_police Vehicle) (t Int))
+  (=> (and (police_signal_given v_police v_op t)
+           (or (audible_signal v_police v_op t)
+               (emergency_signals_active v_police t))
+           (not (fleeing_police v_op t)))
+      (and (stopped v_op t)
+           (not (reckless_driving v_op t)))))

@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (r Roadway) (a Access) (td TurnDir) (t Int))
+  (=> (and (on_roadway v r t)
+           (not (movement_can_be_made_safely v t))
+           (or (turning_into v a t)
+               (intends_turn v td t)
+               (intends_lane_change v td t)))
+      (not (movement_can_be_made_safely v t))))

@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (td TurnDir) (t Int))
+  (=> (and (or (= td TD_Left) (= td TD_Right))
+           (intends_turn v td t)
+           (opportunity_to_signal v t))
+      (signal_continuous_100ft v td t)))

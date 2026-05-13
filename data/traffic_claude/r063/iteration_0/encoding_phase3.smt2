@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (d TurnDir) (t Int))
+  (=> (and (is_ego v)
+           (or (= d TD_Left) (= d TD_Right))
+           (executing_turn v d t))
+      (signal_continuous_100ft v d t)))

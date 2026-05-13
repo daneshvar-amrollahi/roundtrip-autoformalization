@@ -1,0 +1,5 @@
+(forall ((v_pass Vehicle) (v_sc Vehicle) (t Int))
+  (=> (and (passing v_pass v_sc t)
+           (= (kind v_sc) VK_Streetcar)
+           (in_front_of v_pass v_sc t))
+      (not (interfered_or_impeded v_pass v_sc t))))

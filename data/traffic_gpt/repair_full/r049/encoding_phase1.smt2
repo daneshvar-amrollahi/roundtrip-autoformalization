@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (approaching_crossing v c t)
+           (rail_stop_condition_holds v c t))
+      (forall ((t2 Int))
+        (=> (and (<= t t2)
+                 (not (and (permitted_to_proceed v c t2)
+                           (safe_to_proceed v c t2))))
+            (stopped v t2)))))

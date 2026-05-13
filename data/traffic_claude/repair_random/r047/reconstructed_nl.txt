@@ -1,0 +1,1 @@
+An operator passing a streetcar must not execute a turn in front of the streetcar in a manner that interferes with or impedes the streetcar.

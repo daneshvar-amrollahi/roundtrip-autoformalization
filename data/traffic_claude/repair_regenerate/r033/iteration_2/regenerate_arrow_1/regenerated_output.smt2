@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (v_other Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (not (= (district_of_roadway r) DK_Business))
+           (not (= (district_of_roadway r) DK_Residence))
+           (in_caravan_or_motorcade v t)
+           (not (is_funeral_procession v t))
+           (not (= v v_other)))
+      (sufficient_space_for_vehicle_to_enter v v_other t)))

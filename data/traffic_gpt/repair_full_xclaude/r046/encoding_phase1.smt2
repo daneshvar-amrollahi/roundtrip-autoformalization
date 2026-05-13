@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (sc Vehicle) (i Intersection) (r Roadway) (t Int))
+  (=> (and (in_intersection v i t)
+           (intersection_on_roadway i r)
+           (on_roadway v r t)
+           (in_front_of v sc t)
+           (= (kind sc) VK_Streetcar)
+           (= (streetcar_state sc t) SCS_CrossingIntersection))
+      (not (= (roadway_pos v r t) RP_StreetcarTrack))))

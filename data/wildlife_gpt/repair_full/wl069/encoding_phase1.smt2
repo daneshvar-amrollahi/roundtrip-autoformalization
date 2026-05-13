@@ -1,0 +1,5 @@
+(forall ((p Person) (sg Animal) (t Int))
+  (=> (and (is_kind sg AK_Seagrass)
+           (uproots_or_digs_by_propeller p sg t)
+           (not (has_commercial_seagrass_permit p t)))
+      (not (uproots_or_digs_by_propeller p sg t))))

@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (moving_slower_than_normal v r t))
+      (or (reduced_speed_appropriate v t)
+          (directed_by_traffic_control_device v t)
+          (directed_by_police v t))))

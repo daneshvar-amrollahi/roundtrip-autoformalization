@@ -1,0 +1,8 @@
+(forall ((p Person) (trap Device) (w WaterBody) (t Int))
+  (=> (and (uses_device p trap t)
+           (device_kind trap DK_CrabTrap)
+           (on_water_body p w t)
+           (water_kind w WK_PublicWater)
+           (not (and (has_subchapter_authorization p t)
+                     (has_document_kind p DOK_CommercialFishingLicense t))))
+      (has_attached_tag trap t)))

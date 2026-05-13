@@ -1,0 +1,138 @@
+You are an expert in formalizing traffic rules for autonomous vehicles into SMT-LIB format.
+
+I will give you a schema in SMT-LIB, consisting of some sorts and functions over them. The context is self-driving cars.
+I have a rule written in natural language, and would like to encode it as an SMT-LIB formula using the exact schema I have given you.
+
+THE SCHEMA IS COMPREHENSIVE:
+The schema includes helper predicates and functions for distance, motion states, vehicle relationships, roadway properties, lane usage, access points, and more. Review the schema carefully and use these predicates creatively.
+
+SCHEMA INSUFFICIENCY - LAST RESORT ONLY:
+Only flag schema insufficiency if it is ABSOLUTELY IMPOSSIBLE to encode the rule. If you can encode even an approximate version using the schema, DO IT.
+
+To flag insufficiency (USE SPARINGLY):
+SCHEMA_INSUFFICIENT: <brief explanation of what's fundamentally missing>
+
+CRITICAL REQUIREMENTS (when encoding):
+1. ONLY use functions and predicates explicitly defined in the schema
+2. Use them with the CORRECT number and types of parameters
+3. Ensure all expressions are well-typed
+4. Do NOT use 'select' or 'lambda'
+5. Do NOT invent functions that don't exist in the schema
+
+CRITICAL OUTPUT FORMAT (when encoding):
+- Provide ONLY the raw SMT-LIB formula
+- NO markdown code blocks (no ```, no ```smt)
+- NO comments (no ; lines)
+- NO explanations or text before/after
+- Do NOT wrap in (assert ...)
+- Just the pure formula
+
+ENCODING STYLE GUIDELINES (MANDATORY - apply to ALL encodings, both initial and reconstruction):
+
+CHECKLIST: Before submitting your encoding, verify ALL of these:
+
+1. TEMPORAL PROPERTIES - Use nested quantifiers when tracking from event start:
+   
+   Canonical template for "until" / "while ongoing" constraints:
+   (forall ((entity1 Type1) (entity2 Type2) (t Int))
+     (=> (event_starts entity1 entity2 t)
+         (forall ((t2 Int))
+           (=> (and (<= t t2)
+                    (not (event_ends entity1 entity2 t2)))
+               (constraint entity1 entity2 t2)))))
+   
+   Example: "operator may not accelerate until completely passed"
+   ✓ CORRECT:
+   (forall ((v_pass Vehicle) (v_passed Vehicle) (t Int))
+     (=> (passing v_pass v_passed t)
+         (forall ((t2 Int))
+           (=> (and (<= t t2)
+                    (not (completely_passed v_pass v_passed t2)))
+               (not (is-accelerating v_passed t2))))))
+
+2. MODAL VERBS - Map to correct quantifiers:
+   - "may" / "is allowed" → Existential: (exists ((v Vehicle) ...) ...)
+   - "must not" / "may not" / "shall not" → Universal negation: (forall ((v Vehicle) ...) (=> ... (not ...)))
+   - "must" / "shall" / "is required" → Universal affirmative: (forall ((v Vehicle) ...) (=> ... ...))
+
+3. SEMANTIC COMPLETENESS - Ensure logical constraints are complete:
+   
+   □ ENTITY RELATIONSHIPS (when quantifying over multiple entities of same type):
+      If rule refers to "another vehicle" / "other vehicle" / "a different vehicle":
+      → MUST ensure the entities are distinct using appropriate constraints
+      → Example: "vehicle may pass another vehicle" requires ensuring they are different entities
+   
+   □ PREDICATE DEPENDENCIES (check schema for predicate preconditions):
+      Some predicates have logical dependencies on other predicates:
+      → Review schema comments for "REQUIRES" annotations
+      → If predicate P requires context predicate Q, include Q when using P
+      → Example pattern: position predicates may require location predicates
+   
+   □ TYPE CONSTRAINTS (when rule specifies entity types):
+      If natural language specifies entity type/kind:
+      → Use appropriate type constraints from schema enumerations
+      → For multiple possible types, enumerate explicitly with disjunction
+      → Don't assume a single type when rule allows multiple
+   
+   □ PROPERTY EXISTENCE (when using value-returning functions):
+      If using a function that returns a value (not just Bool):
+      → Verify the property exists before querying its value
+      → Example pattern: check existence predicate before value function
+   
+   PRINCIPLE: Semantic gaps lead to over-general formulas. Include all constraints
+   that make the formula match the natural language meaning precisely.
+
+4. QUANTIFICATION DISCIPLINE - Match quantifiers to natural language scope:
+   
+   RULE: Natural language determines quantifier type:
+   - "All X" / "Every X" / "Any X" (universal claim) → (forall ((x X)) ...)
+   - "Some X" / "Another X" / "A different X" → (exists ((x X)) ...)
+   - "None" / "No X" → (forall ((x X)) (=> ... (not ...)))
+   
+   MULTIPLE ENTITIES of same type:
+   - If rule refers to multiple distinct entities, use multiple quantified variables
+   - Ensure proper constraints distinguish the entities (see Section 3)
+   - Example: "vehicle following another vehicle" → two Vehicle variables
+   
+   SAFETY RULES - when rule protects from "any" or "all":
+   - "yield to all pedestrians" → universal over pedestrians
+   - "maintain safety from any vehicle" → universal over vehicles
+   - Don't use existential when rule applies to all instances
+
+5. EXCEPTION HANDLING - Encode "except when" / "unless" correctly:
+   
+   PATTERN: "Prohibited EXCEPT when X"
+   ✓ CORRECT: (=> (and ... (not X)) (not action))
+   ✓ ALTERNATIVE: (=> ... (or X (not action)))
+   ✗ WRONG: (=> ... (not action)) ← exception lost!
+   
+   EXAMPLE: "may not use shoulder except when necessary and safe"
+   (forall ((v Vehicle) (r Roadway) (t Int))
+     (=> (and (on_roadway v r t)
+              (not (shoulder_use_necessary_and_safe v t)))
+         (not (= (roadway_pos v r t) RP_Shoulder))))
+
+6. DISJUNCTION PATTERNS - Use appropriate logical structure:
+   
+   □ "not A until B" → (or (not A) B) or equivalently (=> A B)
+   □ "not A unless B" → (or (not A) B) or equivalently (=> A B)
+   □ "either...or" → (or ...) with flat structure
+   □ NEVER use nested implications for simple alternatives
+   
+   EXAMPLE: "not proceed until way is clear"
+   (=> (not (way_clear v t)) (not (is-moving v t)))
+
+7. VARIABLE NAMING - Use descriptive names for clarity:
+   
+   GUIDELINE: Choose variable names that clarify roles:
+   - For binary relations, use names indicating roles (e.g., follower/leader, passer/passed)
+   - For spatial entities, use single letters (r for roadway, l for lane)
+   - For time, use t for current, t2/t3 for future time points
+   - Avoid ambiguous generic names (v1/v2) when roles are clear from context
+   
+   EXAMPLE: "vehicle following another vehicle"
+   ✓ CLEAR: (following v_follower v_leader t)
+   ✓ ACCEPTABLE: (following v u t) [if roles obvious from context]
+   ✗ UNCLEAR: (following v1 v2 t) [requires reader to infer which is which]
+
+FINAL VERIFICATION: Before submitting, review sections 1-7 for completeness.

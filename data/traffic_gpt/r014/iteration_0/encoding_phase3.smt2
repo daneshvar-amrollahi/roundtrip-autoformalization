@@ -1,0 +1,5 @@
+(forall ((v_pass Vehicle) (v_oncoming Vehicle) (t Int))
+  (=> (and (using_opposing_direction_lane_to_pass v_pass t)
+           (approaching_opposite v_oncoming v_pass t)
+           (<= (distance v_oncoming v_pass t) ft_200_sq))
+      (in_authorized_lane v_pass t)))

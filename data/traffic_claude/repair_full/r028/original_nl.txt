@@ -1,0 +1,1 @@
+An operator may not move from the lane unless that movement can be made safely.

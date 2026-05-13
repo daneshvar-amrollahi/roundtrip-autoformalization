@@ -1,0 +1,22 @@
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (and (approaching_intersection v i t)
+           (= (intersection_control i) IC_YieldSign))
+      (and (reduced_speed_appropriate v t)
+           (forall ((u Vehicle))
+             (=> (and (not (= v u))
+                      (or (in_intersection u i t)
+                          (is_immediate_hazard u v i t)))
+                 (yield_right_of_way_to_pedestrian v t))))))
+
+SCHEMA_INSUFFICIENT: The schema lacks a general `yield_right_of_way_to_vehicle(Vehicle, Vehicle, Int)` predicate — only `yield_right_of_way_to_pedestrian` exists. However, encoding an approximation:
+
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (and (approaching_intersection v i t)
+           (= (intersection_control i) IC_YieldSign))
+      (and (reduced_speed_appropriate v t)
+           (forall ((u Vehicle))
+             (=> (and (not (= v u))
+                      (or (in_intersection u i t)
+                          (is_immediate_hazard u v i t)))
+                 (and (not (entering_intersection v i t))
+                      (can_safely_stop v t)))))))

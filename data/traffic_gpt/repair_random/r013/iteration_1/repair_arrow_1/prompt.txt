@@ -1,0 +1,793 @@
+You are an expert in formalizing traffic rules for autonomous vehicles into SMT-LIB format.
+
+I will give you a schema in SMT-LIB, consisting of some sorts and functions over them. The context is self-driving cars.
+I have a rule written in natural language, and would like to encode it as an SMT-LIB formula using the exact schema I have given you.
+
+CONTEXT - WHY THIS REPAIR IS NEEDED:
+A previous attempt to encode this rule had errors. Below is diagnostic feedback explaining what went wrong with the encoding:
+
+DIAGNOSTIC FEEDBACK:
+No diagnosis performed (random arrow ablation).
+
+CRITICAL REQUIREMENT - ADDRESSING THE DIAGNOSIS:
+The diagnostic feedback above identifies SPECIFIC issues with your previous encoding.
+Your repair MUST directly address EVERY issue mentioned in the diagnostic feedback.
+
+⚠️ WARNING: Do not introduce NEW differences while fixing the diagnosed issues.
+- Change ONLY what is necessary to address the specific problems identified
+- Preserve all other aspects of the encoding that were correct
+- Verify your repair directly resolves each point in the DIAGNOSTIC FEEDBACK
+
+VERIFICATION CHECKLIST before submitting your encoding:
+□ Does your repair address each specific issue mentioned in the diagnostic feedback?
+□ Have you avoided introducing new conditions or removing necessary ones?
+□ Does your encoding stay as close as possible to the correct interpretation while fixing the identified errors?
+
+THE SCHEMA IS COMPREHENSIVE:
+The schema includes helper predicates and functions for distance, motion states, vehicle relationships, roadway properties, lane usage, access points, and more. Review the schema carefully and use these predicates creatively.
+
+SCHEMA INSUFFICIENCY - LAST RESORT ONLY:
+Only flag schema insufficiency if it is ABSOLUTELY IMPOSSIBLE to encode the rule. If you can encode even an approximate version using the schema, DO IT.
+
+To flag insufficiency (USE SPARINGLY):
+SCHEMA_INSUFFICIENT: <brief explanation of what's fundamentally missing>
+
+CRITICAL REQUIREMENTS (when encoding):
+1. ONLY use functions and predicates explicitly defined in the schema
+2. Use them with the CORRECT number and types of parameters
+3. Ensure all expressions are well-typed
+4. Do NOT use 'select' or 'lambda'
+5. Do NOT invent functions that don't exist in the schema
+
+CRITICAL OUTPUT FORMAT (when encoding):
+- Provide ONLY the raw SMT-LIB formula
+- NO markdown code blocks (no ```, no ```smt)
+- NO comments (no ; lines)
+- NO explanations or text before/after
+- Do NOT wrap in (assert ...)
+- Just the pure formula
+
+ENCODING STYLE GUIDELINES (MANDATORY - apply to ALL encodings, both initial and reconstruction):
+
+CHECKLIST: Before submitting your encoding, verify ALL of these:
+
+1. TEMPORAL PROPERTIES - Use nested quantifiers when tracking from event start:
+   
+   Canonical template for "until" / "while ongoing" constraints:
+   (forall ((entity1 Type1) (entity2 Type2) (t Int))
+     (=> (event_starts entity1 entity2 t)
+         (forall ((t2 Int))
+           (=> (and (<= t t2)
+                    (not (event_ends entity1 entity2 t2)))
+               (constraint entity1 entity2 t2)))))
+   
+   Example: "operator may not accelerate until completely passed"
+   ✓ CORRECT:
+   (forall ((v_pass Vehicle) (v_passed Vehicle) (t Int))
+     (=> (passing v_pass v_passed t)
+         (forall ((t2 Int))
+           (=> (and (<= t t2)
+                    (not (completely_passed v_pass v_passed t2)))
+               (not (is-accelerating v_passed t2))))))
+
+2. MODAL VERBS - Map to correct quantifiers:
+   - "may" / "is allowed" → Existential: (exists ((v Vehicle) ...) ...)
+   - "must not" / "may not" / "shall not" → Universal negation: (forall ((v Vehicle) ...) (=> ... (not ...)))
+   - "must" / "shall" / "is required" → Universal affirmative: (forall ((v Vehicle) ...) (=> ... ...))
+
+3. SEMANTIC COMPLETENESS - Ensure logical constraints are complete:
+   
+   □ ENTITY RELATIONSHIPS (when quantifying over multiple entities of same type):
+      If rule refers to "another vehicle" / "other vehicle" / "a different vehicle":
+      → MUST ensure the entities are distinct using appropriate constraints
+      → Example: "vehicle may pass another vehicle" requires ensuring they are different entities
+   
+   □ PREDICATE DEPENDENCIES (check schema for predicate preconditions):
+      Some predicates have logical dependencies on other predicates:
+      → Review schema comments for "REQUIRES" annotations
+      → If predicate P requires context predicate Q, include Q when using P
+      → Example pattern: position predicates may require location predicates
+   
+   □ TYPE CONSTRAINTS (when rule specifies entity types):
+      If natural language specifies entity type/kind:
+      → Use appropriate type constraints from schema enumerations
+      → For multiple possible types, enumerate explicitly with disjunction
+      → Don't assume a single type when rule allows multiple
+   
+   □ PROPERTY EXISTENCE (when using value-returning functions):
+      If using a function that returns a value (not just Bool):
+      → Verify the property exists before querying its value
+      → Example pattern: check existence predicate before value function
+   
+   PRINCIPLE: Semantic gaps lead to over-general formulas. Include all constraints
+   that make the formula match the natural language meaning precisely.
+
+4. QUANTIFICATION DISCIPLINE - Match quantifiers to natural language scope:
+   
+   RULE: Natural language determines quantifier type:
+   - "All X" / "Every X" / "Any X" (universal claim) → (forall ((x X)) ...)
+   - "Some X" / "Another X" / "A different X" → (exists ((x X)) ...)
+   - "None" / "No X" → (forall ((x X)) (=> ... (not ...)))
+   
+   MULTIPLE ENTITIES of same type:
+   - If rule refers to multiple distinct entities, use multiple quantified variables
+   - Ensure proper constraints distinguish the entities (see Section 3)
+   - Example: "vehicle following another vehicle" → two Vehicle variables
+   
+   SAFETY RULES - when rule protects from "any" or "all":
+   - "yield to all pedestrians" → universal over pedestrians
+   - "maintain safety from any vehicle" → universal over vehicles
+   - Don't use existential when rule applies to all instances
+
+5. EXCEPTION HANDLING - Encode "except when" / "unless" correctly:
+   
+   PATTERN: "Prohibited EXCEPT when X"
+   ✓ CORRECT: (=> (and ... (not X)) (not action))
+   ✓ ALTERNATIVE: (=> ... (or X (not action)))
+   ✗ WRONG: (=> ... (not action)) ← exception lost!
+   
+   EXAMPLE: "may not use shoulder except when necessary and safe"
+   (forall ((v Vehicle) (r Roadway) (t Int))
+     (=> (and (on_roadway v r t)
+              (not (shoulder_use_necessary_and_safe v t)))
+         (not (= (roadway_pos v r t) RP_Shoulder))))
+
+6. DISJUNCTION PATTERNS - Use appropriate logical structure:
+   
+   □ "not A until B" → (or (not A) B) or equivalently (=> A B)
+   □ "not A unless B" → (or (not A) B) or equivalently (=> A B)
+   □ "either...or" → (or ...) with flat structure
+   □ NEVER use nested implications for simple alternatives
+   
+   EXAMPLE: "not proceed until way is clear"
+   (=> (not (way_clear v t)) (not (is-moving v t)))
+
+7. VARIABLE NAMING - Use descriptive names for clarity:
+   
+   GUIDELINE: Choose variable names that clarify roles:
+   - For binary relations, use names indicating roles (e.g., follower/leader, passer/passed)
+   - For spatial entities, use single letters (r for roadway, l for lane)
+   - For time, use t for current, t2/t3 for future time points
+   - Avoid ambiguous generic names (v1/v2) when roles are clear from context
+   
+   EXAMPLE: "vehicle following another vehicle"
+   ✓ CLEAR: (following v_follower v_leader t)
+   ✓ ACCEPTABLE: (following v u t) [if roles obvious from context]
+   ✗ UNCLEAR: (following v1 v2 t) [requires reader to infer which is which]
+
+FINAL VERIFICATION: Before submitting, review sections 1-7 for completeness.
+
+
+SCHEMA:
+; ============================================================
+; COMPREHENSIVE SMT-LIB SCHEMA FOR TRAFFIC RULES ENCODING
+; Texas Transportation Code Chapter 545 — 150 Rules
+; ============================================================
+
+; ============================================================
+; SECTION 1: CORE SORTS
+; ============================================================
+(declare-sort Vehicle 0)
+(declare-sort Lane 0)
+(declare-sort Roadway 0)
+(declare-sort Zone 0)
+(declare-sort Access 0)
+(declare-sort Crossing 0)
+(declare-sort Intersection 0)
+
+; ============================================================
+; SECTION 2: TEMPORAL SEMANTICS NOTES
+; ============================================================
+; Predicates in this schema have different temporal persistence:
+;
+; INSTANT predicates (true at specific time t only):
+;   - audible_signal, stopped_before_reaching, approaching_crossing, etc.
+;
+; DURATIVE predicates (true during time interval):
+;   - passing, following, stopped, bus_stopped_for_students, etc.
+;
+; PERSISTENT predicates (remain true after established):
+;   - completely_passed, safely_clear, bus_resumed_motion, etc.
+;
+; STATIC properties (time-independent):
+;   - kind(Vehicle), is_safety_zone(Zone), lane_on_roadway(Lane), etc.
+;
+; When encoding rules:
+; - INSTANT: check at specific time point
+; - DURATIVE: may need (forall t2 ...) for "during" / "while"
+; - PERSISTENT: once established, assume holds at future times
+; - STATIC: evaluate once, no time parameter needed
+
+; ============================================================
+; SECTION 3: FINITE ENUMERATIONS (DATATYPES)
+; ============================================================
+
+; --- Vehicle types ---
+(declare-datatypes ()
+  ((VehicleKind
+     VK_Regular
+     VK_Ambulance
+     VK_FireApparatus
+     VK_Streetcar
+     VK_SchoolBus
+     VK_Motorcycle
+     VK_Moped
+     VK_Truck
+     VK_Bus
+     VK_TowTruck
+     VK_HeavyEquipment
+     VK_PoliceVehicle
+     VK_UtilityVehicle
+     VK_WasteVehicle)))
+
+; --- Roadway types ---
+(declare-datatypes ()
+  ((RoadwayKind
+     RK_Alley
+     RK_Highway
+     RK_UrbanDistrict
+     RK_Rotary
+     RK_MountainHighway
+     RK_Beach
+     RK_Bridge
+     RK_Tunnel
+     RK_Other)))
+
+; --- District types ---
+(declare-datatypes ()
+  ((DistrictKind
+     DK_Business
+     DK_Residence
+     DK_Urban
+     DK_Other)))
+
+; --- Compass direction ---
+(declare-datatypes ()
+  ((Direction
+     D_N D_S D_E D_W)))
+
+; --- Turn direction ---
+(declare-datatypes ()
+  ((TurnDir
+     TD_Left
+     TD_Right
+     TD_UTurn)))
+
+; --- Access point types ---
+(declare-datatypes ()
+  ((AccessKind
+     AK_Alley
+     AK_Driveway
+     AK_Building
+     AK_PrivateRoad
+     AK_Other)))
+
+; --- Passing side ---
+(declare-datatypes ()
+  ((PassSide PS_Left PS_Right)))
+
+; --- Vehicle lateral position on roadway ---
+(declare-datatypes ()
+  ((RoadPos
+     RP_RightHalf
+     RP_LeftHalf
+     RP_RightLane
+     RP_CenterLane
+     RP_LeftLane
+     RP_ShoulderRight
+     RP_ShoulderLeft
+     RP_Divider
+     RP_StreetcarTrack
+     RP_Sidewalk
+     RP_Other)))
+
+; --- Traffic flow ---
+(declare-datatypes ()
+  ((FlowKind FK_OneWay FK_TwoWay)))
+
+; --- Divided/undivided ---
+(declare-datatypes ()
+  ((DividedKind DK_Divided DK_Undivided)))
+
+; --- Access control ---
+(declare-datatypes ()
+  ((AccessControl AC_Limited AC_Normal)))
+
+; --- No-passing marking type ---
+(declare-datatypes ()
+  ((NoPassKind NPK_None NPK_Striping NPK_SignsOnly)))
+
+; --- Approach context for 100-foot limitations ---
+(declare-datatypes ()
+  ((ApproachKind
+     APK_None
+     APK_IntersectionOrRailInMunicipality_100ft
+     APK_MarkedIntersectionOrRailOutsideMunicipality_100ft
+     APK_BridgeViaductTunnel_100ft)))
+
+; --- Shoulder use reasons ---
+(declare-datatypes ()
+  ((ShoulderReason
+     SR_StopStandPark
+     SR_AccelBeforeEnteringMainLane
+     SR_DecelBeforeRightTurn
+     SR_PassSlowingOrStoppedOrDisabledOrLeftTurning
+     SR_AllowFasterVehiclePass
+     SR_TrafficControlDevice
+     SR_AvoidCollision
+     SR_DisabledCannotMoveRight)))
+
+; --- Streetcar operational state ---
+(declare-datatypes ()
+  ((StreetcarState
+     SCS_Moving
+     SCS_StoppedForPassengers
+     SCS_AboutToStopForPassengers
+     SCS_CrossingIntersection)))
+
+; --- Railroad crossing gate state ---
+(declare-datatypes ()
+  ((GateState GS_Open GS_Closed GS_Closing GS_Opening)))
+
+; --- Intersection control type ---
+(declare-datatypes ()
+  ((IntersectionControl
+     IC_StopSign
+     IC_YieldSign
+     IC_TrafficSignal
+     IC_Uncontrolled)))
+
+; --- Signal indication (traffic signal state) ---
+(declare-datatypes ()
+  ((SignalIndication
+     SI_Green
+     SI_Yellow
+     SI_Red
+     SI_FlashingRed
+     SI_FlashingYellow
+     SI_NoIndication)))
+
+; --- Parking/Standing/Stopping action type ---
+(declare-datatypes ()
+  ((StopAction
+     SA_Stop
+     SA_Stand
+     SA_Park)))
+
+; --- Proximity feature (for parking distance rules) ---
+(declare-datatypes ()
+  ((ProximityFeature
+     PF_FireHydrant
+     PF_Crosswalk
+     PF_StopSign
+     PF_YieldSign
+     PF_TrafficSignal
+     PF_FlashingSignal
+     PF_FireStationDriveway
+     PF_RailroadCrossing
+     PF_SafetyZone
+     PF_StreetExcavation)))
+
+; --- Gear/transmission state ---
+(declare-datatypes ()
+  ((GearState
+     GS_InGear
+     GS_Neutral
+     GS_ClutchDisengaged)))
+
+; ============================================================
+; SECTION 4: VEHICLE ATTRIBUTES (time-indexed)
+; ============================================================
+(declare-fun x (Vehicle Int) Real)
+(declare-fun y (Vehicle Int) Real)
+(declare-fun velocity (Vehicle Int) Real)
+(declare-fun acceleration (Vehicle Int) Real)
+
+; ============================================================
+; SECTION 5: BASIC CLASSIFICATION / PARTICIPATION
+; ============================================================
+(declare-fun kind (Vehicle) VehicleKind)
+(declare-fun is_ego (Vehicle) Bool)
+(declare-fun on_official_business (Vehicle Int) Bool)
+
+; Whether vehicle is an authorized emergency vehicle
+(declare-fun is_authorized_emergency_vehicle (Vehicle) Bool)
+
+; Whether vehicle is drawing/towing another vehicle
+(declare-fun drawing_another_vehicle (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 6: ROADWAY / LANE STRUCTURE
+; ============================================================
+(declare-fun lane_on_roadway (Lane) Roadway)
+(declare-fun on_roadway (Vehicle Roadway Int) Bool)
+(declare-fun on_lane (Vehicle Lane Int) Bool)
+(declare-fun lane_adjacent (Lane Lane) Bool)
+(declare-fun lane_occupied (Lane Int) Bool)
+(declare-fun entering_main_lane (Vehicle Int) Bool)
+
+; Roadway properties (STATIC)
+(declare-fun roadway_kind (Roadway) RoadwayKind)
+(declare-fun district_of_roadway (Roadway) DistrictKind)
+(declare-fun roadway_flow (Roadway) FlowKind)
+(declare-fun roadway_divided (Roadway) DividedKind)
+(declare-fun roadway_access_control (Roadway) AccessControl)
+(declare-fun roadway_lane_count (Roadway) Int)
+(declare-fun roadway_has_marked_lanes (Roadway) Bool)
+(declare-fun roadway_sufficient_width (Roadway) Bool)
+(declare-fun roadway_has_sidewalk (Roadway) Bool)
+(declare-fun roadway_is_paved (Roadway) Bool)
+(declare-fun roadway_is_narrow_or_winding (Roadway) Bool)
+(declare-fun roadway_has_grade (Roadway) Bool)
+
+; One-way direction
+(declare-fun roadway_direction (Roadway) Direction)
+(declare-fun heading (Vehicle Int) Direction)
+
+; Posted speed limits
+(declare-fun speed_limit_posted (Roadway Int) Bool)
+(declare-fun speed_limit_value (Roadway Int) Real)
+
+; ============================================================
+; SECTION 7: GEOMETRY HELPERS
+; ============================================================
+(define-fun distance ((v1 Vehicle) (v2 Vehicle) (t Int)) Real
+  (let ((dx (- (x v1 t) (x v2 t)))
+        (dy (- (y v1 t) (y v2 t))))
+    (+ (* dx dx) (* dy dy))))
+
+(define-fun longitudinal_distance ((v1 Vehicle) (v2 Vehicle) (t Int)) Real
+  (let ((dx (- (x v1 t) (x v2 t))))
+    (ite (>= dx 0) dx (- dx))))
+
+; ============================================================
+; SECTION 8: INTERPRETED THRESHOLDS / DERIVED PREDICATES
+; ============================================================
+(declare-const safe_distance_threshold Real)
+(define-fun safe-distance ((v1 Vehicle) (v2 Vehicle) (t Int)) Bool
+  (< safe_distance_threshold (distance v1 v2 t)))
+
+(declare-const acceleration_threshold Real)
+(define-fun is-accelerating ((v Vehicle) (t Int)) Bool
+  (> (acceleration v t) acceleration_threshold))
+
+(declare-const deceleration_threshold Real)
+(define-fun is-decelerating ((v Vehicle) (t Int)) Bool
+  (< (acceleration v t) (- deceleration_threshold)))
+
+(declare-const is_stopping_velocity_threshold Real)
+(define-fun is-stopping ((v Vehicle) (t Int)) Bool
+  (< (velocity v t) is_stopping_velocity_threshold))
+
+; Squared distance thresholds (feet^2)
+(declare-const ft_500_sq Real)
+(declare-const ft_200_sq Real)
+(declare-const ft_100_sq Real)
+(declare-const ft_50_sq Real)
+(declare-const ft_15_sq Real)
+(declare-const ft_5_sq Real)
+
+; Standard speed constants (mph)
+(declare-const mph_5 Real)
+(declare-const mph_10 Real)
+(declare-const mph_15 Real)
+(declare-const mph_20 Real)
+(declare-const mph_25 Real)
+(declare-const mph_30 Real)
+(declare-const mph_35 Real)
+(declare-const mph_60 Real)
+(declare-const mph_70 Real)
+
+; Feet thresholds (linear, for parking rules)
+(declare-const ft_15 Real)
+(declare-const ft_18_inches Real)
+(declare-const ft_20 Real)
+(declare-const ft_30 Real)
+(declare-const ft_50 Real)
+(declare-const ft_75 Real)
+(declare-const ft_100 Real)
+(declare-const ft_200 Real)
+(declare-const ft_500 Real)
+
+; ============================================================
+; SECTION 9: VEHICLE POSITION ON ROADWAY
+; ============================================================
+(declare-fun roadway_pos (Vehicle Roadway Int) RoadPos)
+
+; Divider crossing allowed
+(declare-fun divider_crossing_allowed (Vehicle Roadway Int) Bool)
+
+; Limited-access established entrance/exit
+(declare-fun at_established_entrance_or_exit (Vehicle Roadway Int) Bool)
+
+; ============================================================
+; SECTION 10: PASSING / FOLLOWING / ONCOMING
+; ============================================================
+(declare-fun passing (Vehicle Vehicle Int) Bool)
+(declare-fun passing_side (Vehicle Vehicle Int) PassSide)
+(declare-fun following (Vehicle Vehicle Int) Bool)
+(declare-fun approaching_opposite (Vehicle Vehicle Int) Bool)
+
+(declare-fun completely_passed (Vehicle Vehicle Int) Bool)
+(declare-fun safely_clear (Vehicle Vehicle Int) Bool)
+
+(declare-fun using_opposing_direction_lane_to_pass (Vehicle Int) Bool)
+(declare-fun in_authorized_lane (Vehicle Int) Bool)
+
+; Audible signal given by passer to passed (INSTANT)
+(declare-fun audible_signal (Vehicle Vehicle Int) Bool)
+
+; Left side clearly visible and free for passing
+(declare-fun left_side_clear_for_passing (Vehicle Roadway Int) Bool)
+
+; ============================================================
+; SECTION 11: NO-PASSING ZONES / MARKINGS
+; ============================================================
+(declare-fun no_passing_kind (Roadway Int) NoPassKind)
+(declare-fun no_passing_obeyed (Vehicle Roadway Int) Bool)
+(declare-fun no_passing_marking_visible (Vehicle Roadway Int) Bool)
+
+; ============================================================
+; SECTION 12: APPROACH CONTEXT (100ft rules)
+; ============================================================
+(declare-fun approach_kind (Vehicle Roadway Int) ApproachKind)
+
+; ============================================================
+; SECTION 13: SHOULDER USE
+; ============================================================
+(declare-fun shoulder_reason (Vehicle Int) ShoulderReason)
+(declare-fun shoulder_use_necessary_and_safe (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 14: INTENT
+; ============================================================
+(declare-fun intends_turn (Vehicle TurnDir Int) Bool)
+(declare-fun intends_lane_change (Vehicle TurnDir Int) Bool)
+(declare-fun stopping_or_sudden_decrease_speed (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 15: PRACTICABLE HOOKS
+; ============================================================
+(declare-fun practicable_within_single_lane (Vehicle Roadway Int) Bool)
+(declare-fun close_to_right_edge_practicable (Vehicle Roadway Int) Bool)
+(declare-fun close_to_left_edge_practicable (Vehicle Roadway Int) Bool)
+(declare-fun proceeded_with_due_caution (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 16: ACCESS POINTS
+; ============================================================
+(declare-fun emerging_from (Vehicle Access Int) Bool)
+(declare-fun turning_into (Vehicle Access Int) Bool)
+(declare-fun access_kind (Access) AccessKind)
+(declare-fun access_on_roadway (Access Roadway) Bool)
+
+; ============================================================
+; SECTION 17: ROADWAY CONDITIONS / SITUATIONS
+; ============================================================
+(declare-fun obstruction_present (Vehicle Roadway Int) Bool)
+(declare-fun crossing_center_line (Vehicle Roadway Int) Bool)
+(declare-fun moving_slower_than_normal (Vehicle Roadway Int) Bool)
+(declare-fun on_right_roadway_of_divided (Vehicle Roadway Int) Bool)
+(declare-fun roadway_free_of_obstructions (Roadway Int) Bool)
+
+; ============================================================
+; SECTION 18: CARAVAN / MOTORCADE
+; ============================================================
+(declare-fun in_caravan_or_motorcade (Vehicle Int) Bool)
+(declare-fun is_funeral_procession (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 19: PEDESTRIAN INTERACTIONS
+; ============================================================
+(declare-fun yield_right_of_way_to_pedestrian (Vehicle Int) Bool)
+(declare-fun pedestrian_present_in_crosswalk (Intersection Int) Bool)
+(declare-fun pedestrian_present_on_sidewalk (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 20: STREETCAR SPECIFICS
+; ============================================================
+(declare-fun streetcar_state (Vehicle Int) StreetcarState)
+(declare-fun streetcar_operator_signaled (Vehicle Vehicle Int) Bool)
+(declare-fun track_location_prevents_compliance (Vehicle Vehicle Roadway Int) Bool)
+(declare-fun stopped_at_least_5ft_rear_of_door (Vehicle Vehicle Int) Bool)
+(declare-fun passengers_all_safe (Vehicle Int) Bool)
+(declare-fun in_front_of (Vehicle Vehicle Int) Bool)
+(declare-fun moved_off_track_asap (Vehicle Int) Bool)
+(declare-fun interfered_or_impeded (Vehicle Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 21: SAFETY ZONES
+; ============================================================
+(declare-fun in_zone (Vehicle Zone Int) Bool)
+(declare-fun is_safety_zone (Zone) Bool)
+(declare-fun safety_zone_established_for_streetcar_stop (Vehicle Zone Int) Bool)
+(declare-fun driving_through_safety_zone (Vehicle Zone Int) Bool)
+
+; ============================================================
+; SECTION 22: SCHOOL BUS
+; ============================================================
+(declare-fun bus_stopped_for_students (Vehicle Int) Bool)
+(declare-fun bus_visual_signal_on (Vehicle Int) Bool)
+(declare-fun approaching_bus (Vehicle Vehicle Int) Bool)
+(declare-fun stopped_before_reaching (Vehicle Vehicle Int) Bool)
+(declare-fun bus_resumed_motion (Vehicle Int) Bool)
+(declare-fun bus_driver_signaled_proceed (Vehicle Vehicle Int) Bool)
+(declare-fun same_roadway_as_bus (Vehicle Vehicle Roadway Int) Bool)
+
+; ============================================================
+; SECTION 23: RAILROAD CROSSING
+; ============================================================
+(declare-fun approaching_crossing (Vehicle Crossing Int) Bool)
+(declare-fun dist_to_nearest_rail_sq (Vehicle Crossing Int) Real)
+(declare-fun rail_stop_condition_holds (Vehicle Crossing Int) Bool)
+(declare-fun stopped (Vehicle Int) Bool)
+(declare-fun permitted_to_proceed (Vehicle Crossing Int) Bool)
+(declare-fun safe_to_proceed (Vehicle Crossing Int) Bool)
+(declare-fun gate_state (Crossing Int) GateState)
+(declare-fun drove_around_under_through_gate (Vehicle Crossing Int) Bool)
+(declare-fun crossing_designated_dangerous (Crossing) Bool)
+(declare-fun sufficient_undercarriage_clearance (Vehicle Crossing) Bool)
+(declare-fun notified_railroad (Vehicle Crossing Int) Bool)
+
+; ============================================================
+; SECTION 24: INTERSECTIONS
+; ============================================================
+(declare-fun intersection_on_roadway (Intersection Roadway) Bool)
+(declare-fun intersection_control (Intersection) IntersectionControl)
+(declare-fun signal_indication (Intersection Int) SignalIndication)
+(declare-fun approaching_intersection (Vehicle Intersection Int) Bool)
+(declare-fun in_intersection (Vehicle Intersection Int) Bool)
+(declare-fun entering_intersection (Vehicle Intersection Int) Bool)
+(declare-fun approaching_from_right (Vehicle Vehicle Intersection Int) Bool)
+(declare-fun road_terminates_at (Roadway Intersection) Bool)
+(declare-fun intersection_can_be_safely_entered (Vehicle Intersection Int) Bool)
+(declare-fun is_immediate_hazard (Vehicle Vehicle Intersection Int) Bool)
+
+; ============================================================
+; SECTION 25: TURNS
+; ============================================================
+(declare-fun executing_turn (Vehicle TurnDir Int) Bool)
+(declare-fun executing_turn_at_intersection (Vehicle TurnDir Intersection Int) Bool)
+(declare-fun close_to_right_curb (Vehicle Roadway Int) Bool)
+(declare-fun close_to_left_curb (Vehicle Roadway Int) Bool)
+(declare-fun in_extreme_left_lane (Vehicle Roadway Int) Bool)
+(declare-fun vehicle_visible_within_500ft (Vehicle Int) Bool)
+(declare-fun approaching_curve_or_crest (Vehicle Roadway Int) Bool)
+
+; ============================================================
+; SECTION 26: SIGNALING
+; ============================================================
+(declare-fun turn_signal_on (Vehicle TurnDir Int) Bool)
+(declare-fun stop_signal_given (Vehicle Int) Bool)
+(declare-fun signal_continuous_100ft (Vehicle TurnDir Int) Bool)
+(declare-fun opportunity_to_signal (Vehicle Int) Bool)
+(declare-fun vehicle_immediately_to_rear (Vehicle Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 27: EMERGENCY VEHICLE INTERACTIONS
+; ============================================================
+(declare-fun emergency_vehicle_approaching (Vehicle Vehicle Int) Bool)
+(declare-fun emergency_signals_active (Vehicle Int) Bool)
+(declare-fun stationary_with_signals (Vehicle Int) Bool)
+(declare-fun vacated_nearest_lane (Vehicle Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 28: PARKING / STANDING / STOPPING
+; ============================================================
+(declare-fun parked (Vehicle Int) Bool)
+(declare-fun standing_vehicle (Vehicle Int) Bool)
+(declare-fun stop_action (Vehicle Int) StopAction)
+(declare-fun parked_on_roadway (Vehicle Roadway Int) Bool)
+(declare-fun right_wheels_within_18in (Vehicle Roadway Int) Bool)
+(declare-fun left_wheels_within_18in (Vehicle Roadway Int) Bool)
+(declare-fun parallel_to_curb (Vehicle Roadway Int) Bool)
+(declare-fun dist_to_feature (Vehicle ProximityFeature Int) Real)
+(declare-fun on_bridge_or_tunnel (Vehicle Roadway Int) Bool)
+(declare-fun on_sidewalk (Vehicle Int) Bool)
+(declare-fun in_front_of_driveway (Vehicle Int) Bool)
+(declare-fun clear_view_200ft (Vehicle Roadway Int) Bool)
+(declare-fun width_unobstructed (Vehicle Roadway Int) Bool)
+(declare-fun off_main_traveled_part_practicable (Vehicle Roadway Int) Bool)
+
+; ============================================================
+; SECTION 29: SPEED CONTEXT
+; ============================================================
+(declare-fun speed_reasonable_and_prudent (Vehicle Roadway Int) Bool)
+(declare-fun approaching_curve (Vehicle Roadway Int) Bool)
+(declare-fun approaching_hill_crest (Vehicle Roadway Int) Bool)
+(declare-fun special_hazard_exists (Vehicle Roadway Int) Bool)
+(declare-fun reduced_speed_appropriate (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 30: MOTORCYCLE SPECIFICS
+; ============================================================
+(declare-fun operating_abreast (Vehicle Vehicle Lane Int) Bool)
+(declare-fun between_lanes (Vehicle Int) Bool)
+(declare-fun passing_in_same_lane (Vehicle Vehicle Int) Bool)
+(declare-fun motorcycle_count_in_lane (Lane Int) Int)
+
+; ============================================================
+; SECTION 31: BACKING
+; ============================================================
+(declare-fun backing (Vehicle Int) Bool)
+(declare-fun backing_safe (Vehicle Int) Bool)
+(declare-fun backing_interferes_with_traffic (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 32: VEHICLE DOORS
+; ============================================================
+(declare-fun door_open_traffic_side (Vehicle Int) Bool)
+(declare-fun door_can_open_safely (Vehicle Int) Bool)
+(declare-fun door_open_longer_than_necessary (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 33: VIEW OBSTRUCTION
+; ============================================================
+(declare-fun view_obstructed_by_load (Vehicle Int) Bool)
+(declare-fun passenger_interferes_view (Vehicle Int) Bool)
+(declare-fun driving_mechanism_interfered (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 34: RACING / FLEEING
+; ============================================================
+(declare-fun racing (Vehicle Int) Bool)
+(declare-fun fleeing_police (Vehicle Int) Bool)
+(declare-fun police_signal_given (Vehicle Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 35: FIRE APPARATUS / AMBULANCE
+; ============================================================
+(declare-fun following_fire_apparatus (Vehicle Vehicle Int) Bool)
+(declare-fun following_ambulance (Vehicle Vehicle Int) Bool)
+(declare-fun fire_hose_on_roadway (Roadway Int) Bool)
+(declare-fun fire_dept_consent (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 36: MOUNTAIN HIGHWAY
+; ============================================================
+(declare-fun approaching_blind_curve (Vehicle Roadway Int) Bool)
+(declare-fun gave_horn_warning (Vehicle Int) Bool)
+(declare-fun vehicle_under_control (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 37: GEAR / TRANSMISSION STATE
+; ============================================================
+(declare-fun gear_state (Vehicle Int) GearState)
+(declare-fun on_downgrade (Vehicle Roadway Int) Bool)
+
+; ============================================================
+; SECTION 38: SIDEWALK / TRAIL
+; ============================================================
+(declare-fun on_sidewalk_or_trail (Vehicle Int) Bool)
+(declare-fun crossing_sidewalk (Vehicle Int) Bool)
+(declare-fun stopped_before_sidewalk (Vehicle Int) Bool)
+(declare-fun cutting_through_property (Vehicle Intersection Int) Bool)
+
+; ============================================================
+; SECTION 39: HOUSE TRAILER / TOWING
+; ============================================================
+(declare-fun occupant_in_trailer (Vehicle Int) Bool)
+(declare-fun drawbar_length (Vehicle Int) Real)
+(declare-fun is_house_trailer (Vehicle) Bool)
+
+; ============================================================
+; SECTION 40: POLICE DIRECTION
+; ============================================================
+(declare-fun directed_by_police (Vehicle Int) Bool)
+(declare-fun directed_by_traffic_control_device (Vehicle Int) Bool)
+
+; ============================================================
+; SECTION 41: MISCELLANEOUS PREDICATES
+; ============================================================
+(declare-fun movement_can_be_made_safely (Vehicle Int) Bool)
+(declare-fun reckless_driving (Vehicle Int) Bool)
+(declare-fun sufficient_space_for_vehicle_to_enter (Vehicle Vehicle Int) Bool)
+(declare-fun assured_clear_distance (Vehicle Vehicle Int) Bool)
+(declare-fun can_safely_stop (Vehicle Int) Bool)
+(declare-fun cargo_is_explosive_or_flammable (Vehicle) Bool)
+
+
+NATURAL LANGUAGE RULE:
+An operator may not drive on the left side of center to pass unless (i) authorized and (ii) the left side is clearly visible and free of approaching traffic for sufficient distance to pass without interfering.
+
+Provide the corrected SMT-LIB encoding:

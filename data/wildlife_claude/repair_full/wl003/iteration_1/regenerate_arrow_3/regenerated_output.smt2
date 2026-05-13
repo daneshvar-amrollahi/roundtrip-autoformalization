@@ -1,0 +1,22 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (captures_by_nonlethal_means p a t)
+           (or (is_kind a AK_Reptile) (is_kind a AK_Amphibian))
+           (or (on_road_shoulder p t) (on_land p (as l Land) t)))
+      (or (and (has_document_kind p DOK_ReptileAmphibianStamp t)
+               (forall ((d Device))
+                 (=> (uses_device p d t)
+                     (not (device_kind d DK_CrabTrap)))))
+          (has_subchapter_authorization p t))))
+
+SCHEMA_INSUFFICIENT: The schema does not have a direct predicate for "on a right-of-way" as a standalone boolean (like `on_road_shoulder`). There is `on_road_or_right_of_way` which covers both road and right-of-way. Let me re-encode properly using available predicates.
+
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (captures_by_nonlethal_means p a t)
+           (or (is_kind a AK_Reptile) (is_kind a AK_Amphibian))
+           (or (on_road_shoulder p t)
+               (on_road_or_right_of_way p t)))
+      (or (and (has_document_kind p DOK_ReptileAmphibianStamp t)
+               (forall ((d Device))
+                 (=> (uses_device p d t)
+                     (not (device_kind d DK_CrabTrap)))))
+          (has_subchapter_authorization p t))))

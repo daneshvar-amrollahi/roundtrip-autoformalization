@@ -1,0 +1,25 @@
+A vehicle being passed on the right may accelerate at some point before the passing vehicle has completely passed.
+
+Wait, let me re-analyze the formula more carefully.
+
+The inner negation is:
+```
+(not (forall ((t2 Int))
+       (=> (and (<= t t2)
+                (not (completely_passed v_passer v_passed t2)))
+           (not (is-accelerating v_passed t2)))))
+```
+
+The inner universal says: "for all future times t2, if the passer has not completely passed, then the passed vehicle is not accelerating." Negating this means: "there exists some future time t2 where the passer has not completely passed AND the passed vehicle IS accelerating."
+
+So the formula requires that when being passed on the right, the passed vehicle must be accelerating at some point before being completely passed. That seems odd as a requirement. Let me re-read...
+
+The outer implication says: if a vehicle is passing another on the right, then this negation must hold. This effectively states that the passed vehicle must accelerate at some time before the pass is complete — which would be a strange obligation.
+
+But reading it as a logical encoding, this is what the formula literally says.
+
+A vehicle that is being passed on the right must increase speed at some point before the passing vehicle has completely passed.
+
+Hmm, but that's unusual for traffic law. Let me reconsider — perhaps the formula is meant to encode a permission or prohibition differently. But I must translate literally.
+
+When a vehicle is passing another vehicle on the right side, the vehicle being passed must be accelerating at some point before the passing vehicle has completely passed.

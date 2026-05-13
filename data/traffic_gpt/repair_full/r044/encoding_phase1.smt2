@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (sc Vehicle) (z Zone) (t Int))
+  (=> (and (safety_zone_established_for_streetcar_stop sc z t)
+           (is_safety_zone z)
+           (passing v sc t)
+           (= (passing_side v sc t) PS_Right))
+      (proceeded_with_due_caution v t)))

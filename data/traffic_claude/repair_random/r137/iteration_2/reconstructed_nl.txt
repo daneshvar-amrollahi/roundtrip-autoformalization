@@ -1,0 +1,1 @@
+An operator may not cut through property at an intersection to avoid that intersection while executing either a left turn or a right turn at that intersection.

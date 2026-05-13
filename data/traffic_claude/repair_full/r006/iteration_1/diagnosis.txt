@@ -1,0 +1,38 @@
+================================================================================
+DIAGNOSIS
+================================================================================
+
+First Failed Arrow: 3
+
+Reasoning:
+The Reconstructed NL specifies three exceptions for driving on the left half: (1) being in an authorized lane, (2) obstruction present with yielding to pedestrians, and (3) crossing the center line while "intending to turn left" or while "turning into or emerging from an alley, private road, or driveway." The Phase 3 SMT encoding of exception (3) includes `(executing_turn v TD_Left t)` as an additional disjunct alongside `(intends_turn v TD_Left t)`, but the Reconstructed NL only mentions "intending to turn left" — it does not mention "executing a left turn." This extra predicate in Phase 3 broadens the exception beyond what the Reconstructed NL states, making the Phase 3 encoding strictly more permissive than the Reconstructed NL warrants.
+
+================================================================================
+FULL LLM RESPONSE
+================================================================================
+
+I'll analyze each arrow sequentially to find the first error.
+
+## Arrow 1: Original NL → Phase 1 SMT
+
+The Original NL states that an operator may not drive left of the center line except for three exceptions: (1) authorized lane, (2) obstruction/yield case, (3) crossing to turn left into/out of alley/private road/driveway.
+
+Looking at Phase 1 SMT, the structure is: if (on roadway AND ≥4 lanes AND two-way AND left-half AND NOT exception1 AND NOT exception2 AND NOT exception3) → NOT left-half. This is a contradiction in the antecedent — it assumes `roadway_pos = RP_LeftHalf` in the premise and concludes `NOT (roadway_pos = RP_LeftHalf)`. This is logically equivalent to saying: if on roadway AND conditions AND left-half AND no exceptions apply → FALSE, which means: on roadway AND conditions → (NOT left-half OR some exception applies). This is actually a valid encoding pattern — it's vacuously enforcing the prohibition.
+
+However, looking at exception 3 more carefully: The original NL says "crossing to turn left into/out of alley/private road/driveway." The Phase 1 SMT encodes exception 3 as: `(intends_turn v TD_Left t) OR (exists access...)` AND `crossing_center_line`. The original NL says the crossing exception is specifically for turning left — and the "into/out of alley/private road/driveway" is part of the same crossing exception. The Phase 1 encoding makes `intends_turn left` and `turning into/emerging from access` as alternatives under the crossing condition, which seems reasonable. The original NL says "crossing to turn left into/out of" which could mean crossing the center line to (turn left) OR (to enter/exit an alley/private road/driveway). This seems acceptable.
+
+Arrow 1 appears correct.
+
+## Arrow 2: Phase 1 SMT → Reconstructed NL
+
+The Reconstructed NL says: "unless the vehicle is crossing the center line while intending to turn left or while turning into or emerging from an alley, private road, or driveway." This matches Phase 1's exception 3 structure: crossing_center_line AND (intends_turn left OR turning_into/emerging_from access). Arrow 2 appears correct.
+
+## Arrow 3: Reconstructed NL → Phase 3 SMT
+
+The Reconstructed NL says: "crossing the center line while intending to turn left or while turning into or emerging from an alley, private road, or driveway."
+
+Phase 3 SMT encodes exception 3 as: `crossing_center_line AND (intends_turn left OR executing_turn left OR exists access with turning_into/emerging_from)`. The Reconstructed NL says "intending to turn left" — Phase 3 adds `executing_turn v TD_Left t` which is NOT mentioned in the Reconstructed NL. The Reconstructed NL specifically says "intending to turn left," not "intending or executing a left turn." This is an addition not present in the Reconstructed NL.
+
+FIRST_FAILED_ARROW: 3
+REASONING:
+The Reconstructed NL specifies three exceptions for driving on the left half: (1) being in an authorized lane, (2) obstruction present with yielding to pedestrians, and (3) crossing the center line while "intending to turn left" or while "turning into or emerging from an alley, private road, or driveway." The Phase 3 SMT encoding of exception (3) includes `(executing_turn v TD_Left t)` as an additional disjunct alongside `(intends_turn v TD_Left t)`, but the Reconstructed NL only mentions "intending to turn left" — it does not mention "executing a left turn." This extra predicate in Phase 3 broadens the exception beyond what the Reconstructed NL states, making the Phase 3 encoding strictly more permissive than the Reconstructed NL warrants.

@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (t Int))
+  (=> (or (exists ((d TurnDir)) (intends_turn v d t))
+          (exists ((d TurnDir)) (intends_lane_change v d t))
+          (and (parked v t) (not (stopped v t))))
+      (or (exists ((d TurnDir)) (turn_signal_on v d t))
+          (exists ((d TurnDir)) (signal_continuous_100ft v d t)))))

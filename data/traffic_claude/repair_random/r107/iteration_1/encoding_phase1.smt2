@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (u Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (on_roadway u r t)
+           (not (= v u)))
+      (speed_reasonable_and_prudent v r t)))

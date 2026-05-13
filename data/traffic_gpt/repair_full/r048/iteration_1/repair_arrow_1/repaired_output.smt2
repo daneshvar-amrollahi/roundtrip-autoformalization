@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (approaching_crossing v c t)
+           (or (rail_stop_condition_holds v c t)
+               (not (= (gate_state c t) GS_Open))))
+      (and (stopped v t)
+           (<= ft_15_sq (dist_to_nearest_rail_sq v c t))
+           (<= (dist_to_nearest_rail_sq v c t) ft_50_sq))))

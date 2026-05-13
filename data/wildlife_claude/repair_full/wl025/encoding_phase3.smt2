@@ -1,0 +1,5 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (hunts p a t)
+           (is_kind a AK_ExoticAnimal)
+           (on_road_or_right_of_way p t))
+      false))

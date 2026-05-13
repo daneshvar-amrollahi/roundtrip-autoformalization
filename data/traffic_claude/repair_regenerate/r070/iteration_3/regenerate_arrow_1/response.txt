@@ -1,0 +1,33 @@
+(forall ((v_turner Vehicle) (v_oncoming Vehicle) (i Intersection) (t Int))
+  (=> (and (is_ego v_turner)
+           (not (= v_turner v_oncoming))
+           (or (executing_turn_at_intersection v_turner TD_Left i t)
+               (and (intends_turn v_turner TD_Left t)
+                    (exists ((a Access))
+                      (and (turning_into v_turner a t)
+                           (or (= (access_kind a) AK_Alley)
+                               (= (access_kind a) AK_PrivateRoad)
+                               (= (access_kind a) AK_Driveway))))))
+           (approaching_opposite v_turner v_oncoming t)
+           (or (in_intersection v_oncoming i t)
+               (is_immediate_hazard v_oncoming v_turner i t)))
+       (yield_right_of_way_to_pedestrian v_turner t)))
+
+Wait - `yield_right_of_way_to_pedestrian` is for pedestrians, not vehicles. Let me reconsider. The schema doesn't have a direct `yield_right_of_way_to_vehicle` predicate. The rule says the turner must yield. The practical encoding of "yielding right-of-way" means the turner must not proceed into the intersection (or must stop/not enter) while the oncoming vehicle is present. Let me look for the best approximation.
+
+The closest encoding: the turner must not enter the intersection while the oncoming vehicle is an immediate hazard, which means the turner must be able to safely stop and must not be moving into the path. Using `can_safely_stop` and requiring the turner to stop or not enter:
+
+(forall ((v_turner Vehicle) (v_oncoming Vehicle) (i Intersection) (t Int))
+  (=> (and (is_ego v_turner)
+           (not (= v_turner v_oncoming))
+           (intends_turn v_turner TD_Left t)
+           (or (executing_turn_at_intersection v_turner TD_Left i t)
+               (exists ((a Access))
+                 (and (turning_into v_turner a t)
+                      (or (= (access_kind a) AK_Alley)
+                          (= (access_kind a) AK_PrivateRoad)
+                          (= (access_kind a) AK_Driveway)))))
+           (approaching_opposite v_turner v_oncoming t)
+           (or (in_intersection v_oncoming i t)
+               (is_immediate_hazard v_oncoming v_turner i t)))
+       (not (entering_intersection v_turner i t))))

@@ -1,0 +1,1 @@
+An operator must not allow a passenger to interfere with the operator's view, and must not allow the driving mechanism to be interfered with.

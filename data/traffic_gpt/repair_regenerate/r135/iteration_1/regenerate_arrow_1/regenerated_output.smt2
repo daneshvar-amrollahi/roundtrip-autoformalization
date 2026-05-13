@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (pursuer Vehicle) (t Int))
+  (=> (and (not (= v pursuer))
+           (police_signal_given pursuer v t)
+           (fleeing_police v t))
+      true))

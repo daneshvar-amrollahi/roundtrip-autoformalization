@@ -1,0 +1,5 @@
+(forall ((actor Person) (hunter Person) (t Int))
+  (=> (and (distinct actor hunter)
+           (acts_intentionally actor t)
+           (lawfully_hunting_or_catching hunter t))
+      (not (interferes_with actor hunter t))))

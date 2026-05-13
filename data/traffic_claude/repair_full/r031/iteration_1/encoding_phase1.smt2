@@ -1,0 +1,6 @@
+(forall ((v_follower Vehicle) (v_leader Vehicle) (t Int))
+  (=> (and (is_ego v_follower)
+           (following v_follower v_leader t)
+           (not (= v_follower v_leader)))
+      (and (assured_clear_distance v_follower v_leader t)
+           (can_safely_stop v_follower t))))

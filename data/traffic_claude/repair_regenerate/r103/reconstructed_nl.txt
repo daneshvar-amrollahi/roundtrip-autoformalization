@@ -1,0 +1,11 @@
+A vehicle that is approaching a railroad crossing must not park within 50 feet of the nearest rail unless the vehicle is standing rather than parked.
+
+Wait, let me re-read the formula more carefully.
+
+The formula says: if a vehicle is approaching a crossing, AND is parked, AND is within 50 feet of the nearest rail, AND the stop action is NOT standing, then false (i.e., this situation is prohibited).
+
+So the prohibition applies when all four conditions hold. The negation of "stop_action = SA_Stand" means standing is excluded from the prohibition — but actually, the vehicle is already "parked," and the stop action is not standing. Let me reconsider.
+
+The conditions are: approaching a crossing, parked, within 50 feet, and the stop action is not standing. All four must hold for the prohibition. So if the stop action IS standing, the prohibition doesn't apply.
+
+A vehicle may not park within 50 feet of the nearest rail at a railroad crossing unless the vehicle's stop action constitutes standing.

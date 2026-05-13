@@ -1,0 +1,1 @@
+When a vehicle being passed receives an audible signal from the passing vehicle, the vehicle being passed must move to and remain on the right half of the roadway until the passing vehicle has completely passed.

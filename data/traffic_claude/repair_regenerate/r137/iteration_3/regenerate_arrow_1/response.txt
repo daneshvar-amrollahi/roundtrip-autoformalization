@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (and (is_ego v)
+           (cutting_through_property v i t)
+           (or (executing_turn_at_intersection v TD_Right i t)
+               (executing_turn_at_intersection v TD_Left i t)))
+      false))

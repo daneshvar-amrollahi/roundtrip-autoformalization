@@ -1,0 +1,7 @@
+(exists ((p Person) (a Animal) (w WaterBody) (t Int))
+  (and (handfishes p a t)
+       (on_water_body p w t)
+       (water_kind w WK_PublicFreshWater)
+       (is_kind a AK_AquaticAnimalLife)
+       (has_document_kind p DOK_FishingLicense t)
+       (has_document_kind p DOK_FreshwaterFishingStamp t)))

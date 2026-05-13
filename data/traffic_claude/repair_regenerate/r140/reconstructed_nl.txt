@@ -1,0 +1,15 @@
+When a vehicle is being passed on the right, the vehicle being passed must not move closer to the right edge of the roadway upon receiving an audible signal from the passing vehicle, and the vehicle being passed must not refrain from accelerating while being passed.
+
+Wait, let me re-analyze the formula more carefully.
+
+The formula states: for all passed, passer, and t, if passer is passing passed on the right side, then:
+
+1. `(not (=> (audible_signal ...) (close_to_right_edge_practicable ...)))` — this negates the implication, meaning: audible signal was given AND the passed vehicle did NOT move close to the right edge as practicable.
+
+2. `(not (=> (passing ...) (not (is-accelerating ...))))` — this negates the implication, meaning: passing is occurring AND the passed vehicle IS accelerating.
+
+So the conjunction requires: the passer gave an audible signal, the passed vehicle did not move to the right edge, the passing is happening, and the passed vehicle is accelerating. But this is asserted for ALL such situations, which would be a universal requirement that these conditions hold — that seems like it encodes a violation condition or is oddly structured.
+
+Re-reading: the formula universally asserts that whenever a vehicle is passing another on the right, the audible signal was given but the passed vehicle did not move to the right, and the passed vehicle is accelerating. This appears to encode prohibited behavior of the passed vehicle.
+
+A vehicle being passed on the right must, upon receiving an audible signal from the passing vehicle, move as close to the right edge of the roadway as practicable, and must not accelerate while being passed.

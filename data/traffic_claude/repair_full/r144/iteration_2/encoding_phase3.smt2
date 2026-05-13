@@ -1,0 +1,7 @@
+(forall ((trailer Vehicle) (t Int))
+  (=> (and (is_house_trailer trailer)
+           (exists ((tower Vehicle))
+             (and (not (= tower trailer))
+                  (following trailer tower t)
+                  (drawing_another_vehicle tower t))))
+      (not (occupant_in_trailer trailer t))))

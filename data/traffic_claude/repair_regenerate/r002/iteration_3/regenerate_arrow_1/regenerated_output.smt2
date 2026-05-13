@@ -1,0 +1,8 @@
+(forall ((v_pass Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v_pass r t)
+           (exists ((v_passed Vehicle)
+                    (t2 Int))
+             (and (not (= v_pass v_passed))
+                  (passing v_pass v_passed t2)
+                  (crossing_center_line v_pass r t2))))
+       true))

@@ -1,0 +1,1 @@
+The being-passed obligations (move right on signal, no accelerating) do not apply when passing to the right is permitted.

@@ -1,0 +1,6 @@
+(forall ((v_em Vehicle) (v Vehicle) (t Int))
+  (=> (and (is_authorized_emergency_vehicle v_em)
+           (emergency_vehicle_approaching v_em v t)
+           (emergency_signals_active v_em t)
+           (audible_signal v_em v t))
+      (yield_right_of_way_to_pedestrian v t)))

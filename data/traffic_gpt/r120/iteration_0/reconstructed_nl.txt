@@ -1,0 +1,1 @@
+An operator must not be in a safety zone and must not drive through a safety zone at any time when the zone is a safety zone.

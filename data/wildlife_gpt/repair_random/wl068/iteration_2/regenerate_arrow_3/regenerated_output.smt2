@@ -1,0 +1,10 @@
+(forall ((p Person) (f Animal) (t Int))
+  (=> (and (possesses p f t)
+           (is_kind f AK_Fish)
+           (is_named_in_protected_fish_list f))
+      (not
+        (exists ((doc1 Document) (doc2 Document))
+          (and (document_kind doc1 DOK_OriginVerification)
+               (document_kind doc2 DOK_OriginVerification)
+               (keeps_with p doc1 f t)
+               (displays_on_request p doc2 t))))))

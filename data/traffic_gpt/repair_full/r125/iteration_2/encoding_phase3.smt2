@@ -1,0 +1,8 @@
+(forall ((v_follow Vehicle) (v_fire Vehicle) (t Int))
+  (=> (and (following v_follow v_fire t)
+           (is_authorized_emergency_vehicle v_fire)
+           (= (kind v_fire) VK_FireApparatus)
+           (emergency_signals_active v_fire t)
+           (< (distance v_follow v_fire t) ft_500_sq)
+           (not (on_official_business v_follow t)))
+      false))

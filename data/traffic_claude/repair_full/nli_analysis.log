@@ -1,0 +1,1125 @@
+================================================================================
+NLI COMPARISON ANALYSIS
+Timestamp: 2026-02-09 00:09:30
+================================================================================
+Comparing: original_nl.txt vs reconstructed_nl.txt (iteration_0)
+Model: facebook/bart-large-mnli (bidirectional)
+
+Key signals:
+  E_min = min(E1, E2): Both directions must entail for equivalence
+  C_max = max(C1, C2): Any contradiction is concerning
+  E1 = P(original entails reconstructed)
+  E2 = P(reconstructed entails original)
+
+Categories:
+  CONTRADICTION: C_max ≥ 0.6 (genuine semantic conflict)
+  EQUIVALENT:    E_min ≥ 0.7 and C_max < 0.2
+  STRENGTHENED:  E1 ≥ 0.6, E2 < 0.4 (recon adds constraints)
+  WEAKENED:      E2 ≥ 0.6, E1 < 0.4 (recon drops constraints)
+  RELATED:       E_min ≥ 0.3, C_max < 0.3
+  UNRELATED:     otherwise
+
+
+================================================================================
+CONTRADICTION (10 rules)
+--------------------------------------------------------------------------------
+
+Rule: r066
+  E1=0.996 (orig→recon), E2=0.071 (recon→orig)
+  E_min=0.071, C_max=0.772, Score=-0.701
+  Original:      An operator on a single-lane or two-lane roadway approaching an uncontrolled intersection on a divided highway or a roadway divided into three or more marked lanes shall stop, yield, and grant immediate use of the intersection to a vehicle on the other roadway that is within or approaching the intersection and is a hazard.
+  Reconstructed: An operator on a roadway with one or two lanes who is approaching an uncontrolled intersection must stop and stop before reaching another vehicle that is on a different roadway, where that other roadway is either divided or has marked lanes with three or more lanes, if that other vehicle is in or approaching the same intersection and constitutes an immediate hazard.
+  Rationale: High contradiction (C_max=0.77 ≥ 0.6); asymmetric: forward stronger (1.00 vs 0.07)
+
+Rule: r067
+  E1=0.897 (orig→recon), E2=0.010 (recon→orig)
+  E_min=0.010, C_max=0.989, Score=-0.979
+  Original:      An operator on an unpaved roadway approaching an intersection of a paved roadway shall stop, yield, and grant immediate use of the intersection to a vehicle on the paved roadway that is within or approaching the intersection and is a hazard.
+  Reconstructed: The ego vehicle, when traveling on an unpaved roadway and approaching an intersection where that unpaved roadway meets a paved roadway, must stop, and must not enter the intersection while any vehicle on the paved roadway that is either in or approaching the intersection constitutes an immediate hazard, and must maintain an assured clear distance ahead of any such vehicle.
+  Rationale: High contradiction (C_max=0.99 ≥ 0.6); asymmetric: forward stronger (0.90 vs 0.01)
+
+Rule: r068
+  E1=0.001 (orig→recon), E2=0.035 (recon→orig)
+  E_min=0.001, C_max=0.963, Score=-0.962
+  Original:      An operator approaching an uncontrolled intersection shall stop, yield, and grant immediate use of the intersection to a vehicle that has entered from the operator's right or is approaching from the operator's right in a proximity that is a hazard.
+  Reconstructed: When approaching an uncontrolled intersection, if another vehicle is either already in the intersection and approaching from the right, or approaching from the right and constituting an immediate hazard, an operator must stop, yield the right-of-way to pedestrians, and must not enter the intersection.
+  Rationale: High contradiction (C_max=0.96 ≥ 0.6)
+
+Rule: r069
+  E1=0.951 (orig→recon), E2=0.140 (recon→orig)
+  E_min=0.140, C_max=0.851, Score=-0.711
+  Original:      An operator approaching an intersection from a roadway that terminates at the intersection shall stop, yield, and grant immediate use of the intersection to another vehicle that has entered or is approaching on the other roadway in a proximity that is a hazard.
+  Reconstructed: If an operator is approaching an intersection on a roadway that terminates at that intersection, and another vehicle is on a different roadway at that intersection, and that other vehicle is either already in the intersection or is approaching the intersection and constitutes an immediate hazard, then the operator must stop and may not enter the intersection.
+  Rationale: High contradiction (C_max=0.85 ≥ 0.6); asymmetric: forward stronger (0.95 vs 0.14)
+
+Rule: r070
+  E1=0.002 (orig→recon), E2=0.106 (recon→orig)
+  E_min=0.002, C_max=0.993, Score=-0.991
+  Original:      To turn left at an intersection or into an alley, private road, or driveway, an operator shall yield the right-of-way to a vehicle approaching from the opposite direction that is in the intersection or in such proximity as to be an immediate hazard.
+  Reconstructed: When an operator is executing a left turn at an intersection, or is executing a left turn into an alley, private road, or driveway, and another vehicle approaching from the opposite direction is either in the intersection or constitutes an immediate hazard to the operator at that intersection, the operator must not enter the intersection.
+  Rationale: High contradiction (C_max=0.99 ≥ 0.6)
+
+Rule: r071
+  E1=0.659 (orig→recon), E2=0.061 (recon→orig)
+  E_min=0.061, C_max=0.844, Score=-0.783
+  Original:      An operator approaching an intersection controlled by a stop sign, after stopping, shall yield the right-of-way to a vehicle that has entered the intersection from another highway or that is approaching so closely as to be an immediate hazard.
+  Reconstructed: An operator who has stopped at a stop sign–controlled intersection must not enter the intersection if another vehicle is already in the intersection or constitutes an immediate hazard.
+  Rationale: High contradiction (C_max=0.84 ≥ 0.6); asymmetric: forward stronger (0.66 vs 0.06)
+
+Rule: r073
+  E1=0.127 (orig→recon), E2=0.014 (recon→orig)
+  E_min=0.014, C_max=0.955, Score=-0.942
+  Original:      An operator on an access or feeder road of a limited-access highway shall yield the right-of-way to a vehicle entering or about to enter the access road from the highway, or leaving or about to leave the access road to enter the highway.
+  Reconstructed: When operating on a limited-access roadway and emerging from or turning into an access point, an operator must maintain an assured clear distance from any other vehicle on the same roadway that is emerging from or turning into the same access point or entering the main lane, and must ensure there is sufficient space for that other vehicle to enter.
+  Rationale: High contradiction (C_max=0.96 ≥ 0.6)
+
+Rule: r081
+  E1=0.005 (orig→recon), E2=0.002 (recon→orig)
+  E_min=0.002, C_max=0.836, Score=-0.834
+  Original:      An operator emerging from an alley, driveway, or building, on entering the roadway, shall yield the right-of-way to an approaching vehicle.
+  Reconstructed: An operator emerging from an alley, driveway, or building onto a roadway and entering the main lane must maintain an assured clear distance from any other vehicle on that roadway.
+  Rationale: High contradiction (C_max=0.84 ≥ 0.6)
+
+Rule: r140
+  E1=0.171 (orig→recon), E2=0.027 (recon→orig)
+  E_min=0.027, C_max=0.936, Score=-0.909
+  Original:      The being-passed obligations (move right on signal, no accelerating) do not apply when passing to the right is permitted.
+  Reconstructed: When a vehicle is passing another vehicle on a roadway and the passing is not on the right side, the vehicle being passed must not accelerate from that time until the passing vehicle has completely passed, and if the passing vehicle gives an audible signal at that time, the vehicle being passed must move as close to the right edge of the roadway as practicable.
+  Rationale: High contradiction (C_max=0.94 ≥ 0.6)
+
+Rule: r142
+  E1=0.013 (orig→recon), E2=0.017 (recon→orig)
+  E_min=0.013, C_max=0.976, Score=-0.963
+  Original:      The 100-foot approach limitations on driving to the left do not apply to an operator turning left into or from an alley, private road, or driveway.
+  Reconstructed: If an operator is on a roadway within the 100-foot approach zone of an intersection or railroad crossing in a municipality, and the operator intends to turn left into or from an alley, private road, or driveway on that roadway, then divider crossing is permitted for that operator on that roadway.
+  Rationale: High contradiction (C_max=0.98 ≥ 0.6)
+
+================================================================================
+UNRELATED (5 rules)
+--------------------------------------------------------------------------------
+
+Rule: r022
+  E1=0.595 (orig→recon), E2=0.088 (recon→orig)
+  E_min=0.088, C_max=0.001, Score=0.087
+  Original:      An operator may not pass to the right by leaving the main traveled portion of a roadway except as provided by the improved-shoulder rule.
+  Reconstructed: A vehicle may not pass another vehicle on the right by using a shoulder unless such shoulder use is necessary and safe.
+  Rationale: Low mutual entailment (E_min=0.09), no clear relationship; asymmetric: forward stronger (0.59 vs 0.09)
+
+Rule: r038
+  E1=0.447 (orig→recon), E2=0.981 (recon→orig)
+  E_min=0.447, C_max=0.544, Score=-0.097
+  Original:      After stopping for such a school bus, the operator may not proceed until the bus resumes motion, the driver signals to proceed, or the visual signal is no longer actuated.
+  Reconstructed: If an operator has stopped before reaching a stopped school bus, the operator must remain stopped from that time onward for as long as the bus has not resumed motion, the bus driver has not signaled the operator to proceed, and the bus's visual signal remains on.
+  Rationale: Low mutual entailment (E_min=0.45), no clear relationship; asymmetric: backward stronger (0.98 vs 0.45)
+
+Rule: r115
+  E1=0.476 (orig→recon), E2=0.865 (recon→orig)
+  E_min=0.476, C_max=0.480, Score=-0.005
+  Original:      Unless a special hazard exists, a speed of 60 miles per hour on a highway outside an urban district that is not a numbered highway is lawful.
+  Reconstructed: When operating on a highway that is not in an urban district and no special hazard exists, a vehicle traveling at or below 60 miles per hour is presumed to be traveling at a speed that is reasonable and prudent.
+  Rationale: Low mutual entailment (E_min=0.48), no clear relationship; asymmetric: backward stronger (0.86 vs 0.48)
+
+Rule: r136
+  E1=0.223 (orig→recon), E2=0.079 (recon→orig)
+  E_min=0.079, C_max=0.009, Score=0.070
+  Original:      A person may not drive a motor vehicle on a sidewalk, sidewalk area, or hike and bike trail except on a permanent or authorized temporary driveway.
+  Reconstructed: An operator may not drive on a sidewalk or trail unless the operator is emerging from or turning into a driveway.
+  Rationale: Low mutual entailment (E_min=0.08), no clear relationship
+
+Rule: r141
+  E1=0.036 (orig→recon), E2=0.000 (recon→orig)
+  E_min=0.000, C_max=0.003, Score=-0.002
+  Original:      The 100-foot approach limitations on driving to the left do not apply on a one-way roadway.
+  Reconstructed: On a one-way roadway, the approach-context limitations for passing near intersections, railroad crossings, bridges, viaducts, and tunnels do not apply to a vehicle.
+  Rationale: Low mutual entailment (E_min=0.00), no clear relationship
+
+================================================================================
+WEAKENED (7 rules)
+--------------------------------------------------------------------------------
+
+Rule: r003
+  E1=0.341 (orig→recon), E2=0.691 (recon→orig)
+  E_min=0.341, C_max=0.123, Score=0.218
+  Original:      If an obstruction necessitates moving left of center, the operator must yield right-of-way to a vehicle moving properly on the unobstructed portion that is an immediate hazard.
+  Reconstructed: A vehicle must not cross the center line of a roadway due to an obstruction when another distinct vehicle is in an authorized lane on the same roadway and the two vehicles are not at a safe distance from each other.
+  Rationale: Recon→Orig strong (0.69), Orig→Recon weak (0.34): reconstruction drops constraints
+
+Rule: r021
+  E1=0.037 (orig→recon), E2=0.999 (recon→orig)
+  E_min=0.037, C_max=0.002, Score=0.035
+  Original:      Passing to the right is only allowed if conditions permit safely passing and the vehicle being passed is making/about to make a left turn and the roadway conditions match the listed cases.
+  Reconstructed: An operator passing another vehicle on the right side may do so only if the movement can be made safely, the vehicle being passed intends to or is executing a left turn, and both vehicles are on the same roadway where either the roadway is of sufficient width and free of obstructions, the roadway has marked lanes with at least two lanes, or the roadway is a one-way roadway.
+  Rationale: Recon→Orig strong (1.00), Orig→Recon weak (0.04): reconstruction drops constraints
+
+Rule: r051
+  E1=0.024 (orig→recon), E2=0.965 (recon→orig)
+  E_min=0.024, C_max=0.015, Score=0.009
+  Original:      A motorcycle is entitled to full use of a lane, and a motor vehicle may not be driven in a manner that deprives a motorcycle of the full use of a lane.
+  Reconstructed: A vehicle may not occupy the same lane as a motorcycle unless operating abreast of that motorcycle, if doing so would interfere with or impede the motorcycle.
+  Rationale: Recon→Orig strong (0.97), Orig→Recon weak (0.02): reconstruction drops constraints
+
+Rule: r091
+  E1=0.015 (orig→recon), E2=0.988 (recon→orig)
+  E_min=0.015, C_max=0.002, Score=0.013
+  Original:      An operator may not stop, stand, or park a vehicle on the roadway side of a vehicle stopped or parked at the edge or curb of a street.
+  Reconstructed: A vehicle may not stop, stand, or park on a roadway alongside another vehicle that is already stopped or parked when that other vehicle has its right wheels within eighteen inches of the curb or is parallel to the curb.
+  Rationale: Recon→Orig strong (0.99), Orig→Recon weak (0.02): reconstruction drops constraints
+
+Rule: r098
+  E1=0.007 (orig→recon), E2=0.980 (recon→orig)
+  E_min=0.007, C_max=0.027, Score=-0.021
+  Original:      An operator may not stop, stand, or park a vehicle on a railroad track.
+  Reconstructed: A vehicle may not stop, stand, or park on a railroad crossing at a location where its distance to the railroad crossing feature is zero.
+  Rationale: Recon→Orig strong (0.98), Orig→Recon weak (0.01): reconstruction drops constraints
+
+Rule: r109
+  E1=0.021 (orig→recon), E2=0.994 (recon→orig)
+  E_min=0.021, C_max=0.000, Score=0.021
+  Original:      An operator shall drive at an appropriate reduced speed if approaching and going around a curve.
+  Reconstructed: When approaching a curve, executing a left turn, or executing a right turn, an operator must reduce speed as appropriate.
+  Rationale: Recon→Orig strong (0.99), Orig→Recon weak (0.02): reconstruction drops constraints
+
+Rule: r117
+  E1=0.010 (orig→recon), E2=0.987 (recon→orig)
+  E_min=0.010, C_max=0.001, Score=0.010
+  Original:      An operator may not drive so slowly as to impede the normal and reasonable movement of traffic, except when reduced speed is necessary for safe operation or in compliance with law.
+  Reconstructed: A vehicle traveling on a roadway may not move slower than the normal speed of traffic unless the reduced speed is appropriate for existing conditions, the vehicle is directed by a traffic control device, or the vehicle is directed by a police officer.
+  Rationale: Recon→Orig strong (0.99), Orig→Recon weak (0.01): reconstruction drops constraints
+
+================================================================================
+STRENGTHENED (28 rules)
+--------------------------------------------------------------------------------
+
+Rule: r013
+  E1=0.989 (orig→recon), E2=0.300 (recon→orig)
+  E_min=0.300, C_max=0.001, Score=0.299
+  Original:      An operator may not drive on the left side of center to pass unless (i) authorized and (ii) the left side is clearly visible and free of approaching traffic for sufficient distance to pass without interfering.
+  Reconstructed: A vehicle on a roadway may not drive on the left half of the roadway while using the opposing direction lane to pass unless the vehicle is in an authorized lane and the left side is clearly visible and free for passing.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.30): reconstruction adds constraints
+
+Rule: r025
+  E1=0.998 (orig→recon), E2=0.059 (recon→orig)
+  E_min=0.059, C_max=0.000, Score=0.059
+  Original:      On a designated one-way roadway with signs, an operator shall drive only in the indicated direction.
+  Reconstructed: A vehicle traveling on a one-way roadway must move only in the designated direction of that roadway.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.06): reconstruction adds constraints
+
+Rule: r026
+  E1=0.925 (orig→recon), E2=0.363 (recon→orig)
+  E_min=0.363, C_max=0.159, Score=0.205
+  Original:      Around a rotary traffic island, an operator shall drive only to the right of the island.
+  Reconstructed: A vehicle traveling on a rotary roadway must drive on the right half of the roadway.
+  Rationale: Orig→Recon strong (0.92), Recon→Orig weak (0.36): reconstruction adds constraints
+
+Rule: r031
+  E1=0.989 (orig→recon), E2=0.096 (recon→orig)
+  E_min=0.096, C_max=0.001, Score=0.095
+  Original:      If following another vehicle, an operator shall maintain an assured clear distance so the operator can safely stop without colliding or veering into another vehicle/object/person.
+  Reconstructed: The ego vehicle, when following another vehicle, must maintain an assured clear distance ahead and must be able to safely stop.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.10): reconstruction adds constraints
+
+Rule: r035
+  E1=0.754 (orig→recon), E2=0.130 (recon→orig)
+  E_min=0.130, C_max=0.062, Score=0.067
+  Original:      An operator may not drive over/across/in a dividing space/barrier/section constructed to impede vehicular traffic except through an opening or at a crossover/intersection established by a public authority.
+  Reconstructed: A vehicle on a divided roadway must not cross the center line unless crossing the divider is allowed.
+  Rationale: Orig→Recon strong (0.75), Recon→Orig weak (0.13): reconstruction adds constraints
+
+Rule: r036
+  E1=0.982 (orig→recon), E2=0.050 (recon→orig)
+  E_min=0.050, C_max=0.001, Score=0.049
+  Original:      An operator may not drive on or from a limited-access or controlled-access roadway except at an entrance or exit established by a public authority.
+  Reconstructed: A vehicle entering the main lane of a limited-access roadway must do so only through an established entrance or exit.
+  Rationale: Orig→Recon strong (0.98), Recon→Orig weak (0.05): reconstruction adds constraints
+
+Rule: r048
+  E1=0.998 (orig→recon), E2=0.273 (recon→orig)
+  E_min=0.273, C_max=0.001, Score=0.273
+  Original:      When approaching a railroad grade crossing, an operator shall stop (15-50 feet from nearest rail) if a listed warning/hazard condition holds (signal warns, gate lowered/flagger warns, audible train signal within ~1500 feet and immediate hazard, train plainly visible and in hazardous proximity, or otherwise required to stop).
+  Reconstructed: A vehicle approaching a railroad crossing where a stop condition is present must stop at a distance of no less than 15 feet and no more than 50 feet from the nearest rail.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.27): reconstruction adds constraints
+
+Rule: r059
+  E1=0.893 (orig→recon), E2=0.276 (recon→orig)
+  E_min=0.276, C_max=0.001, Score=0.274
+  Original:      To turn left from a one-way roadway into a one-way roadway, the operator shall make the turn as closely as practicable to the left-hand curb or edge of the roadway.
+  Reconstructed: When an operator executes a left turn at an intersection from a one-way roadway onto a different one-way roadway, the operator must make the turn as close as practicable to the left curb of the roadway being entered.
+  Rationale: Orig→Recon strong (0.89), Recon→Orig weak (0.28): reconstruction adds constraints
+
+Rule: r072
+  E1=0.998 (orig→recon), E2=0.002 (recon→orig)
+  E_min=0.002, C_max=0.000, Score=0.002
+  Original:      An operator approaching an intersection controlled by a yield sign shall slow to a reasonable speed and yield the right-of-way to a vehicle in the intersection or approaching on another highway so closely as to be an immediate hazard.
+  Reconstructed: An operator approaching an intersection controlled by a yield sign must reduce speed appropriately and yield the right-of-way to any other vehicle that is already in the intersection or that constitutes an immediate hazard.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: r079
+  E1=0.812 (orig→recon), E2=0.299 (recon→orig)
+  E_min=0.299, C_max=0.032, Score=0.267
+  Original:      An operator emerging from an alley, driveway, or building in a business or residence district shall stop the vehicle before moving on a sidewalk or the sidewalk area extending across the alley or driveway.
+  Reconstructed: An operator emerging from an alley, driveway, or building onto a roadway in a business or residence district must stop before crossing the sidewalk.
+  Rationale: Orig→Recon strong (0.81), Recon→Orig weak (0.30): reconstruction adds constraints
+
+Rule: r080
+  E1=0.984 (orig→recon), E2=0.015 (recon→orig)
+  E_min=0.015, C_max=0.001, Score=0.015
+  Original:      An operator emerging from an alley, driveway, or building shall yield the right-of-way to a pedestrian to avoid collision.
+  Reconstructed: An operator emerging from an alley, driveway, or building must yield the right-of-way to any pedestrian.
+  Rationale: Orig→Recon strong (0.98), Recon→Orig weak (0.02): reconstruction adds constraints
+
+Rule: r096
+  E1=0.616 (orig→recon), E2=0.012 (recon→orig)
+  E_min=0.012, C_max=0.001, Score=0.011
+  Original:      An operator may not stop, stand, or park a vehicle alongside or opposite a street excavation or obstruction if it would obstruct traffic.
+  Reconstructed: A vehicle may not stop, stand, or park on a roadway when an obstruction is present and the remaining width is not sufficient for unobstructed passage.
+  Rationale: Orig→Recon strong (0.62), Recon→Orig weak (0.01): reconstruction adds constraints
+
+Rule: r099
+  E1=0.995 (orig→recon), E2=0.001 (recon→orig)
+  E_min=0.001, C_max=0.002, Score=-0.001
+  Original:      An operator may not stand or park a vehicle in front of a public or private driveway, except momentarily to pick up or discharge a passenger.
+  Reconstructed: A vehicle must not stand or park in front of a driveway.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: r100
+  E1=0.995 (orig→recon), E2=0.001 (recon→orig)
+  E_min=0.001, C_max=0.003, Score=-0.003
+  Original:      An operator may not stand or park a vehicle within 15 feet of a fire hydrant, except momentarily to pick up or discharge a passenger.
+  Reconstructed: A vehicle may not stand or park within 15 feet of a fire hydrant.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: r102
+  E1=0.989 (orig→recon), E2=0.002 (recon→orig)
+  E_min=0.002, C_max=0.009, Score=-0.007
+  Original:      An operator may not stand or park a vehicle within 30 feet of a flashing signal, stop sign, yield sign, or traffic-control signal on the approach side, except momentarily to pick up or discharge a passenger.
+  Reconstructed: A vehicle may not stand or park within 30 feet of a flashing signal, stop sign, yield sign, or traffic signal, unless the vehicle is stopped in the act of stopping.
+
+Wait, let me re-read the formula more carefully.
+
+The formula says: for all vehicles and times, if (the vehicle is within 30 feet of a flashing signal, stop sign, yield sign, or traffic signal) AND (it is NOT the case that the vehicle's stop action is "stop" and the vehicle is stopped), then the vehicle must not be standing and must not be parked.
+
+So the exception is when the vehicle is performing a "stop" action and is stopped.
+
+A vehicle may not stand or park within 30 feet of a flashing signal, stop sign, yield sign, or traffic signal, unless the vehicle is making a lawful stop and is stopped.
+
+Hmm, let me be more precise and literal:
+
+A vehicle within 30 feet of a flashing signal, stop sign, yield sign, or traffic signal may not stand or park unless the vehicle is stopped as part of a stopping action.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: r104
+  E1=0.999 (orig→recon), E2=0.206 (recon→orig)
+  E_min=0.206, C_max=0.001, Score=0.205
+  Original:      An operator who stops or parks on a two-way roadway shall do so with the right-hand wheels parallel to and within 18 inches of the right-hand curb or edge of the roadway.
+  Reconstructed: When a vehicle is stopped or parked on a two-way roadway, the vehicle must be parallel to the curb and must have its right wheels within eighteen inches of the curb.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.21): reconstruction adds constraints
+
+Rule: r112
+  E1=0.987 (orig→recon), E2=0.001 (recon→orig)
+  E_min=0.001, C_max=0.001, Score=0.000
+  Original:      An operator shall drive at an appropriate reduced speed if a special hazard exists with regard to traffic, including pedestrians, or weather or highway conditions.
+  Reconstructed: When the ego vehicle is on a roadway where a special hazard exists, the operator must reduce speed to an appropriate level.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: r122
+  E1=0.997 (orig→recon), E2=0.001 (recon→orig)
+  E_min=0.001, C_max=0.000, Score=0.000
+  Original:      An operator on a mountain highway approaching a curve that obstructs the view for 200 feet shall give warning with the horn.
+  Reconstructed: An operator driving on a mountain highway who is approaching a blind curve must give a horn warning.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: r125
+  E1=0.807 (orig→recon), E2=0.070 (recon→orig)
+  E_min=0.070, C_max=0.002, Score=0.069
+  Original:      An operator, unless on official business, may not follow closer than 500 feet a fire apparatus responding to a fire alarm.
+  Reconstructed: The ego vehicle, when not on official business and following a fire apparatus that has its emergency signals active, and where the ego vehicle and the fire apparatus are distinct vehicles, must maintain a distance strictly greater than 500 feet from that fire apparatus.
+  Rationale: Orig→Recon strong (0.81), Recon→Orig weak (0.07): reconstruction adds constraints
+
+Rule: r126
+  E1=0.937 (orig→recon), E2=0.002 (recon→orig)
+  E_min=0.002, C_max=0.001, Score=0.001
+  Original:      An operator may not follow closer than 500 feet an ambulance that is flashing red lights unless the operator is on official business.
+  Reconstructed: An operator may not follow closer than 500 feet behind an ambulance that has emergency signals active, unless the operator is on official business.
+  Rationale: Orig→Recon strong (0.94), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: r127
+  E1=0.994 (orig→recon), E2=0.018 (recon→orig)
+  E_min=0.018, C_max=0.001, Score=0.017
+  Original:      An operator may not drive over an unprotected fire hose on a street without the consent of the fire department official in command.
+  Reconstructed: An operator may not drive over a fire hose laid on a roadway unless the operator has obtained consent from the fire department.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.02): reconstruction adds constraints
+
+Rule: r133
+  E1=0.996 (orig→recon), E2=0.001 (recon→orig)
+  E_min=0.001, C_max=0.001, Score=-0.000
+  Original:      A person may not leave a door on the side of a vehicle next to moving traffic open for longer than is necessary to load or unload a passenger.
+  Reconstructed: An operator must not leave a door open on the traffic side of a vehicle longer than necessary.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: r134
+  E1=0.998 (orig→recon), E2=0.253 (recon→orig)
+  E_min=0.253, C_max=0.001, Score=0.253
+  Original:      A person may not participate in a race, vehicle speed competition, drag race, or test of physical endurance of the operator on a highway.
+  Reconstructed: An operator may not engage in racing while on a highway.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.25): reconstruction adds constraints
+
+Rule: r137
+  E1=0.990 (orig→recon), E2=0.006 (recon→orig)
+  E_min=0.006, C_max=0.002, Score=0.004
+  Original:      An operator may not cross or drive in or on a sidewalk, driveway, parking lot, or business or residential entrance at an intersection to turn right or left from one highway to another highway.
+  Reconstructed: An operator may not avoid an intersection by cutting through adjacent property when executing a left or right turn at that intersection.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.01): reconstruction adds constraints
+
+Rule: r147
+  E1=0.673 (orig→recon), E2=0.024 (recon→orig)
+  E_min=0.024, C_max=0.011, Score=0.013
+  Original:      An operator of a streetcar may not drive over an unprotected fire hose on a streetcar track without the consent of the fire department official in command.
+  Reconstructed: A streetcar operator must not drive over a fire hose laid on the roadway while operating on a streetcar track unless the operator has obtained the consent of the fire department.
+  Rationale: Orig→Recon strong (0.67), Recon→Orig weak (0.02): reconstruction adds constraints
+
+Rule: r148
+  E1=0.937 (orig→recon), E2=0.001 (recon→orig)
+  E_min=0.001, C_max=0.295, Score=-0.294
+  Original:      An operator may not stand or park a vehicle within 20 feet of the driveway entrance to a fire station and on the side of a street opposite the entrance within 75 feet, except momentarily to pick up or discharge a passenger.
+  Reconstructed: The ego vehicle may not stand or park within 75 feet of a fire station driveway entrance, unless the ego vehicle is performing a stop action and is momentarily stopped rather than standing or parking.
+  Rationale: Orig→Recon strong (0.94), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: r149
+  E1=0.932 (orig→recon), E2=0.130 (recon→orig)
+  E_min=0.130, C_max=0.058, Score=0.071
+  Original:      An operator of heavy equipment may not move on or across a track at a railroad grade crossing unless the operator has given notice to the railroad and allowed reasonable time for protection.
+  Reconstructed: An operator of heavy equipment approaching a railroad crossing must have notified the railroad and must be permitted to proceed before crossing.
+  Rationale: Orig→Recon strong (0.93), Recon→Orig weak (0.13): reconstruction adds constraints
+
+Rule: r150
+  E1=0.828 (orig→recon), E2=0.049 (recon→orig)
+  E_min=0.049, C_max=0.000, Score=0.049
+  Original:      An operator of heavy equipment at a railroad grade crossing shall stop (15-50 feet from the nearest rail), listen and look in both directions, and may not proceed until it is safe to cross.
+  Reconstructed: An operator of a heavy equipment vehicle approaching a railroad crossing must stop at a distance of not less than 15 feet and not more than 50 feet from the nearest rail, must ensure that the rail stop condition holds, and must not proceed until it is safe to proceed.
+  Rationale: Orig→Recon strong (0.83), Recon→Orig weak (0.05): reconstruction adds constraints
+
+================================================================================
+RELATED (14 rules)
+--------------------------------------------------------------------------------
+
+Rule: r008
+  E1=0.610 (orig→recon), E2=0.969 (recon→orig)
+  E_min=0.610, C_max=0.016, Score=0.594
+  Original:      On a roadway wide enough for not more than one line of movement each direction, an operator shall give the other operator at least one-half of the main traveled portion (or as much as possible if not possible).
+  Reconstructed: When two distinct vehicles are on the same two-lane roadway and approaching each other from opposite directions, each vehicle must be positioned on the right half of the roadway or as close to the right edge as practicable.
+  Rationale: Some mutual entailment (E_min=0.61), low contradiction; asymmetric: backward stronger (0.97 vs 0.61)
+
+Rule: r011
+  E1=0.492 (orig→recon), E2=0.519 (recon→orig)
+  E_min=0.492, C_max=0.244, Score=0.247
+  Original:      An operator being passed shall, on audible signal, move or remain to the right in favor of the passing vehicle.
+  Reconstructed: When a vehicle is passing another vehicle and the passing vehicle has given an audible signal to the vehicle being passed, the vehicle being passed must be on some roadway on which it is positioned as close to the right edge as practicable.
+  Rationale: Some mutual entailment (E_min=0.49), low contradiction
+
+Rule: r030
+  E1=0.871 (orig→recon), E2=0.703 (recon→orig)
+  E_min=0.703, C_max=0.274, Score=0.429
+  Original:      On a one-way roadway with three or more lanes, an operator entering a lane from a lane to the right shall yield right-of-way to a vehicle entering the same lane from a lane to the left.
+  Reconstructed: If two distinct vehicles are both on the same one-way roadway that has three or more lanes, both vehicles are in the same lane, and one vehicle intends to change lanes to the left while the other intends to change lanes to the right, the vehicle intending to change lanes to the left must ensure there is sufficient space for the vehicle intending to change lanes to the right to enter the intended lane.
+  Rationale: Some mutual entailment (E_min=0.70), low contradiction
+
+Rule: r032
+  E1=0.997 (orig→recon), E2=0.429 (recon→orig)
+  E_min=0.429, C_max=0.000, Score=0.429
+  Original:      A truck (or vehicle drawing another vehicle) outside a business/residential district, following another truck (or vehicle drawing another vehicle), shall (if conditions permit) leave sufficient space so a passing vehicle can safely enter and occupy the space.
+  Reconstructed: A truck or vehicle drawing another vehicle that is following another truck or vehicle drawing another vehicle on a roadway outside of a business or residence district must maintain sufficient space between itself and the vehicle it is following so that any other vehicle may safely enter that space.
+  Rationale: Some mutual entailment (E_min=0.43), low contradiction; asymmetric: forward stronger (1.00 vs 0.43)
+
+Rule: r042
+  E1=0.998 (orig→recon), E2=0.693 (recon→orig)
+  E_min=0.693, C_max=0.010, Score=0.683
+  Original:      Passing to the right of a streetcar stopped/about to stop to receive/discharge a passenger: the operator shall stop at least five feet to the rear of the nearest running board/door.
+  Reconstructed: When passing a streetcar on the right side while the streetcar is stopped for passengers or is about to stop for passengers, an operator must stop at least five feet to the rear of the nearest door of the streetcar.
+  Rationale: Some mutual entailment (E_min=0.69), low contradiction; asymmetric: forward stronger (1.00 vs 0.69)
+
+Rule: r043
+  E1=0.995 (orig→recon), E2=0.530 (recon→orig)
+  E_min=0.530, C_max=0.081, Score=0.449
+  Original:      Passing to the right of that streetcar: the operator shall remain standing until all passengers have entered or (on leaving) have reached a place of safety.
+  Reconstructed: When a vehicle is passing a streetcar on the right side while the streetcar is stopped for passengers, the vehicle must remain stopped until all passengers of the streetcar are safe.
+  Rationale: Some mutual entailment (E_min=0.53), low contradiction; asymmetric: forward stronger (0.99 vs 0.53)
+
+Rule: r061
+  E1=0.591 (orig→recon), E2=0.994 (recon→orig)
+  E_min=0.591, C_max=0.000, Score=0.590
+  Original:      An operator may not turn the vehicle to enter a private road or driveway, otherwise turn the vehicle from a direct course, or move right or left on a roadway unless movement can be made safely.
+  Reconstructed: An operator must not turn left, turn right, make a U-turn, change lanes in either direction, or turn into a private road or driveway unless the movement can be made safely.
+  Rationale: Some mutual entailment (E_min=0.59), low contradiction; asymmetric: backward stronger (0.99 vs 0.59)
+
+Rule: r114
+  E1=0.972 (orig→recon), E2=0.531 (recon→orig)
+  E_min=0.531, C_max=0.115, Score=0.416
+  Original:      Unless a special hazard exists, a speed of 70 miles per hour on a highway numbered by the state or United States outside an urban district is lawful.
+  Reconstructed: A vehicle on a highway that is not in an urban district must not exceed 70 miles per hour unless a special hazard exists.
+  Rationale: Some mutual entailment (E_min=0.53), low contradiction; asymmetric: forward stronger (0.97 vs 0.53)
+
+Rule: r121
+  E1=0.991 (orig→recon), E2=0.656 (recon→orig)
+  E_min=0.656, C_max=0.001, Score=0.655
+  Original:      An operator moving through a defile or canyon or on a mountain highway shall hold the vehicle under control and as near the right-hand edge of the highway as possible.
+  Reconstructed: If a vehicle is traveling on a roadway of kind mountain highway, tunnel, or other, the operator must keep the vehicle under control and as close to the right edge of the roadway as practicable.
+  Rationale: Some mutual entailment (E_min=0.66), low contradiction; asymmetric: forward stronger (0.99 vs 0.66)
+
+Rule: r123
+  E1=0.566 (orig→recon), E2=0.597 (recon→orig)
+  E_min=0.566, C_max=0.002, Score=0.564
+  Original:      An operator moving on a downgrade may not coast with the gears or transmission of the vehicle in neutral.
+  Reconstructed: An operator must not coast in neutral gear while traveling on a downgrade on a roadway.
+  Rationale: Some mutual entailment (E_min=0.57), low contradiction
+
+Rule: r130
+  E1=0.992 (orig→recon), E2=0.578 (recon→orig)
+  E_min=0.578, C_max=0.002, Score=0.576
+  Original:      An operator may not drive a vehicle when it is loaded so that the view of the operator to the front or sides is obstructed.
+  Reconstructed: The ego vehicle must not drive when its view is obstructed by the vehicle's load.
+  Rationale: Some mutual entailment (E_min=0.58), low contradiction; asymmetric: forward stronger (0.99 vs 0.58)
+
+Rule: r131
+  E1=0.972 (orig→recon), E2=0.673 (recon→orig)
+  E_min=0.673, C_max=0.007, Score=0.666
+  Original:      A passenger in a vehicle may not ride in a position that interferes with the operator's view to the front or sides or control over the driving mechanism of the vehicle.
+  Reconstructed: An operator must not allow a passenger to interfere with the operator's view, and must not allow the vehicle's driving mechanism to be interfered with.
+  Rationale: Some mutual entailment (E_min=0.67), low contradiction
+
+Rule: r132
+  E1=0.991 (orig→recon), E2=0.686 (recon→orig)
+  E_min=0.686, C_max=0.003, Score=0.683
+  Original:      A person may not open the door of a motor vehicle on the side available to moving traffic unless the door may be opened in reasonable safety without interfering with the movement of other traffic.
+  Reconstructed: A vehicle may not open a door on the traffic side unless the door can be opened safely.
+  Rationale: Some mutual entailment (E_min=0.69), low contradiction; asymmetric: forward stronger (0.99 vs 0.69)
+
+Rule: r146
+  E1=0.492 (orig→recon), E2=0.593 (recon→orig)
+  E_min=0.492, C_max=0.019, Score=0.473
+  Original:      On the immediate approach of an authorized emergency vehicle, the operator of a streetcar shall immediately stop the streetcar clear of any intersection and remain there until the emergency vehicle has passed.
+  Reconstructed: A streetcard that is a different vehicle from an authorized emergency vehicle approaching it with active emergency signals must stop and must not be in any intersection, and must remain stopped and out of any intersection until the emergency vehicle has completely passed the streetcar.
+  Rationale: Some mutual entailment (E_min=0.49), low contradiction
+
+================================================================================
+EQUIVALENT (86 rules)
+--------------------------------------------------------------------------------
+
+Rule: r001
+  E1=0.998 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.998, C_max=0.000, Score=0.997
+  Original:      An operator on a roadway of sufficient width shall drive on the right half of the roadway.
+  Reconstructed: A vehicle traveling on a roadway of sufficient width must drive on the right half of the roadway.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r002
+  E1=0.775 (orig→recon), E2=0.931 (recon→orig)
+  E_min=0.775, C_max=0.047, Score=0.729
+  Original:      An operator may drive left of center to pass another vehicle.
+  Reconstructed: The ego vehicle may pass another vehicle while both the ego vehicle is on a roadway and positioned on the left half of that roadway.
+  Rationale: Strong mutual entailment (E_min=0.78), low contradiction (C_max=0.05)
+
+Rule: r004
+  E1=0.960 (orig→recon), E2=0.995 (recon→orig)
+  E_min=0.960, C_max=0.000, Score=0.960
+  Original:      If moving more slowly than the normal speed of other vehicles, the operator shall drive in the right-hand lane available for vehicles.
+  Reconstructed: A vehicle moving slower than the normal speed of traffic on a roadway must be driven in the right lane.
+  Rationale: Strong mutual entailment (E_min=0.96), low contradiction (C_max=0.00)
+
+Rule: r005
+  E1=0.992 (orig→recon), E2=0.975 (recon→orig)
+  E_min=0.975, C_max=0.000, Score=0.974
+  Original:      If moving more slowly than normal, the operator shall drive as close as practicable to the right-hand curb/edge unless passing or preparing for a left turn.
+  Reconstructed: If the ego vehicle is on a roadway and is moving slower than the normal speed of traffic, and is not currently passing another vehicle, and does not intend to turn left, then the ego vehicle must drive as close to the right edge of the roadway as practicable.
+  Rationale: Strong mutual entailment (E_min=0.97), low contradiction (C_max=0.00)
+
+Rule: r006
+  E1=0.989 (orig→recon), E2=0.999 (recon→orig)
+  E_min=0.989, C_max=0.000, Score=0.989
+  Original:      On a roadway with four or more lanes and two-way movement, an operator may not drive left of the center line except in listed exceptions (authorized lane, obstruction/yield case, or crossing to turn left into/out of alley/private road/driveway).
+  Reconstructed: A vehicle on a two-way roadway with four or more lanes must not drive on the left half of the roadway unless the vehicle is in an authorized lane, or unless an obstruction is present and the vehicle is yielding the right-of-way to pedestrians, or unless the vehicle is crossing the center line while intending to turn left or while turning into or emerging from an alley, private road, or driveway on that roadway.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r007
+  E1=0.887 (orig→recon), E2=0.957 (recon→orig)
+  E_min=0.887, C_max=0.009, Score=0.879
+  Original:      When meeting oncoming traffic, an operator shall move to or remain to the right.
+  Reconstructed: When the ego vehicle is on a roadway and another vehicle is approaching from the opposite direction on the same roadway, the ego vehicle must drive on the right half of the roadway.
+  Rationale: Strong mutual entailment (E_min=0.89), low contradiction (C_max=0.01)
+
+Rule: r009
+  E1=0.995 (orig→recon), E2=0.999 (recon→orig)
+  E_min=0.995, C_max=0.000, Score=0.995
+  Original:      An operator passing another vehicle shall pass to the left at a safe distance.
+  Reconstructed: A vehicle passing another vehicle must pass on the left side and must maintain a safe distance from the vehicle being passed.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r010
+  E1=0.978 (orig→recon), E2=0.999 (recon→orig)
+  E_min=0.978, C_max=0.000, Score=0.978
+  Original:      An operator passing another vehicle may not move back to the right side until safely clear of the passed vehicle.
+  Reconstructed: When a vehicle is passing another vehicle on a roadway, the passing vehicle must not return to the right half of the roadway until it is safely clear of the passed vehicle.
+  Rationale: Strong mutual entailment (E_min=0.98), low contradiction (C_max=0.00)
+
+Rule: r012
+  E1=0.998 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.998, C_max=0.000, Score=0.998
+  Original:      An operator being passed may not accelerate until completely passed by the passing vehicle.
+  Reconstructed: A vehicle being passed by another vehicle must not accelerate until the passing vehicle has completely passed.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r014
+  E1=0.922 (orig→recon), E2=0.737 (recon→orig)
+  E_min=0.737, C_max=0.090, Score=0.647
+  Original:      If using the opposing-direction lane to pass, the operator shall return to an authorized lane before coming within 200 feet of an approaching vehicle.
+  Reconstructed: The ego vehicle, when using the opposing direction lane to pass and an oncoming vehicle is approaching from the opposite direction at a distance strictly less than 200 feet, must be in an authorized lane.
+  Rationale: Strong mutual entailment (E_min=0.74), low contradiction (C_max=0.09)
+
+Rule: r015
+  E1=0.986 (orig→recon), E2=0.995 (recon→orig)
+  E_min=0.986, C_max=0.000, Score=0.985
+  Original:      An operator shall obey the directions of a no-passing sign/marking if in place and clearly visible.
+  Reconstructed: When a vehicle is on a roadway where a no-passing zone is established by striping or signs and the no-passing marking is visible to the operator, the operator must obey the no-passing restriction.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r016
+  E1=0.956 (orig→recon), E2=0.978 (recon→orig)
+  E_min=0.956, C_max=0.001, Score=0.955
+  Original:      An operator may not drive on the left side of the roadway in a no-passing zone or on the left side of pavement striping marking a no-passing zone.
+  Reconstructed: A vehicle on a roadway where a no-passing zone is established by striping, signs, or other visible no-passing markings must not drive on the left half of the roadway.
+  Rationale: Strong mutual entailment (E_min=0.96), low contradiction (C_max=0.00)
+
+Rule: r017
+  E1=0.922 (orig→recon), E2=0.943 (recon→orig)
+  E_min=0.922, C_max=0.026, Score=0.896
+  Original:      The no-passing-zone striping rule does not prohibit crossing striping/center line in a no-passing zone marked by signs only to make a left turn into/out of an alley/private road/driveway.
+  Reconstructed: When a roadway's no-passing zone is established by signs only and a vehicle is crossing the center line while intending to turn left and is either turning into or emerging from an alley, private road, or driveway on that roadway, the vehicle must still be considered in compliance with the no-passing restriction.
+  Rationale: Strong mutual entailment (E_min=0.92), low contradiction (C_max=0.03)
+
+Rule: r018
+  E1=0.994 (orig→recon), E2=0.896 (recon→orig)
+  E_min=0.896, C_max=0.002, Score=0.894
+  Original:      An operator may not drive to the left side of the roadway when approaching within 100 feet of an intersection or railroad grade crossing in a municipality.
+  Reconstructed: A vehicle on a roadway must not drive on the left half of the roadway when within 100 feet of an intersection or railroad crossing within a municipality.
+  Rationale: Strong mutual entailment (E_min=0.90), low contradiction (C_max=0.00)
+
+Rule: r019
+  E1=0.985 (orig→recon), E2=0.907 (recon→orig)
+  E_min=0.907, C_max=0.002, Score=0.905
+  Original:      An operator may not drive to the left side when approaching within 100 feet of a signed/marked intersection or railroad grade crossing outside a municipality.
+  Reconstructed: A vehicle on a roadway must not drive on the left half of the roadway when approaching within 100 feet of a marked intersection or railroad crossing outside a municipality.
+  Rationale: Strong mutual entailment (E_min=0.91), low contradiction (C_max=0.00)
+
+Rule: r020
+  E1=0.976 (orig→recon), E2=0.996 (recon→orig)
+  E_min=0.976, C_max=0.002, Score=0.974
+  Original:      An operator may not drive to the left side when approaching within 100 feet of a bridge, viaduct, or tunnel.
+  Reconstructed: A vehicle on a roadway must not drive on the left half of the roadway when within 100 feet of a bridge, viaduct, or tunnel.
+  Rationale: Strong mutual entailment (E_min=0.98), low contradiction (C_max=0.00)
+
+Rule: r023
+  E1=0.998 (orig→recon), E2=0.892 (recon→orig)
+  E_min=0.892, C_max=0.000, Score=0.892
+  Original:      An operator may drive on an improved shoulder to the right only if necessary and safe, and only for one of the listed purposes (stop/stand/park; accelerate before entering main lane; decelerate before right turn; pass a slowing/stopped/disabled/left-turning vehicle; allow faster vehicle to pass; traffic-control device; avoid collision).
+  Reconstructed: An operator driving on the right shoulder of a roadway may do so only when it is necessary and safe, and only for one of the following purposes: stopping, standing, or parking; accelerating before entering the main lane; decelerating before making a right turn; passing a vehicle that is slowing, stopped, disabled, or turning left; allowing a faster vehicle to pass; complying with a traffic control device; or avoiding a collision.
+  Rationale: Strong mutual entailment (E_min=0.89), low contradiction (C_max=0.00)
+
+Rule: r024
+  E1=0.997 (orig→recon), E2=0.972 (recon→orig)
+  E_min=0.972, C_max=0.000, Score=0.971
+  Original:      An operator may drive on an improved shoulder to the left of the main traveled portion of certain divided/controlled-access highways only if safe and only for one of the listed purposes (disabled and can't safely move right; traffic-control device; avoid collision).
+  Reconstructed: A vehicle on a roadway that is either divided or has limited access control may not drive on the left shoulder unless the shoulder use is necessary and safe, and the reason for using the shoulder is that the vehicle is disabled and cannot move right, that a traffic control device directs such use, or that the use is necessary to avoid a collision.
+  Rationale: Strong mutual entailment (E_min=0.97), low contradiction (C_max=0.00)
+
+Rule: r027
+  E1=0.998 (orig→recon), E2=0.999 (recon→orig)
+  E_min=0.998, C_max=0.000, Score=0.997
+  Original:      On a roadway divided into two or more clearly marked lanes, an operator shall drive as nearly as practical entirely within a single lane.
+  Reconstructed: A vehicle traveling on a roadway that has marked lanes and at least two lanes must, as far as practicable, remain entirely within a single lane.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r028
+  E1=0.994 (orig→recon), E2=0.995 (recon→orig)
+  E_min=0.994, C_max=0.002, Score=0.992
+  Original:      An operator may not move from the lane unless that movement can be made safely.
+  Reconstructed: A vehicle may not change lanes unless the movement can be made safely.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r029
+  E1=0.998 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.998, C_max=0.000, Score=0.998
+  Original:      On a three-lane roadway with two-way movement, an operator may not drive in the center lane except for passing (center lane clear within a safe distance), preparing for a left turn, or where traffic-control devices designate that lane for the operator's direction.
+  Reconstructed: When operating on a three-lane two-way roadway, a vehicle may only use the center lane if the vehicle is passing another vehicle and the left side is clearly visible and free for passing, or the vehicle intends to turn left, or the vehicle is directed by a traffic control device.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r033
+  E1=0.967 (orig→recon), E2=0.957 (recon→orig)
+  E_min=0.957, C_max=0.000, Score=0.957
+  Original:      An operator outside a business/residential district driving in a caravan or motorcade shall allow sufficient space so another vehicle can safely enter and occupy the space (does not apply to a funeral procession).
+  Reconstructed: An operator driving in a caravan or motorcade on a roadway that is not in a business or residence district must maintain sufficient space between their vehicle and any other vehicle to enable another vehicle to enter that space, unless the operator is part of a funeral procession.
+  Rationale: Strong mutual entailment (E_min=0.96), low contradiction (C_max=0.00)
+
+Rule: r034
+  E1=0.998 (orig→recon), E2=0.981 (recon→orig)
+  E_min=0.981, C_max=0.002, Score=0.979
+  Original:      On a divided highway with separated roadways, an operator shall drive on the right roadway unless directed/permitted otherwise by a traffic-control device or police officer.
+  Reconstructed: A vehicle traveling on a divided roadway must drive on the right roadway unless directed otherwise by a police officer or a traffic control device.
+  Rationale: Strong mutual entailment (E_min=0.98), low contradiction (C_max=0.00)
+
+Rule: r037
+  E1=0.995 (orig→recon), E2=0.878 (recon→orig)
+  E_min=0.878, C_max=0.001, Score=0.877
+  Original:      When approaching a school bus stopped to receive/discharge a student, if the bus is operating the required visual signal, the operator shall stop before reaching the school bus.
+  Reconstructed: The ego vehicle, when approaching a school bus that is stopped for students and has its visual signal on, must stop before reaching the school bus.
+  Rationale: Strong mutual entailment (E_min=0.88), low contradiction (C_max=0.00)
+
+Rule: r039
+  E1=0.969 (orig→recon), E2=0.963 (recon→orig)
+  E_min=0.963, C_max=0.030, Score=0.933
+  Original:      An operator may not pass to the left or drive on the left side of a streetcar moving in the same direction (even if temporarily at rest) unless directed by a police officer, on a one-way street, or track location prevents compliance.
+  Reconstructed: An operator on a two-way roadway shared with a streetcar that is moving, stopped for passengers, about to stop for passengers, or crossing an intersection must not pass the streetcar on the left and must not drive on the left half of the roadway, unless the operator is directed by police or the location of the track prevents compliance.
+  Rationale: Strong mutual entailment (E_min=0.96), low contradiction (C_max=0.03)
+
+Rule: r040
+  E1=0.994 (orig→recon), E2=0.950 (recon→orig)
+  E_min=0.950, C_max=0.001, Score=0.949
+  Original:      When lawfully passing to the left of a streetcar stopped to receive/discharge passengers, the operator shall reduce speed.
+  Reconstructed: When passing a streetcar on the left while the streetcar is stopped for passengers, an operator must reduce speed appropriately.
+  Rationale: Strong mutual entailment (E_min=0.95), low contradiction (C_max=0.00)
+
+Rule: r041
+  E1=0.999 (orig→recon), E2=0.995 (recon→orig)
+  E_min=0.995, C_max=0.000, Score=0.994
+  Original:      When lawfully passing to the left of such a streetcar, the operator shall accord pedestrians the right-of-way as required.
+  Reconstructed: An operator passing a streetcar on the left must yield the right-of-way to pedestrians.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r044
+  E1=0.990 (orig→recon), E2=0.709 (recon→orig)
+  E_min=0.709, C_max=0.009, Score=0.699
+  Original:      If a safety zone has been established, the operator is not required to stop before passing the streetcar to the right (but must proceed with due caution).
+  Reconstructed: If a vehicle is passing a streetcar on the right side and a safety zone has been established for that streetcar stop, the vehicle must proceed with due caution.
+  Rationale: Strong mutual entailment (E_min=0.71), low contradiction (C_max=0.01)
+
+Rule: r045
+  E1=0.785 (orig→recon), E2=0.993 (recon→orig)
+  E_min=0.785, C_max=0.000, Score=0.785
+  Original:      If on a streetcar track in front of a streetcar, after a signal from the streetcar operator, the operator shall move the vehicle off the track as soon as possible.
+  Reconstructed: If a vehicle is on a streetcar track on a roadway, is in front of a streetcar, and the streetcar operator has signaled the vehicle, the vehicle must move off the track as soon as possible.
+  Rationale: Strong mutual entailment (E_min=0.79), low contradiction (C_max=0.00)
+
+Rule: r046
+  E1=0.996 (orig→recon), E2=0.994 (recon→orig)
+  E_min=0.994, C_max=0.000, Score=0.994
+  Original:      An operator may not drive on or cross a streetcar track in an intersection in front of a streetcar crossing the intersection.
+  Reconstructed: A vehicle on a roadway that is in front of a streetcar crossing an intersection must not occupy the streetcar track within that intersection while the streetcar is crossing it.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r047
+  E1=0.996 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.996, C_max=0.001, Score=0.995
+  Original:      An operator passing a streetcar may not turn in front of the streetcar so as to interfere with or impede its movement.
+  Reconstructed: An operator passing a streetcar must not execute a turn in front of the streetcar in a manner that interferes with or impedes the streetcar.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r049
+  E1=0.976 (orig→recon), E2=0.878 (recon→orig)
+  E_min=0.878, C_max=0.001, Score=0.877
+  Original:      An operator required to stop at a railroad grade crossing shall remain stopped until permitted to proceed and it is safe to proceed.
+  Reconstructed: A vehicle that has stopped at a railroad crossing where a stop condition is present must remain stopped until it is both permitted to proceed and safe to proceed.
+  Rationale: Strong mutual entailment (E_min=0.88), low contradiction (C_max=0.00)
+
+Rule: r050
+  E1=0.985 (orig→recon), E2=0.954 (recon→orig)
+  E_min=0.954, C_max=0.001, Score=0.953
+  Original:      An operator commits an offense if the operator drives around/under/through a crossing gate or barrier at a railroad crossing while the gate/barrier is closed, being closed, or being opened.
+  Reconstructed: An operator must not drive around, under, or through a railroad crossing gate while the gate is closed, closing, or opening.
+  Rationale: Strong mutual entailment (E_min=0.95), low contradiction (C_max=0.00)
+
+Rule: r052
+  E1=0.972 (orig→recon), E2=0.996 (recon→orig)
+  E_min=0.972, C_max=0.002, Score=0.970
+  Original:      A motorcycle may operate two abreast in a single lane with another motorcycle.
+  Reconstructed: Two distinct motorcycles may operate abreast in a single lane.
+  Rationale: Strong mutual entailment (E_min=0.97), low contradiction (C_max=0.00)
+
+Rule: r053
+  E1=0.996 (orig→recon), E2=0.986 (recon→orig)
+  E_min=0.986, C_max=0.002, Score=0.984
+  Original:      A motorcycle may not operate more than two abreast in a single lane with other motorcycles.
+  Reconstructed: No more than two motorcycles may operate abreast in a single lane at the same time.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r054
+  E1=0.997 (orig→recon), E2=0.826 (recon→orig)
+  E_min=0.826, C_max=0.000, Score=0.826
+  Original:      A motorcycle may not operate between lanes of traffic moving in the same direction.
+  Reconstructed: An operator of a motorcycle must not operate the vehicle between lanes.
+  Rationale: Strong mutual entailment (E_min=0.83), low contradiction (C_max=0.00)
+
+Rule: r055
+  E1=0.999 (orig→recon), E2=0.996 (recon→orig)
+  E_min=0.996, C_max=0.001, Score=0.996
+  Original:      A motorcycle may not pass a motor vehicle while in the same lane as the vehicle being passed.
+  Reconstructed: A motorcycle operator must not pass another vehicle in the same lane occupied by the vehicle being passed.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r056
+  E1=0.995 (orig→recon), E2=0.727 (recon→orig)
+  E_min=0.727, C_max=0.001, Score=0.726
+  Original:      To make a right turn at an intersection, an operator shall make both the approach and the turn as closely as practicable to the right-hand curb or edge of the roadway.
+  Reconstructed: If the ego vehicle is approaching an intersection on a roadway while intending to turn right, or is executing a right turn at that intersection, the ego vehicle must position itself as close as practicable to the right curb of that roadway.
+  Rationale: Strong mutual entailment (E_min=0.73), low contradiction (C_max=0.00)
+
+Rule: r057
+  E1=0.996 (orig→recon), E2=0.826 (recon→orig)
+  E_min=0.826, C_max=0.001, Score=0.825
+  Original:      To make a left turn at an intersection, an operator shall approach the intersection in the extreme left-hand lane lawfully available to a vehicle moving in the direction of the vehicle.
+  Reconstructed: When an operator is approaching an intersection on a roadway and intends to turn left while executing that left turn at the intersection, the operator must be in the extreme left lane of the roadway.
+  Rationale: Strong mutual entailment (E_min=0.83), low contradiction (C_max=0.00)
+
+Rule: r058
+  E1=0.986 (orig→recon), E2=0.988 (recon→orig)
+  E_min=0.986, C_max=0.002, Score=0.984
+  Original:      On a two-way street, the operator turning left shall turn in the portion of the intersection to the left of the center of the intersection, to the extent practicable.
+  Reconstructed: If the ego vehicle is executing a left turn at an intersection on a two-way roadway, the ego vehicle must position itself as close as practicable to the left edge of the roadway.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r060
+  E1=0.924 (orig→recon), E2=0.986 (recon→orig)
+  E_min=0.924, C_max=0.067, Score=0.857
+  Original:      An operator may not turn the vehicle to move in the opposite direction when approaching a curve or the crest of a grade if the vehicle is not visible to the operator of another vehicle approaching from either direction within 500 feet.
+  Reconstructed: A vehicle may not execute a U-turn when approaching a curve or crest of a grade unless the vehicle is visible to the operator of any other vehicle approaching from either direction within 500 feet.
+  Rationale: Strong mutual entailment (E_min=0.92), low contradiction (C_max=0.07)
+
+Rule: r062
+  E1=0.996 (orig→recon), E2=0.993 (recon→orig)
+  E_min=0.993, C_max=0.001, Score=0.992
+  Original:      An operator shall use the authorized signal to indicate an intention to turn, change lanes, or start from a parked position.
+  Reconstructed: A vehicle must activate the appropriate turn signal when intending to turn in any direction, when intending to change lanes in any direction, and when moving from a parked position.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r063
+  E1=0.996 (orig→recon), E2=0.987 (recon→orig)
+  E_min=0.987, C_max=0.001, Score=0.985
+  Original:      An operator intending to turn a vehicle right or left shall signal continuously for not less than the last 100 feet of movement of the vehicle before the turn.
+  Reconstructed: An operator intending to turn left or right must give a continuous turn signal for at least the last 100 feet before the turn.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r064
+  E1=0.995 (orig→recon), E2=0.975 (recon→orig)
+  E_min=0.975, C_max=0.002, Score=0.974
+  Original:      An operator may not stop or suddenly decrease the speed of the vehicle without first giving a stop signal to the operator of a vehicle immediately to the rear when there is an opportunity to give the signal.
+  Reconstructed: An operator who is stopping or suddenly decreasing speed must give a stop signal if there is a vehicle immediately to the rear and there is an opportunity to signal.
+  Rationale: Strong mutual entailment (E_min=0.98), low contradiction (C_max=0.00)
+
+Rule: r065
+  E1=0.894 (orig→recon), E2=0.946 (recon→orig)
+  E_min=0.894, C_max=0.005, Score=0.890
+  Original:      An operator approaching an intersection shall stop, yield, and grant immediate use of the intersection in obedience to an official traffic-control device, including a stop sign or yield right-of-way sign.
+  Reconstructed: If an operator is approaching an intersection controlled by a stop sign or a yield sign, the operator must be stopped and must not enter the intersection, and for any vehicle that is an immediate hazard to the operator at that intersection at the time of approach, the operator must not enter the intersection at any subsequent time at which that vehicle remains an immediate hazard to the operator at that intersection.
+  Rationale: Strong mutual entailment (E_min=0.89), low contradiction (C_max=0.00)
+
+Rule: r074
+  E1=0.899 (orig→recon), E2=0.827 (recon→orig)
+  E_min=0.827, C_max=0.147, Score=0.680
+  Original:      An operator about to enter or cross a highway from an alley, building, or private road or driveway shall yield the right-of-way to a vehicle approaching on the highway to be entered.
+  Reconstructed: The ego vehicle, when emerging from an alley, building, private road, or driveway onto a highway where another vehicle is on that highway, must stop.
+  Rationale: Strong mutual entailment (E_min=0.83), low contradiction (C_max=0.15)
+
+Rule: r075
+  E1=0.903 (orig→recon), E2=0.910 (recon→orig)
+  E_min=0.903, C_max=0.002, Score=0.901
+  Original:      On the immediate approach of an authorized emergency vehicle using required audible and visual signals, an operator shall yield the right-of-way.
+  Reconstructed: When an authorized emergency vehicle with active emergency signals is approaching, an operator of another vehicle must vacate the nearest lane to the emergency vehicle.
+  Rationale: Strong mutual entailment (E_min=0.90), low contradiction (C_max=0.00)
+
+Rule: r076
+  E1=0.994 (orig→recon), E2=0.936 (recon→orig)
+  E_min=0.936, C_max=0.001, Score=0.935
+  Original:      On the immediate approach of an authorized emergency vehicle, an operator shall immediately drive to a position parallel to and as close as possible to the right-hand edge or curb of the roadway, clear of any intersection, and stop and remain standing until the emergency vehicle has passed.
+  Reconstructed: When an authorized emergency vehicle is approaching on a roadway, an operator must move as close as practicable to the right edge of the roadway, position the vehicle parallel to the curb, stop, and remain outside of any intersection, and the operator must remain stopped, as close as practicable to the right edge, parallel to the curb, and outside of any intersection until the emergency vehicle has completely passed.
+  Rationale: Strong mutual entailment (E_min=0.94), low contradiction (C_max=0.00)
+
+Rule: r077
+  E1=0.993 (orig→recon), E2=0.987 (recon→orig)
+  E_min=0.987, C_max=0.000, Score=0.987
+  Original:      On approaching a stationary authorized emergency vehicle using visual signals on a highway with two or more lanes in the same direction, an operator shall vacate the lane closest to the emergency vehicle.
+  Reconstructed: If an operator is approaching a stationary authorized emergency vehicle that is displaying emergency signals, and both the operator and the emergency vehicle are on the same highway with two or more lanes, the operator must vacate the lane nearest to the emergency vehicle.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r078
+  E1=0.989 (orig→recon), E2=0.981 (recon→orig)
+  E_min=0.981, C_max=0.011, Score=0.971
+  Original:      If unable to vacate the lane closest to a stationary emergency vehicle, an operator shall slow to a speed not to exceed 20 miles per hour less than the posted speed limit (or 5 mph if posted limit is less than 25 mph).
+  Reconstructed: When an operator is on the same roadway as a stationary authorized emergency vehicle that has its emergency signals active and the operator has not vacated the lane nearest to the emergency vehicle, the operator must reduce speed to no more than five miles per hour if the posted speed limit is less than twenty-five miles per hour, or to no more than twenty miles per hour below the posted speed limit otherwise.
+  Rationale: Strong mutual entailment (E_min=0.98), low contradiction (C_max=0.01)
+
+Rule: r082
+  E1=0.999 (orig→recon), E2=0.992 (recon→orig)
+  E_min=0.992, C_max=0.000, Score=0.992
+  Original:      An operator approaching a stop sign or traffic-control device at a railroad grade crossing designated as particularly dangerous shall stop not closer than 15 feet or farther than 50 feet from the nearest rail.
+  Reconstructed: A vehicle approaching a railroad crossing that is designated as dangerous, when a stop condition is present, must stop at a distance of no less than 15 feet and no more than 50 feet from the nearest rail.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r083
+  E1=0.999 (orig→recon), E2=0.993 (recon→orig)
+  E_min=0.993, C_max=0.000, Score=0.993
+  Original:      The operator of a motor bus carrying passengers for hire, before crossing a railroad grade crossing, shall stop the vehicle not closer than 15 feet or farther than 50 feet from the nearest rail.
+  Reconstructed: A bus that is stopped while approaching a railroad crossing must stop at a distance of no less than 15 feet and no more than 50 feet from the nearest rail.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r084
+  E1=0.996 (orig→recon), E2=0.987 (recon→orig)
+  E_min=0.987, C_max=0.001, Score=0.986
+  Original:      The operator of a motor bus at a railroad grade crossing may not proceed until it is safe to do so.
+  Reconstructed: A bus approaching a railroad crossing may not proceed unless it is safe to proceed.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r085
+  E1=0.997 (orig→recon), E2=0.959 (recon→orig)
+  E_min=0.959, C_max=0.000, Score=0.959
+  Original:      The operator of a school bus, before crossing a track at a railroad grade crossing, shall stop the vehicle not closer than 15 feet or farther than 50 feet from the track.
+  Reconstructed: A school bus that is stopped while approaching a railroad crossing must stop at a distance of no less than 15 feet and no more than 50 feet from the nearest rail.
+  Rationale: Strong mutual entailment (E_min=0.96), low contradiction (C_max=0.00)
+
+Rule: r086
+  E1=0.994 (orig→recon), E2=0.749 (recon→orig)
+  E_min=0.749, C_max=0.001, Score=0.748
+  Original:      The operator of a school bus at a railroad grade crossing may not proceed until it is safe to do so.
+  Reconstructed: An operator of a school bus approaching a railroad crossing must not proceed unless it is safe to proceed.
+  Rationale: Strong mutual entailment (E_min=0.75), low contradiction (C_max=0.00)
+
+Rule: r087
+  E1=0.989 (orig→recon), E2=0.804 (recon→orig)
+  E_min=0.804, C_max=0.007, Score=0.797
+  Original:      An operator of a vehicle carrying explosive substances or flammable liquids moving at more than 20 mph shall reduce speed to 20 mph or less before coming within 200 feet of the nearest rail of a railroad crossing.
+  Reconstructed: A vehicle carrying explosive or flammable cargo that is approaching a railroad crossing and is within 200 feet of the nearest rail must not exceed a speed of 20 miles per hour.
+  Rationale: Strong mutual entailment (E_min=0.80), low contradiction (C_max=0.01)
+
+Rule: r088
+  E1=0.846 (orig→recon), E2=0.988 (recon→orig)
+  E_min=0.846, C_max=0.000, Score=0.845
+  Original:      An operator of a vehicle carrying explosive substances or flammable liquids in a municipality shall stop (15-50 feet from nearest rail) before crossing a railroad grade crossing.
+  Reconstructed: The ego vehicle, when carrying explosive or flammable cargo and approaching a railroad crossing while on a roadway in an urban district, must stop at a distance from the nearest rail of no less than 15 feet and no more than 50 feet.
+  Rationale: Strong mutual entailment (E_min=0.85), low contradiction (C_max=0.00)
+
+Rule: r089
+  E1=0.991 (orig→recon), E2=0.971 (recon→orig)
+  E_min=0.971, C_max=0.001, Score=0.971
+  Original:      An operator of a vehicle carrying explosive substances or flammable liquids may not proceed through a railroad crossing until the operator determines the course is clear.
+  Reconstructed: A vehicle carrying explosive or flammable cargo that is approaching a railroad crossing must not proceed unless it is safe to proceed.
+  Rationale: Strong mutual entailment (E_min=0.97), low contradiction (C_max=0.00)
+
+Rule: r090
+  E1=0.995 (orig→recon), E2=0.997 (recon→orig)
+  E_min=0.995, C_max=0.001, Score=0.994
+  Original:      An operator may not stop, park, or leave standing a vehicle on the main traveled part of a highway outside a business or residence district unless stopping off the main part is not practicable, width is unobstructed, and the vehicle is in clear view for at least 200 feet each direction.
+  Reconstructed: If a vehicle is stopped, parked, or standing on a highway outside of a business or residence district, and the vehicle is positioned on the main traveled part of the roadway, then it must be the case that stopping off the main traveled part is not practicable, the width of the roadway beside the vehicle remains unobstructed, and a clear view of the vehicle is available for 200 feet in each direction.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r092
+  E1=0.998 (orig→recon), E2=0.997 (recon→orig)
+  E_min=0.997, C_max=0.001, Score=0.996
+  Original:      An operator may not stop, stand, or park a vehicle on a sidewalk.
+  Reconstructed: A vehicle may not stop, stand, or park on a sidewalk.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r093
+  E1=0.997 (orig→recon), E2=0.997 (recon→orig)
+  E_min=0.997, C_max=0.001, Score=0.995
+  Original:      An operator may not stop, stand, or park a vehicle in an intersection.
+  Reconstructed: A vehicle may not stop, stand, or park within an intersection.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r094
+  E1=0.955 (orig→recon), E2=0.938 (recon→orig)
+  E_min=0.938, C_max=0.040, Score=0.898
+  Original:      An operator may not stop, stand, or park a vehicle on a crosswalk.
+  Reconstructed: An operator may not stop, stand, or park a vehicle within a crosswalk.
+  Rationale: Strong mutual entailment (E_min=0.94), low contradiction (C_max=0.04)
+
+Rule: r095
+  E1=0.998 (orig→recon), E2=0.997 (recon→orig)
+  E_min=0.997, C_max=0.001, Score=0.997
+  Original:      An operator may not stop, stand, or park a vehicle between a safety zone and the adjacent curb or within 30 feet of the ends of a safety zone.
+  Reconstructed: A vehicle may not stop, stand, or park between a safety zone and the adjacent curb or within 30 feet of the ends of a safety zone.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r097
+  E1=0.931 (orig→recon), E2=0.987 (recon→orig)
+  E_min=0.931, C_max=0.006, Score=0.925
+  Original:      An operator may not stop, stand, or park a vehicle on a bridge or other elevated structure on a highway or in a highway tunnel.
+  Reconstructed: A vehicle on a highway bridge or tunnel must not stop, stand, or park on the roadway.
+  Rationale: Strong mutual entailment (E_min=0.93), low contradiction (C_max=0.01)
+
+Rule: r101
+  E1=0.997 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.997, C_max=0.001, Score=0.996
+  Original:      An operator may not stand or park a vehicle within 20 feet of a crosswalk at an intersection, except momentarily to pick up or discharge a passenger.
+  Reconstructed: A vehicle within an intersection and within 20 feet of a crosswalk may not stand or park unless momentarily picking up or discharging a passenger.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r103
+  E1=0.998 (orig→recon), E2=0.983 (recon→orig)
+  E_min=0.983, C_max=0.001, Score=0.982
+  Original:      An operator may not park a vehicle within 50 feet of the nearest rail of a railroad crossing, except temporarily to load or unload.
+  Reconstructed: A vehicle may not park within 50 feet of a railroad crossing unless the vehicle is temporarily loading or unloading.
+  Rationale: Strong mutual entailment (E_min=0.98), low contradiction (C_max=0.00)
+
+Rule: r105
+  E1=0.999 (orig→recon), E2=0.865 (recon→orig)
+  E_min=0.865, C_max=0.001, Score=0.864
+  Original:      An operator who stops or parks on a one-way roadway shall stop or park parallel to the curb or edge in the direction of authorized traffic movement with the right-hand wheels within 18 inches of the right-hand curb or the left-hand wheels within 18 inches of the left-hand curb.
+  Reconstructed: When a vehicle is parked or stopped on a one-way roadway, the operator must position the vehicle parallel to the curb with either the right wheels or the left wheels within eighteen inches of the curb.
+  Rationale: Strong mutual entailment (E_min=0.87), low contradiction (C_max=0.00)
+
+Rule: r106
+  E1=0.742 (orig→recon), E2=0.754 (recon→orig)
+  E_min=0.742, C_max=0.001, Score=0.741
+  Original:      An operator may not drive at a speed greater than is reasonable and prudent under the circumstances then existing.
+  Reconstructed: An operator driving on a roadway must operate the vehicle at a speed that is reasonable and prudent.
+  Rationale: Strong mutual entailment (E_min=0.74), low contradiction (C_max=0.00)
+
+Rule: r107
+  E1=0.893 (orig→recon), E2=0.887 (recon→orig)
+  E_min=0.887, C_max=0.009, Score=0.878
+  Original:      An operator shall control the speed of the vehicle as necessary to avoid colliding with another person or vehicle that is on or entering the highway in compliance with law.
+  Reconstructed: The ego vehicle, when driving on a highway where another distinct vehicle is also on that roadway or is entering the main lane, and the ego vehicle has an assured clear distance ahead with respect to that other vehicle, must maintain a speed that is reasonable and prudent for that roadway at that time.
+  Rationale: Strong mutual entailment (E_min=0.89), low contradiction (C_max=0.01)
+
+Rule: r108
+  E1=0.997 (orig→recon), E2=0.997 (recon→orig)
+  E_min=0.997, C_max=0.000, Score=0.997
+  Original:      An operator shall drive at an appropriate reduced speed if approaching and crossing an intersection or railroad grade crossing.
+  Reconstructed: An operator approaching or within an intersection, or approaching a railroad grade crossing, must reduce speed as appropriate.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r110
+  E1=0.963 (orig→recon), E2=0.997 (recon→orig)
+  E_min=0.963, C_max=0.000, Score=0.962
+  Original:      An operator shall drive at an appropriate reduced speed if approaching a hill crest.
+  Reconstructed: An operator approaching the crest of a hill must reduce speed as appropriate for the conditions.
+  Rationale: Strong mutual entailment (E_min=0.96), low contradiction (C_max=0.00)
+
+Rule: r111
+  E1=0.998 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.998, C_max=0.000, Score=0.998
+  Original:      An operator shall drive at an appropriate reduced speed if traveling on a narrow or winding roadway.
+  Reconstructed: When operating on a roadway that is narrow or winding, an operator must reduce speed as appropriate for the conditions.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r113
+  E1=0.805 (orig→recon), E2=0.968 (recon→orig)
+  E_min=0.805, C_max=0.077, Score=0.727
+  Original:      Unless a special hazard exists, a speed of 30 miles per hour in an urban district on a street other than an alley is lawful, and 15 miles per hour in an alley is lawful.
+  Reconstructed: When operating on a roadway in an urban district where no special hazard exists, a vehicle traveling at or below 30 miles per hour on any roadway other than an alley, or at or below 15 miles per hour on an alley, shall be considered to be traveling at a speed that is reasonable and prudent.
+  Rationale: Strong mutual entailment (E_min=0.80), low contradiction (C_max=0.08)
+
+Rule: r116
+  E1=0.992 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.992, C_max=0.001, Score=0.991
+  Original:      On a beach, the speed limit is 15 miles per hour.
+  Reconstructed: A vehicle on a beach roadway must not exceed a speed of 15 miles per hour.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r118
+  E1=0.998 (orig→recon), E2=0.978 (recon→orig)
+  E_min=0.978, C_max=0.000, Score=0.978
+  Original:      A person may not drive a vehicle in wilful or wanton disregard for the safety of persons or property (reckless driving).
+  Reconstructed: An operator must not engage in reckless driving.
+  Rationale: Strong mutual entailment (E_min=0.98), low contradiction (C_max=0.00)
+
+Rule: r119
+  E1=0.998 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.998, C_max=0.001, Score=0.997
+  Original:      An operator may not begin movement of a stopped, standing, or parked vehicle unless the movement can be made safely.
+  Reconstructed: An operator who has stopped, is standing, or is parked must not resume movement until such movement can be made safely.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r120
+  E1=0.995 (orig→recon), E2=0.908 (recon→orig)
+  E_min=0.908, C_max=0.016, Score=0.892
+  Original:      An operator may not drive through or in a safety zone.
+  Reconstructed: An operator may not drive through a safety zone.
+  Rationale: Strong mutual entailment (E_min=0.91), low contradiction (C_max=0.02)
+
+Rule: r124
+  E1=0.862 (orig→recon), E2=0.826 (recon→orig)
+  E_min=0.826, C_max=0.001, Score=0.825
+  Original:      An operator of a truck, tractor, or bus moving on a downgrade may not coast with the clutch disengaged.
+  Reconstructed: An operator of a truck, bus, or heavy equipment vehicle must not disengage the clutch while traveling on a downgrade on a roadway.
+  Rationale: Strong mutual entailment (E_min=0.83), low contradiction (C_max=0.00)
+
+Rule: r128
+  E1=0.997 (orig→recon), E2=0.995 (recon→orig)
+  E_min=0.995, C_max=0.000, Score=0.995
+  Original:      An operator may not back the vehicle unless the movement can be made safely and without interference with other traffic.
+  Reconstructed: An operator may not back a vehicle unless backing can be done safely and without interfering with other traffic.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: r129
+  E1=0.940 (orig→recon), E2=0.999 (recon→orig)
+  E_min=0.940, C_max=0.001, Score=0.939
+  Original:      An operator may not back the vehicle on a shoulder or roadway of a limited-access or controlled-access highway.
+  Reconstructed: A vehicle on a highway with limited or normal access control, whether positioned on the right or left shoulder, the right or left half of the roadway, or in the right, center, or left lane, must not back.
+  Rationale: Strong mutual entailment (E_min=0.94), low contradiction (C_max=0.00)
+
+Rule: r135
+  E1=0.980 (orig→recon), E2=0.894 (recon→orig)
+  E_min=0.894, C_max=0.003, Score=0.891
+  Original:      A person who operates a motor vehicle and wilfully fails to bring the vehicle to a stop or flees or attempts to elude a pursuing police vehicle when given a visual or audible signal to stop commits an offense.
+  Reconstructed: An operator must not flee from a police vehicle that has given a signal to stop.
+  Rationale: Strong mutual entailment (E_min=0.89), low contradiction (C_max=0.00)
+
+Rule: r138
+  E1=0.999 (orig→recon), E2=0.837 (recon→orig)
+  E_min=0.837, C_max=0.000, Score=0.837
+  Original:      An operator may not cross a sidewalk or drive through a driveway, parking lot, or business or residential entrance without stopping the vehicle.
+  Reconstructed: An operator who is crossing a sidewalk or turning into a driveway, building, or other access point must have stopped before doing so.
+  Rationale: Strong mutual entailment (E_min=0.84), low contradiction (C_max=0.00)
+
+Rule: r139
+  E1=0.990 (orig→recon), E2=0.992 (recon→orig)
+  E_min=0.990, C_max=0.005, Score=0.985
+  Original:      An operator may not drive on or cross a railroad grade crossing unless the vehicle has sufficient undercarriage clearance.
+  Reconstructed: The ego vehicle must not approach a railroad crossing when the vehicle does not have sufficient undercarriage clearance for the crossing.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: r143
+  E1=0.897 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.897, C_max=0.001, Score=0.896
+  Original:      An operator on a highway having separate roadways is not required to stop for a school bus that is on a different roadway.
+  Reconstructed: An operator approaching a school bus that is stopped for students with its visual signal activated is not required to stop before reaching the bus if the operator is traveling on a divided highway and is on a different roadway than the school bus.
+  Rationale: Strong mutual entailment (E_min=0.90), low contradiction (C_max=0.00)
+
+Rule: r144
+  E1=0.967 (orig→recon), E2=0.996 (recon→orig)
+  E_min=0.967, C_max=0.001, Score=0.966
+  Original:      A person may not occupy a house trailer while it is being moved.
+  Reconstructed: A vehicle that is a house trailer must not have any occupant in it while it is being drawn by another vehicle.
+  Rationale: Strong mutual entailment (E_min=0.97), low contradiction (C_max=0.00)
+
+Rule: r145
+  E1=0.998 (orig→recon), E2=0.929 (recon→orig)
+  E_min=0.929, C_max=0.001, Score=0.928
+  Original:      The drawbar or other connection between a vehicle drawing another vehicle and the drawn vehicle may not exceed 15 feet between the vehicles.
+  Reconstructed: When a vehicle is drawing another vehicle, the drawbar length must not exceed 15 feet.
+  Rationale: Strong mutual entailment (E_min=0.93), low contradiction (C_max=0.00)
+
+================================================================================
+SUMMARY:
+  CONTRADICTION: 10 (C_max ≥ 0.6 - semantic conflict)
+  UNRELATED:     5 (no mutual entailment)
+  WEAKENED:      7 (recon drops constraints)
+  STRENGTHENED:  28 (recon adds constraints)
+  RELATED:       14 (some mutual entailment)
+  EQUIVALENT:    86 (strong mutual entailment)
+  ERROR:         0
+  Total:         150
+
+  Score (E_min - C_max) statistics:
+    Min:    -0.991
+    Max:    0.998
+    Median: 0.825
+    Mean:   0.536
+================================================================================

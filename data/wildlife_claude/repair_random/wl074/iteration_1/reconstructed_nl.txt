@@ -1,0 +1,19 @@
+No person may buy, offer to buy, sell, offer to sell, possess for sale, transport for sale, ship for sale, or advertise for sale a shark fin, nor may any person possess a shark fin that has not been destroyed, if that fin is part of a shark.
+
+Wait, let me re-analyze the formula more carefully.
+
+The formula says: for all p, a, t: if (a is a fin AND there exists a shark such that a is part of that shark), then NOT any of the following disjuncts:
+
+1. (a is a fin AND exists shark it's part of AND fin is not destroyed at t)
+2. buys
+3. offers to buy
+4. sells
+5. offers to sell
+6. possesses for sale
+7. transports for sale
+8. ships for sale
+9. advertises for sale
+
+So the negation of the disjunction means ALL must be false. This means: if a is a shark fin, then (1) the fin must be destroyed at time t, AND (2) no person may buy, offer to buy, sell, offer to sell, possess for sale, transport for sale, ship for sale, or advertise for sale that fin.
+
+No person may buy, offer to buy, sell, offer to sell, possess for sale, transport for sale, ship for sale, or advertise for sale a fin that is part of a shark, and any fin that is part of a shark must be destroyed.

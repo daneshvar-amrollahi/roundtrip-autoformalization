@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (r Roadway) (i Intersection) (t Int))
+  (=> (and (is_ego v)
+           (= (roadway_flow r) FK_TwoWay)
+           (on_roadway v r t)
+           (intersection_on_roadway i r)
+           (in_intersection v i t)
+           (executing_turn_at_intersection v TD_Left i t))
+      (close_to_left_edge_practicable v r t)))

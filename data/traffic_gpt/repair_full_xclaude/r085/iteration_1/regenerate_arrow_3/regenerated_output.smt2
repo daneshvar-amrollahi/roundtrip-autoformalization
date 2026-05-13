@@ -1,0 +1,8 @@
+(forall ((bus Vehicle) (c Crossing) (t Int))
+  (=> (and (= (kind bus) VK_SchoolBus)
+           (approaching_crossing bus c t))
+      (exists ((t_stop Int))
+        (and (<= t t_stop)
+             (stopped bus t_stop)
+             (<= ft_15_sq (dist_to_nearest_rail_sq bus c t_stop))
+             (<= (dist_to_nearest_rail_sq bus c t_stop) ft_50_sq)))))

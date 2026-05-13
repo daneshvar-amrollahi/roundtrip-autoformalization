@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (or (= (roadway_kind r) RK_MountainHighway)
+               (= (roadway_kind r) RK_Tunnel)
+               (= (roadway_kind r) RK_Other)))
+      (and (vehicle_under_control v t)
+           (close_to_right_edge_practicable v r t))))

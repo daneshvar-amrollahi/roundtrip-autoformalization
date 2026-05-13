@@ -1,0 +1,100 @@
+================================================================================
+SMT EQUIVALENCE ANALYSIS
+Folder: output/run_20260506_012839/repair_regenerate
+Timestamp: 2026-05-06 02:10:40
+================================================================================
+Comparing: encoding_phase1.smt2 vs encoding_phase3.smt2
+
+UNSAT (65 rules):
+  - wl002
+  - wl004
+  - wl005
+  - wl006
+  - wl007
+  - wl008
+  - wl009
+  - wl011
+  - wl012
+  - wl014
+  - wl016
+  - wl017
+  - wl018
+  - wl019
+  - wl020
+  - wl022
+  - wl023
+  - wl025
+  - wl026
+  - wl027
+  - wl028
+  - wl029
+  - wl030
+  - wl031
+  - wl032
+  - wl033
+  - wl034
+  - wl035
+  - wl036
+  - wl037
+  - wl038
+  - wl039
+  - wl040
+  - wl041
+  - wl042
+  - wl044
+  - wl045
+  - wl046
+  - wl047
+  - wl048
+  - wl049
+  - wl051
+  - wl052
+  - wl053
+  - wl054
+  - wl055
+  - wl056
+  - wl057
+  - wl058
+  - wl059
+  - wl060
+  - wl061
+  - wl062
+  - wl063
+  - wl064
+  - wl065
+  - wl066
+  - wl069
+  - wl070
+  - wl071
+  - wl072
+  - wl073
+  - wl075
+  - wl076
+  - wl077
+
+SAT (9 rules):
+  - wl001
+  - wl003
+  - wl010
+  - wl013
+  - wl024
+  - wl050
+  - wl067
+  - wl068
+  - wl074
+
+UNKNOWN (1 rules):
+  - wl043
+
+ERROR (1 rules):
+  - wl021
+
+--------------------------------------------------------------------------------
+SUMMARY:
+  UNSAT (equivalent): 65
+  SAT (different):    9
+  UNKNOWN:            1
+  ERROR:              1
+  SKIPPED:            0
+  Total:              76
+================================================================================

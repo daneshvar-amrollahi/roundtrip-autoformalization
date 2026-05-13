@@ -1,0 +1,1 @@
+The ego vehicle, when following another vehicle, must maintain an assured clear distance ahead and must be able to safely stop.

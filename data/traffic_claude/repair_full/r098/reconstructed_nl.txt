@@ -1,0 +1,1 @@
+A vehicle may not stop, stand, or park on a railroad crossing at a location where its distance to the railroad crossing feature is zero.

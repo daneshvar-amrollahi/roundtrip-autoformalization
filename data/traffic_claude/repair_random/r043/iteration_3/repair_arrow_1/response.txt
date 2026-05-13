@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (sc Vehicle) (t Int))
+  (=> (and (is_ego v)
+           (= (kind sc) VK_Streetcar)
+           (passing_side v sc t PS_Right)
+           (passing v sc t)
+           (= (streetcar_state sc t) SCS_StoppedForPassengers)
+           (not (passengers_all_safe sc t)))
+      (stopped v t)))

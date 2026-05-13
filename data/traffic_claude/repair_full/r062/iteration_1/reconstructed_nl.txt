@@ -1,0 +1,1 @@
+The ego vehicle, when intending to turn in any direction, must activate the appropriate turn signal for that turn direction; when intending to change lanes in any direction, must activate the appropriate turn signal for that lane change direction; and when departing from a parked position, must activate either a left or right turn signal.

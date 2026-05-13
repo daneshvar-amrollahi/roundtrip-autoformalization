@@ -1,0 +1,1 @@
+If the vehicle is the ego vehicle and a zone is a safety zone, then the ego vehicle must not be in that safety zone and must not drive through that safety zone at any time.

@@ -1,0 +1,11 @@
+(forall ((p Person) (f Animal) (t Int))
+  (=> (and (possesses p f t)
+           (is_kind f AK_Fish)
+           (is_named_in_protected_fish_list f))
+      (or
+        (not (exists ((doc Document))
+               (keeps_with p doc f t)))
+        (forall ((warden Person) (doc Document))
+          (=> (and (is_peace_officer warden t)
+                   (displays_on_request p doc t))
+              (not (displays_on_request p doc t)))))))

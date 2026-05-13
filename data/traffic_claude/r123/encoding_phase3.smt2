@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (on_downgrade v r t)
+           (> (velocity v t) 0.0))
+      (not (= (gear_state v t) GS_Neutral))))

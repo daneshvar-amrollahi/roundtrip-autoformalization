@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (is_ego v)
+           (or (approaching_curve v r t)
+               (approaching_hill_crest v r t))
+           (exists ((v_other Vehicle))
+             (and (not (= v v_other))
+                  (not (vehicle_visible_within_500ft v t)))))
+      (not (executing_turn v TD_UTurn t))))

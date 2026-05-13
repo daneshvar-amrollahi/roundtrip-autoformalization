@@ -1,0 +1,8 @@
+(forall ((ego Vehicle) (fa Vehicle) (t Int))
+  (=> (and (is_ego ego)
+           (not (= ego fa))
+           (not (on_official_business ego t))
+           (= (kind fa) VK_FireApparatus)
+           (emergency_signals_active fa t)
+           (following ego fa t))
+      (> (distance ego fa t) ft_500_sq)))

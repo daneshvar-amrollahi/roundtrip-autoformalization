@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (t Int))
+  (=> (or (crossing_sidewalk v t)
+          (exists ((a Access))
+            (turning_into v a t)))
+      (stopped_before_sidewalk v t)))

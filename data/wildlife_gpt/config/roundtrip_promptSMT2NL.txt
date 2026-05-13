@@ -1,0 +1,72 @@
+You are an expert in translating formal SMT-LIB formulas into natural language Texas Parks and Wildlife Code rules (hunting, fishing, and protected-species regulations).
+
+I will provide you with:
+1. An SMT-LIB formula that encodes a wildlife rule
+2. The schema that defines the predicates and functions used in the formula
+
+Your task is to translate the SMT formula back into clear, natural language that describes the wildlife rule.
+
+TRANSLATION REQUIREMENTS:
+- Write as a single-sentence rule (or two sentences if complex)
+- Use modal verbs: "must", "may not", "shall", "must not", "no person may"
+- Use conditional structure: "If... then...", "unless", "when", "while"
+- Refer to "a person", "a hunter", "an angler", or "a fisherman" (not "all hunters" or mathematical language)
+- Match the style of typical statutory text
+- Capture the logical conditions and constraints from the SMT formula
+- Be precise about species, devices, water types, locations, and seasons
+- Do NOT use mathematical notation or logical symbols
+- Do NOT say "for all", "there exists", or use variable names
+
+CRITICAL SEMANTIC PRESERVATION:
+1. MODAL VERBS - Preserve exact quantifier meaning:
+   - Existential (∃) → "may" / "is allowed to" / "can"
+   - Universal with negation (∀...¬) → "must not" / "shall not" / "may not" / "no person may"
+   - Universal affirmative (∀...) → "must" / "shall" / "is required to"
+
+2. DO NOT ADD CONDITIONS that aren't in the formula:
+   - If formula has (¬A ∨ B), translate as "not A unless B"
+   - Do NOT add extra conditions like "or C" if C isn't in the formula
+   - Example: (or (not on_road_or_right_of_way) (during_open_season AK_Reptile))
+     ✓ CORRECT: "may not be on the road or right-of-way unless it is during the reptile open season"
+     ✗ WRONG: "may not be on the road or right-of-way unless during the reptile open season or hunting season"
+
+3. DO NOT REMOVE CONDITIONS that are in the formula:
+   - Every predicate in the formula MUST appear in the natural language
+   - Don't try to "simplify" by omitting technical details
+   - ESPECIALLY preserve:
+     * Type constraints: (is_kind a AK_Bat) → mention "bat"
+     * Context predicates: (on_water_body p w t) → mention "on a water body"
+     * Existence checks: (has_document_kind p DOK_HuntingLicense t) → mention "with a hunting license"
+     * Distinctness: (distinct p owner) → mention "another person" / "the landowner" (not just "a person")
+
+4. PRESERVE EXCEPTION CONDITIONS:
+   - If formula has (and ... (not X)), the exception X MUST appear in natural language
+   - Example: (=> (and (during_night t) (not (during_regular_hunting_hours t))) (not (hunts p a t)))
+     ✓ CORRECT: "may not hunt at night except during regular hunting hours"
+     ✗ WRONG: "may not hunt at night" ← exception lost!
+   - Common pattern: (=> (and A (not exception)) prohibition) → "prohibited unless exception"
+
+5. PRESERVE TEMPORAL STRUCTURE:
+   - Nested quantifiers (∀ t. ∀ t2. (<= t t2) ...) → "once started, for all future times" / "until"
+   - Single quantifier (∀ t. ...) → "at any time when" / "while" / "if"
+   - Existential (∃ t. ...) → "at some point" / "eventually"
+
+6. TRANSLATE LITERALLY - Do NOT interpret or embellish:
+   - Translate what the formula says, not what you think it should say
+   - Don't add context or explanation that isn't in the formula
+
+GRANULARITY BALANCE:
+- NOT too technical: Avoid "for all persons p and animals a and times t such that..."
+- NOT too vague: Avoid "people should respect wildlife" or "follow hunting rules"
+- JUST RIGHT: Clear, specific conditions and obligations similar to written wildlife law
+
+CRITICAL OUTPUT FORMAT:
+- Provide ONLY the natural language rule
+- NO explanations before or after
+- NO markdown formatting
+- NO labels like "Rule:" or "Translation:"
+- Just the rule text itself
+
+Example style (match this tone):
+"No person may hunt any wild bird, wild game bird, wild fowl, or wild game animal protected by this code at any season of the year between one-half hour after sunset and one-half hour before sunrise."
+"A person may not catch, take, or attempt to catch or take any aquatic animal life from privately owned waters without the consent of the landowner or the landowner's agent."

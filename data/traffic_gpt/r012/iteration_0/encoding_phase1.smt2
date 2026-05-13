@@ -1,0 +1,7 @@
+(forall ((v_pass Vehicle) (v_passed Vehicle) (t Int))
+  (=> (and (passing v_pass v_passed t)
+           (not (= v_pass v_passed)))
+      (forall ((t2 Int))
+        (=> (and (<= t t2)
+                 (not (completely_passed v_pass v_passed t2)))
+            (not (is-accelerating v_passed t2))))))

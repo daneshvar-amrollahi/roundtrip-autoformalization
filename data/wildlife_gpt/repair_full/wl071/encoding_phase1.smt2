@@ -1,0 +1,10 @@
+(forall ((p Person) (fish Animal) (t Int))
+  (=>
+    (and (possesses p fish t)
+         (is_kind fish AK_Finfish)
+         (not (is_kind fish AK_Shark))
+         (has_head_removed fish)
+         (not (and (has_been_finally_processed fish t)
+                   (or (delivered_to_final_destination fish t)
+                       (delivered_to_certified_dealer fish t)))))
+    (not (lawfully_taken fish))))

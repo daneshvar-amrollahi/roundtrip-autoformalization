@@ -1,0 +1,7 @@
+(forall ((p Person) (plant Animal) (w WaterBody) (t Int))
+  (=> (and (leaves_water_body p w t)
+           (has_aquatic_plant_clinging_to p plant t)
+           (is_kind plant AK_AquaticPlant)
+           (is_exotic_harmful plant))
+      (and (removes p plant t)
+           (lawfully_disposes_of p plant t))))

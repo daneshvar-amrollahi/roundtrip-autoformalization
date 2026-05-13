@@ -1,0 +1,1 @@
+A vehicle using the opposing direction lane to pass must return to an authorized lane when an oncoming vehicle is approaching and is within 200 feet.

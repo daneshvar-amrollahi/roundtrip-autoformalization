@@ -1,0 +1,42 @@
+================================================================================
+DIAGNOSIS
+================================================================================
+
+First Failed Arrow: 3
+
+Reasoning:
+The Reconstructed NL explicitly states "When a vehicle is parked or stopped on a one-way roadway," which requires both that the vehicle is parked or stopped AND that it is on a one-way roadway. However, the Phase 3 SMT encoding only includes `(parked_on_roadway v r t)` and `(= (roadway_flow r) FK_OneWay)` in its antecedent, omitting the `(or (parked v t) (stopped v t))` condition. The Reconstructed NL's "parked or stopped" language indicates a separate condition beyond merely being on the roadway, and Phase 3 fails to encode this explicit parked-or-stopped predicate, making the antecedent weaker than what the Reconstructed NL describes and causing the rule to apply more broadly than intended.
+
+================================================================================
+FULL LLM RESPONSE
+================================================================================
+
+I'll analyze each arrow sequentially to find the first failure.
+
+## Arrow 1: Original NL → Phase 1 SMT
+
+The Original NL states: "An operator who stops or parks on a one-way roadway shall stop or park parallel to the curb or edge in the direction of authorized traffic movement with the right-hand wheels within 18 inches of the right-hand curb or the left-hand wheels within 18 inches of the left-hand curb."
+
+Phase 1 SMT encodes:
+- Antecedent: vehicle is parked OR stopped, AND parked_on_roadway, AND roadway is one-way
+- Consequent: parallel_to_curb AND (right_wheels_within_18in OR left_wheels_within_18in)
+
+The original NL says "stops or parks" — the Phase 1 encoding uses `(or (parked v t) (stopped v t))` along with `parked_on_roadway`. The predicate `parked_on_roadway` might be slightly narrow (what about stopped but not parked?), but this seems like a reasonable encoding choice where `parked_on_roadway` represents being on the roadway in a stopped/parked state. The direction-of-traffic requirement is implicitly captured by `parallel_to_curb`. The right-hand wheels near right curb OR left-hand wheels near left curb is correctly encoded as a disjunction. Arrow 1 appears correct.
+
+## Arrow 2: Phase 1 SMT → Reconstructed NL
+
+Phase 1 SMT antecedent includes: `(or (parked v t) (stopped v t))` AND `(parked_on_roadway v r t)` AND one-way roadway.
+
+The Reconstructed NL says: "When a vehicle is parked or stopped on a one-way roadway..." — this captures the parked/stopped condition and the one-way condition.
+
+The Reconstructed NL seems to faithfully describe what Phase 1 encodes. Arrow 2 appears correct.
+
+## Arrow 3: Reconstructed NL → Phase 3 SMT
+
+The Reconstructed NL states: "When a vehicle is **parked or stopped** on a one-way roadway..."
+
+Phase 3 SMT antecedent: `(and (parked_on_roadway v r t) (= (roadway_flow r) FK_OneWay))` — this is MISSING the `(or (parked v t) (stopped v t))` condition that was present in Phase 1. The Reconstructed NL explicitly mentions "parked or stopped" as a condition, but Phase 3 only checks `parked_on_roadway` without the explicit parked/stopped disjunction. This means Phase 3 would apply the rule to any vehicle on a one-way roadway (as long as `parked_on_roadway` holds), without requiring the separate `parked` or `stopped` predicate to be true. This is a clear discrepancy between the Reconstructed NL and Phase 3's encoding.
+
+FIRST_FAILED_ARROW: 3
+REASONING:
+The Reconstructed NL explicitly states "When a vehicle is parked or stopped on a one-way roadway," which requires both that the vehicle is parked or stopped AND that it is on a one-way roadway. However, the Phase 3 SMT encoding only includes `(parked_on_roadway v r t)` and `(= (roadway_flow r) FK_OneWay)` in its antecedent, omitting the `(or (parked v t) (stopped v t))` condition. The Reconstructed NL's "parked or stopped" language indicates a separate condition beyond merely being on the roadway, and Phase 3 fails to encode this explicit parked-or-stopped predicate, making the antecedent weaker than what the Reconstructed NL describes and causing the rule to apply more broadly than intended.

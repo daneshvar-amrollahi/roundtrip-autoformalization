@@ -1,0 +1,7 @@
+(forall ((p Person) (d Device) (t Int))
+  (=> (and (possesses_device p d t)
+           (device_kind d DK_ElectricityDevice)
+           (not (is_permitted_by_code d t))
+           (or (inside_device p d t)
+               (within_half_mile_of_water d t)))
+      (not (possesses_device p d t))))

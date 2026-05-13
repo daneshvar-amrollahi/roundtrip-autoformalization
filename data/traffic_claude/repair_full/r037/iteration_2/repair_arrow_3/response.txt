@@ -1,0 +1,8 @@
+(forall ((ego Vehicle) (bus Vehicle) (t Int))
+  (=> (and (is_ego ego)
+           (not (= ego bus))
+           (= (kind bus) VK_SchoolBus)
+           (approaching_bus ego bus t)
+           (bus_stopped_for_students bus t)
+           (bus_visual_signal_on bus t))
+      (stopped_before_reaching ego bus t)))

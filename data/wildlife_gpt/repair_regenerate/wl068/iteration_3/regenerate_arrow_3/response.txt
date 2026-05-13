@@ -1,0 +1,13 @@
+(and
+  (forall ((p Person) (f Animal) (t Int))
+    (=> (and (possesses p f t)
+             (is_kind f AK_Fish)
+             (is_named_in_protected_fish_list f))
+        (forall ((doc Document))
+          (not (keeps_with p doc f t)))))
+  (forall ((officer Person) (p Person) (f Animal) (doc Document) (t Int))
+    (=> (and (is_peace_officer officer t)
+             (possesses p f t)
+             (is_kind f AK_Fish)
+             (is_named_in_protected_fish_list f))
+        (not (displays_on_request p doc t)))))

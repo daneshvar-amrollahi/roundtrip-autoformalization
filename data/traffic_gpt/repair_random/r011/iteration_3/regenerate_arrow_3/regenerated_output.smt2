@@ -1,0 +1,6 @@
+(forall ((v_signal Vehicle) (v_signaled Vehicle) (r Roadway) (t Int))
+  (=> (audible_signal v_signal v_signaled t)
+      (and (on_roadway v_signal r t)
+           (on_roadway v_signaled r t)
+           (or (= (roadway_pos v_signaled r t) RP_RightHalf)
+               (= (roadway_pos v_signaled r t) RP_RightLane)))))

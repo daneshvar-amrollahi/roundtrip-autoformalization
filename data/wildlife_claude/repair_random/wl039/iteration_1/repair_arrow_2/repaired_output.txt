@@ -1,0 +1,1 @@
+If a bat is inside or on a building that is occupied by people, a person may remove the bat or hunt the bat at that time.

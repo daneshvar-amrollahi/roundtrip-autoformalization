@@ -1,0 +1,1 @@
+When a vehicle is drawing another vehicle, the drawbar length must not exceed 15 feet.

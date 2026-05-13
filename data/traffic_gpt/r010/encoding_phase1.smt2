@@ -1,0 +1,7 @@
+(forall ((v_pass Vehicle) (v_passed Vehicle) (t Int))
+  (=> (and (passing v_pass v_passed t)
+           (= (passing_side v_pass v_passed t) PS_Left))
+      (forall ((t2 Int))
+        (=> (and (<= t t2)
+                 (not (safely_clear v_pass v_passed t2)))
+            (not (intends_lane_change v_pass TD_Right t2))))))

@@ -1,0 +1,1 @@
+A house trailer must not have any occupant in it at any time when the house trailer is moving.

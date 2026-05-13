@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (protected_by_code a)
+           (imports_to_state p a t)
+           (exists ((k AnimalKind))
+             (and (is_kind a k)
+                  (during_closed_season k t)))
+           (not (has_subchapter_authorization p t)))
+      false))

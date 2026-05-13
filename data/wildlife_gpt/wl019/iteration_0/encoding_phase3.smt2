@@ -1,0 +1,7 @@
+(forall ((shooter Person) (a Animal) (t Int))
+  (=> (and (acts_knowingly shooter t)
+           (discharges_firearm shooter t)
+           (projectile_crosses_property_line shooter t)
+           (or (hunts shooter a t)
+               (engages_in_recreational_shooting shooter t)))
+      (not (discharges_firearm shooter t))))

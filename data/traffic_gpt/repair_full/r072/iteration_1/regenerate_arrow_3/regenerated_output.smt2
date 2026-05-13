@@ -1,0 +1,12 @@
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (and (approaching_intersection v i t)
+           (= (intersection_control i) IC_YieldSign))
+      (and (reduced_speed_appropriate v t)
+           (forall ((u Vehicle))
+             (=> (not (= u v))
+                 (and
+                   (=> (in_intersection u i t)
+                       (not (entering_intersection v i t)))
+                   (=> (and (approaching_intersection u i t)
+                            (is_immediate_hazard v u i t))
+                       (not (entering_intersection v i t)))))))))

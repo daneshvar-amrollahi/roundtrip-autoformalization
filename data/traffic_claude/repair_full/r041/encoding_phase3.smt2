@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (sc Vehicle) (t Int))
+  (=> (and (passing v sc t)
+           (= (passing_side v sc t) PS_Left)
+           (= (kind sc) VK_Streetcar))
+      (yield_right_of_way_to_pedestrian v t)))

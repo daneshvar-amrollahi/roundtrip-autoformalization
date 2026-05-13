@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_divided r) DK_Divided)
+           (not (divider_crossing_allowed v r t)))
+      (not (crossing_center_line v r t))))

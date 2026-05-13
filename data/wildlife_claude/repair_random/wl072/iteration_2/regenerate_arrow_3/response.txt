@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (possesses p a t)
+           (lawfully_taken a)
+           (or (is_kind a AK_Finfish) (is_kind a AK_AquaticAnimalLife))
+           (has_tail_removed a))
+      (or (and (has_been_finally_processed a t)
+               (delivered_to_final_destination a t))
+          (delivered_to_certified_dealer a t))))

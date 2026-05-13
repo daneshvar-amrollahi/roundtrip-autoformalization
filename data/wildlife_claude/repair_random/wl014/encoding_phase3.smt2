@@ -1,0 +1,13 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (has_subchapter_authorization p t)
+           (fishes p a t)
+           (is_kind a AK_Fish))
+      (and
+        (forall ((d Device))
+          (=> (uses_device p d t)
+              (is_permitted_by_code d t)))
+        (during_open_season AK_Fish t)
+        (forall ((d Device) (w WaterBody))
+          (=> (and (uses_device p d t)
+                   (on_water_body p w t))
+              (is_permitted_by_code d t))))))

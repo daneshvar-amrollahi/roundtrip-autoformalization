@@ -1,0 +1,13 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (is_kind a AK_Fin)
+           (exists ((s Animal)) (and (is_kind s AK_Shark) (is_part_of a s))))
+      (and
+        (=> (possesses p a t)
+            (fin_destroyed a t))
+        (not (buys p a t))
+        (not (offers_to_buy p a t))
+        (not (sells p a t))
+        (not (offers_to_sell p a t))
+        (=> (or (possesses p a t) (transports p a t) (ships p a t))
+            (not (for_sale p a t)))
+        (not (advertises_for_sale p a t)))))

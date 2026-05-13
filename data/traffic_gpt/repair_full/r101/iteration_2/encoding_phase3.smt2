@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (and (approaching_intersection v i t)
+           (<= (dist_to_feature v PF_Crosswalk t) ft_20))
+      (and (not (= (stop_action v t) SA_Stand))
+           (not (= (stop_action v t) SA_Park))
+           (= (stop_action v t) SA_Stop)
+           (is-stopping v t))))

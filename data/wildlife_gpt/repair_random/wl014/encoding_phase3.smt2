@@ -1,0 +1,5 @@
+(forall ((angler Person) (a Animal) (d Device) (t Int))
+  (=> (and (fishes angler a t)
+           (uses_device angler d t)
+           (not (is_permitted_by_code d t)))
+      (not (fishes angler a t))))

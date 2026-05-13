@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (or (standing_vehicle v t) (parked v t))
+           (or (<= (dist_to_feature v PF_FireStationDriveway t) ft_20)
+               (<= (dist_to_feature v PF_FireStationDriveway t) ft_75)))
+      (stopped v t)))

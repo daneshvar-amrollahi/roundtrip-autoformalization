@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (or (is_kind a AK_GameBird)
+               (is_kind a AK_GameAnimal)
+               (is_kind a AK_Fish))
+           (acts_intentionally p t)
+           (or (takes p a t)
+               (possesses p a t)))
+      (keeps_in_edible_condition p a t)))

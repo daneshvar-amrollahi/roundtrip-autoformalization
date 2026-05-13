@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_kind r) RK_MountainHighway))
+      (and (vehicle_under_control v t)
+           (close_to_right_edge_practicable v r t))))

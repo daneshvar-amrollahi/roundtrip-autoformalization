@@ -1,0 +1,7 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (is_kind a AK_Wolf)
+           (is_alive a t))
+      (and (not (possesses p a t))
+           (not (transports p a t))
+           (not (receives_from_other_state p a t))
+           (not (places_in_public_water p a t)))))

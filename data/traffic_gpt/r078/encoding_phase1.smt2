@@ -1,0 +1,12 @@
+(forall ((v Vehicle) (ev Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (on_roadway ev r t)
+           (is_authorized_emergency_vehicle ev)
+           (stationary_with_signals ev t)
+           (not (vacated_nearest_lane v ev t))
+           (speed_limit_posted r t))
+      (and (reduced_speed_appropriate v t)
+           (<= (velocity v t)
+               (ite (< (speed_limit_value r t) mph_25)
+                    mph_5
+                    (- (speed_limit_value r t) mph_20))))))

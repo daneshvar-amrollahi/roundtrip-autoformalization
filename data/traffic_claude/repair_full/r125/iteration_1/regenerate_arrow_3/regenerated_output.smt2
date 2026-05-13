@@ -1,0 +1,11 @@
+(forall ((fa Vehicle) (t Int))
+  (=> (and (is_ego fa) false)
+      true))
+
+(forall ((ego Vehicle) (fa Vehicle) (t Int))
+  (=> (and (is_ego ego)
+           (not (= ego fa))
+           (not (on_official_business ego t))
+           (following_fire_apparatus ego fa t)
+           (emergency_signals_active fa t))
+      (> (distance ego fa t) ft_500_sq)))

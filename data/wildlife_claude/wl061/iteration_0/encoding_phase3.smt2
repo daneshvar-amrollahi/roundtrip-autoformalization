@@ -1,0 +1,5 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (transports p a t)
+           (is_aquatic_product a)
+           (for_commercial_purpose p a t))
+      (vehicle_marked_as_aquatic_carrier p t)))

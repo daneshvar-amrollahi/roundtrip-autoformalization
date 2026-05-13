@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_kind r) RK_Highway)
+           (on_bridge_or_tunnel v r t))
+      (and (not (stopped v t))
+           (not (standing_vehicle v t))
+           (not (parked_on_roadway v r t)))))

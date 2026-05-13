@@ -1,0 +1,1 @@
+The ego vehicle, when approaching a school bus that is stopped for students and has its visual signal on, must stop before reaching the school bus.

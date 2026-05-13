@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (i Intersection) (r Roadway) (t Int))
+  (=> (and (is_ego v)
+           (on_roadway v r t)
+           (approaching_intersection v i t)
+           (intends_turn v TD_Left t)
+           (executing_turn_at_intersection v TD_Left i t))
+      (in_extreme_left_lane v r t)))

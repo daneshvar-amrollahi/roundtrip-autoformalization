@@ -1,0 +1,7 @@
+No person may buy, offer to buy, sell, offer to sell, possess for sale, transport for sale, ship for sale, or advertise for sale a shark fin, nor may a person possess a shark fin that has not been destroyed.
+
+Wait—let me re-read the formula more carefully.
+
+The formula states: for every person, animal, and time, if the animal is a fin that is part of a shark, then none of the following may be true: (1) the fin exists as a shark fin and has not been destroyed, (2) the person buys it, (3) the person offers to buy it, (4) the person sells it, (5) the person offers to sell it, (6) the person possesses it for sale, (7) the person transports it for sale, (8) the person ships it for sale, or (9) the person advertises it for sale.
+
+No person may buy, offer to buy, sell, offer to sell, possess for sale, transport for sale, ship for sale, or advertise for sale a fin of a shark, and no person may possess a fin of a shark unless that fin has been destroyed.

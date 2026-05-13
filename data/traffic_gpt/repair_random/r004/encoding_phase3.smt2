@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (roadway_has_marked_lanes r)
+           (moving_slower_than_normal v r t))
+      (= (roadway_pos v r t) RP_RightLane)))

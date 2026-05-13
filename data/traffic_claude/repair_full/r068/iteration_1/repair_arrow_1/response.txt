@@ -1,0 +1,22 @@
+(forall ((v_ego Vehicle) (v_right Vehicle) (i Intersection) (t Int))
+  (=> (and (not (= v_ego v_right))
+           (approaching_intersection v_ego i t)
+           (= (intersection_control i) IC_Uncontrolled)
+           (or (in_intersection v_right i t)
+               (and (approaching_from_right v_right v_ego i t)
+                    (is_immediate_hazard v_right v_ego i t))))
+      (and (stopped v_ego t)
+           (yield_right_of_way_to_pedestrian v_ego t)
+           (not (entering_intersection v_ego i t)))))
+
+SCHEMA_INSUFFICIENT: The schema lacks a predicate for yielding right-of-way to another vehicle (e.g., `yield_right_of_way v_ego v_right t`). The only yield predicate available is `yield_right_of_way_to_pedestrian`, which is semantically about pedestrians, not vehicles. The rule requires yielding to a vehicle approaching from the right. As a workaround, the "yield" obligation is approximated by `(not (entering_intersection v_ego i t))` combined with `(stopped v_ego t)`, which together capture the behavioral effect of yielding (stopping and not entering). The `yield_right_of_way_to_pedestrian` is NOT used since it would be semantically incorrect per the diagnostic feedback.
+
+(forall ((v_ego Vehicle) (v_right Vehicle) (i Intersection) (t Int))
+  (=> (and (not (= v_ego v_right))
+           (approaching_intersection v_ego i t)
+           (= (intersection_control i) IC_Uncontrolled)
+           (or (in_intersection v_right i t)
+               (and (approaching_from_right v_right v_ego i t)
+                    (is_immediate_hazard v_right v_ego i t))))
+      (and (stopped v_ego t)
+           (not (entering_intersection v_ego i t)))))

@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_flow r) FK_OneWay))
+      (and (= (approach_kind v r t) APK_None)
+           (not (= (approach_kind v r t) APK_IntersectionOrRailInMunicipality_100ft))
+           (not (= (approach_kind v r t) APK_MarkedIntersectionOrRailOutsideMunicipality_100ft))
+           (not (= (approach_kind v r t) APK_BridgeViaductTunnel_100ft)))))

@@ -1,0 +1,13 @@
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (and (approaching_intersection v i t)
+           (= (intersection_control i) IC_Uncontrolled))
+      (and
+        (stopped v t)
+        (yield_right_of_way_to_pedestrian v t)
+        (forall ((v_right Vehicle))
+          (=> (and (not (= v v_right))
+                   (approaching_from_right v_right v i t)
+                   (or (in_intersection v_right i t)
+                       (and (approaching_intersection v_right i t)
+                            (is_immediate_hazard v_right v i t))))
+              (not (entering_intersection v i t)))))))

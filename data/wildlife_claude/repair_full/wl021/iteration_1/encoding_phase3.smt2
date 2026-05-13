@@ -1,0 +1,15 @@
+(forall ((doc Document) (grantee Person) (grantor Person) (t Int))
+  (=> (is_valid_consent doc grantee grantor t)
+      (exists ((l Land) (signer Person))
+        (and
+          (document_kind doc DOK_WrittenConsent)
+          (names_grantee doc grantee)
+          (identifies_land doc l)
+          (signed_by doc signer)
+          (or
+            (is_landowner_of signer l)
+            (exists ((owner Person))
+              (and (is_landowner_of owner l)
+                   (or (is_agent_of signer owner)
+                       (is_employee_of signer owner)))))
+          (shows_address_and_phone_of doc signer)))))

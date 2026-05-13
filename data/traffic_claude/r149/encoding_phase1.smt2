@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (= (kind v) VK_HeavyEquipment)
+           (approaching_crossing v c t))
+      (and (notified_railroad v c t)
+           (permitted_to_proceed v c t))))

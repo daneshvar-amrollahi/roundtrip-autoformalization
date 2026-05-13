@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (pedestrian_present_in_crosswalk i t)
+      (not (or (parked v t)
+               (standing_vehicle v t)
+               (= (stop_action v t) SA_Stop)
+               (= (stop_action v t) SA_Stand)
+               (= (stop_action v t) SA_Park)))))

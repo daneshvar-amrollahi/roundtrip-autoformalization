@@ -1,0 +1,21 @@
+(forall ((v Vehicle) (sc Vehicle) (i Intersection) (t Int))
+  (=> (and (not (= v sc))
+           (= (kind sc) VK_Streetcar)
+           (= (streetcar_state sc t) SCS_CrossingIntersection)
+           (in_intersection sc i t)
+           (in_front_of v sc t))
+      (and (not (= (roadway_pos v (let ((r Roadway)) r) t) RP_StreetcarTrack))
+           (not (crossing_center_line v (let ((r Roadway)) r) t)))))
+
+Let me reconsider - the schema doesn't have a direct predicate for "driving on streetcar track" in a clean way with roadway binding. Let me use available predicates more carefully.
+
+(forall ((v Vehicle) (sc Vehicle) (i Intersection) (r Roadway) (t Int))
+  (=> (and (not (= v sc))
+           (= (kind sc) VK_Streetcar)
+           (= (streetcar_state sc t) SCS_CrossingIntersection)
+           (in_intersection sc i t)
+           (in_intersection v i t)
+           (intersection_on_roadway i r)
+           (on_roadway v r t)
+           (in_front_of v sc t))
+      (not (= (roadway_pos v r t) RP_StreetcarTrack))))

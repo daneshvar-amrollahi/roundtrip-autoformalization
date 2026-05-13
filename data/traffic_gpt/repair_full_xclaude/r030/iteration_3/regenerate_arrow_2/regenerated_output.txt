@@ -1,0 +1,1 @@
+If a roadway is one-way and has at least three lanes, and another vehicle in the lane to the left and a vehicle in the lane to the right both move into the same adjacent target lane at the next moment, then the operator of the vehicle coming from the right lane must yield the right-of-way to a pedestrian at that time.

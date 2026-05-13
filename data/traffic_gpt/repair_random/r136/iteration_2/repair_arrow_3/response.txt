@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (a Access) (t Int))
+  (=> (and (on_sidewalk_or_trail v t)
+           (not (crossing_sidewalk v t)))
+      (and (turning_into v a t)
+           (or (= (access_kind a) AK_Driveway)
+               (= (access_kind a) AK_PrivateRoad)))))

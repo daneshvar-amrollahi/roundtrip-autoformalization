@@ -1,0 +1,1 @@
+If a vehicle is stopped, standing, or parked when its movement cannot be made safely, then the operator must not accelerate the vehicle.

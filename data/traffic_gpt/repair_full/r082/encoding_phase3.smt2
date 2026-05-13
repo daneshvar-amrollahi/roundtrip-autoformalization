@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (approaching_crossing v c t)
+           (crossing_designated_dangerous c)
+           (rail_stop_condition_holds v c t))
+      (and (stopped v t)
+           (and (<= ft_15_sq (dist_to_nearest_rail_sq v c t))
+                (<= (dist_to_nearest_rail_sq v c t) ft_50_sq)))))

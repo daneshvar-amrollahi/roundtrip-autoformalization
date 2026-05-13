@@ -1,0 +1,7 @@
+(forall ((a Animal) (b Building) (t Int))
+  (=> (and (is_kind a AK_Bat)
+           (inside_or_on_building a b t)
+           (occupied_by_people b t))
+      (exists ((p Person))
+        (or (removes p a t)
+            (hunts p a t)))))

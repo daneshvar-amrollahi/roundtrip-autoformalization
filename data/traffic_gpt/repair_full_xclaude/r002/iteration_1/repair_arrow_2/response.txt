@@ -1,0 +1,1 @@
+If a vehicle is passing another vehicle on the same roadway on the left at a given time, then at that time the passing vehicle must be on the left half of the roadway.

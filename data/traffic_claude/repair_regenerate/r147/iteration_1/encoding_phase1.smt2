@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (= (kind v) VK_Streetcar)
+           (fire_hose_on_roadway r t)
+           (on_roadway v r t)
+           (not (fire_dept_consent v t)))
+      (not (= (roadway_pos v r t) RP_StreetcarTrack))))

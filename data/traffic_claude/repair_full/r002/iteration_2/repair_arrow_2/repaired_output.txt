@@ -1,0 +1,1 @@
+The ego vehicle may pass another vehicle while both the ego vehicle is on a roadway and positioned on the left half of that roadway.

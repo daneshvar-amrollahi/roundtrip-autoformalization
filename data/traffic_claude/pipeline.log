@@ -1,0 +1,2379 @@
+
+================================================================================
+PHASE 1 - Processing: r001.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r002.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r003.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 641 column 0: invalid assert command, ')
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r004.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r005.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r006.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r007.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r008.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r009.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r010.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 80: unknown constant lane_on_roadway (Vehicle) 
+declared: (declare-fun lane_on_roadway (Lane) Roadway) ") | (error "line 639 column 21: unexpected character") | (error "line 639 column 22: unexpected character") | (error "line 639 column 23: unexpected character") | (error "line 639 column 25: unexpected character") | (error "line 639 column 41: unexpected character") | (error "line 639 column 53: unexpected character") | (error "line 639 column 61: unexpected character") | (error "line 639 column 70: unexpected character") | (error "line 639 column 75: unexpected character") | (error "line 639 column 87: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r011.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r012.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r013.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r014.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r015.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r016.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r017.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r018.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r019.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r020.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r021.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r022.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r023.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r024.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r025.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r026.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r027.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r028.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r029.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r030.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 646 column 0: invalid assert command, ')
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r031.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r032.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r033.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r034.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r035.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r036.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 635 column 46: invalid qualified identifier, sort mismatch") | (error "line 648 column 9: unexpected character") | (error "line 650 column 15: unexpected character") | (error "line 650 column 47: unexpected character") | (error "line 650 column 198: unexpected character") | (error "line 657 column 3: unexpected character") | (error "line 657 column 4: unexpected character") | (error "line 657 column 5: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r037.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r038.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r039.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r040.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r041.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r042.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r043.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 631 column 9: unknown constant Looking")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r044.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r045.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r046.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 638 column 43: unknown constant Roadway") | (error "line 640 column 44: unexpected character") | (error "line 640 column 87: unexpected character") | (error "line 640 column 91: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r047.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r048.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r049.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r050.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r051.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r052.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r053.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r054.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r055.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r056.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 639 column 0: invalid assert command, ')
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r057.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r058.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r059.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r060.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r061.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r062.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r063.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r064.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r065.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r066.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r067.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r068.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r069.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r070.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 646 column 0: invalid assert command, ') | (error "line 646 column 48: unexpected character") | (error "line 646 column 78: unexpected character") | (error "line 646 column 90: unexpected character") | (error "line 646 column 91: unexpected character") | (error "line 646 column 92: unexpected character") | (error "line 646 column 94: unexpected character") | (error "line 646 column 127: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r071.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 55: Sort mismatch at argument #3 for function (declare-fun and (Bool Bool) Bool) supplied sort is IntersectionControl") | (error "line 640 column 10: unexpected character") | (error "line 640 column 21: unexpected character") | (error "line 640 column 54: unexpected character") | (error "line 642 column 43: unexpected character") | (error "line 642 column 56: unexpected character") | (error "line 642 column 86: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r072.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r073.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 644 column 0: invalid assert command, ') | (error "line 644 column 113: unexpected character") | (error "line 644 column 114: unexpected character") | (error "line 644 column 115: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r074.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 644 column 0: invalid assert command, ') | (error "line 644 column 129: unexpected character") | (error "line 644 column 162: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r075.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 638 column 0: invalid assert command, ') | (error "line 640 column 15: unexpected character") | (error "line 640 column 48: unexpected character") | (error "line 640 column 58: unexpected character") | (error "line 640 column 140: unexpected character") | (error "line 640 column 157: unexpected character") | (error "line 640 column 197: unexpected character") | (error "line 640 column 235: unexpected character") | (error "line 640 column 265: unexpected character") | (error "line 640 column 268: unexpected character") | (error "line 640 column 293: unexpected character") | (error "line 642 column 347: unexpected character") | (error "line 642 column 368: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r076.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r077.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r078.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r079.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r080.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r081.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 644 column 0: invalid assert command, ') | (error "line 644 column 154: unexpected character") | (error "line 644 column 187: unexpected character") | (error "line 644 column 204: unexpected character") | (error "line 644 column 234: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r082.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r083.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r084.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r085.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r086.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r087.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r088.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r089.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r090.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r091.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 635 column 67: Sort mismatch at argument #1 for function (declare-fun and (Bool Bool) Bool) supplied sort is StopAction") | (error "line 639 column 63: unexpected character") | (error "line 639 column 64: unexpected character") | (error "line 639 column 65: unexpected character") | (error "line 641 column 16: unexpected character") | (error "line 641 column 128: unexpected character") | (error "line 641 column 146: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r092.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r093.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r094.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 639 column 0: invalid assert command, ') | (error "line 639 column 112: unexpected character") | (error "line 639 column 159: unexpected character") | (error "line 639 column 175: unexpected character") | (error "line 639 column 182: unexpected character") | (error "line 639 column 195: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ⚠ Attempt 2 failed:
+         Error: (error "line 632 column 45: unknown constant ft_5")
+      🔧 Requesting repair (attempt 3)...
+      ✓ Repaired successfully after 2 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r095.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r096.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r097.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r098.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 639 column 0: invalid assert command, ') | (error "line 639 column 41: unexpected character") | (error "line 639 column 101: unexpected character") | (error "line 639 column 122: unexpected character") | (error "line 639 column 128: unexpected character") | (error "line 639 column 152: unexpected character") | (error "line 639 column 282: unexpected character") | (error "line 639 column 290: unexpected character") | (error "line 639 column 293: unexpected character") | (error "line 639 column 300: unexpected character") | (error "line 639 column 303: unexpected character") | (error "line 639 column 320: unexpected character") | (error "line 639 column 327: unexpected character") | (error "line 639 column 339: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r099.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 638 column 0: invalid assert command, ') | (error "line 638 column 388: unexpected character") | (error "line 638 column 389: unexpected character") | (error "line 638 column 390: unexpected character") | (error "line 649 column 9: unexpected character") | (error "line 649 column 133: unexpected character") | (error "line 649 column 141: unexpected character") | (error "line 649 column 156: unexpected character") | (error "line 649 column 165: unexpected character") | (error "line 649 column 206: unexpected character") | (error "line 649 column 214: unexpected character") | (error "line 649 column 293: unexpected character") | (error "line 649 column 301: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r100.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r101.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 640 column 0: invalid assert command, ')
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r102.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 632 column 93: Sort mismatch at argument #1 for function (declare-fun or (Bool Bool) Bool) supplied sort is StopAction")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r103.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 0: invalid assert command, ') | (error "line 654 column 3: unexpected character") | (error "line 654 column 4: unexpected character") | (error "line 654 column 5: unexpected character") | (error "line 654 column 14: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r104.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r105.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r106.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r107.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r108.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r109.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r110.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r111.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r112.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r113.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r114.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r115.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r116.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r117.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r118.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r119.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 25: unknown constant is-moving (Vehicle Int) ") | (error "line 639 column 41: unexpected character") | (error "line 639 column 52: unexpected character") | (error "line 639 column 62: unexpected character") | (error "line 639 column 97: unexpected character") | (error "line 643 column 60: unexpected character") | (error "line 643 column 69: unexpected character") | (error "line 643 column 72: unexpected character") | (error "line 643 column 80: unexpected character") | (error "line 643 column 83: unexpected character") | (error "line 643 column 100: unexpected character") | (error "line 643 column 103: unexpected character") | (error "line 643 column 110: unexpected character") | (error "line 643 column 117: unexpected character") | (error "line 643 column 145: unexpected character") | (error "line 643 column 252: unexpected character") | (error "line 645 column 1: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r120.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r121.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r122.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r123.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r124.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r125.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 25: Sort mismatch at argument #3 for function (declare-fun and (Bool Bool) Bool) supplied sort is VehicleKind")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r126.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 633 column 42: unknown constant eq (Vehicle Vehicle) ") | (error "line 640 column 32: unexpected character") | (error "line 640 column 37: unexpected character") | (error "line 640 column 56: unexpected character") | (error "line 640 column 68: unexpected character") | (error "line 640 column 81: unexpected character") | (error "line 640 column 117: unexpected character") | (error "line 640 column 126: unexpected character") | (error "line 640 column 129: unexpected character") | (error "line 640 column 134: unexpected character") | (error "line 640 column 160: unexpected character") | (error "line 640 column 191: unexpected character") | (error "line 640 column 218: unexpected character") | (error "line 640 column 238: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r127.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 0: invalid assert command, ') | (error "line 637 column 127: unexpected character") | (error "line 637 column 148: unexpected character") | (error "line 637 column 192: unexpected character") | (error "line 637 column 210: unexpected character") | (error "line 637 column 338: unexpected character") | (error "line 637 column 359: unexpected character") | (error "line 637 column 372: unexpected character") | (error "line 637 column 386: unexpected character") | (error "line 637 column 397: unexpected character") | (error "line 645 column 9: unexpected character") | (error "line 645 column 73: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r128.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r129.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r130.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r131.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r132.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 0: invalid assert command, ') | (error "line 641 column 104: unexpected character") | (error "line 641 column 125: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r133.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r134.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r135.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r136.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r137.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r138.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r139.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r140.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 133: invalid function application, arguments missing") | (error "line 657 column 23: unexpected character") | (error "line 699 column 3: unexpected character") | (error "line 699 column 4: unexpected character") | (error "line 699 column 5: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r141.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r142.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r143.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 646 column 0: invalid assert command, ') | (error "line 646 column 102: unexpected character") | (error "line 646 column 103: unexpected character") | (error "line 646 column 104: unexpected character") | (error "line 646 column 114: unexpected character") | (error "line 648 column 267: unexpected character") | (error "line 648 column 268: unexpected character") | (error "line 648 column 269: unexpected character") | (error "line 648 column 276: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r144.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r145.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r146.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r147.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 25: unknown constant is-moving (Vehicle Int) ")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r148.txt
+================================================================================
+    Generating encoding...
+      ⚠ Attempt 1 failed:
+         Error: (error "line 642 column 0: invalid assert command, ') | (error "line 660 column 15: unexpected character") | (error "line 660 column 31: unexpected character") | (error "line 660 column 38: unexpected character") | (error "line 660 column 61: unexpected character") | (error "line 660 column 70: unexpected character") | (error "line 660 column 258: unexpected character") | (error "line 660 column 281: unexpected character") | (error "line 660 column 433: unexpected character") | (error "line 672 column 442: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 1 - Processing: r149.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 1 - Processing: r150.txt
+================================================================================
+    Generating encoding...
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 2 - Translating: r001.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r002.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r003.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r004.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r005.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r006.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r007.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r008.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r009.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r010.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r011.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r012.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r013.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r014.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r015.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r016.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r017.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r018.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r019.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r020.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r021.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r022.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r023.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r024.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r025.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r026.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r027.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r028.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r029.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r030.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r031.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r032.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r033.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r034.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r035.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r036.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r037.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r038.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r039.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r040.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r041.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r042.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r043.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r044.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r045.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r046.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r047.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r048.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r049.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r050.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r051.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r052.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r053.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r054.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r055.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r056.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r057.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r058.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r059.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r060.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r061.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r062.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r063.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r064.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r065.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r066.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r067.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r068.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r069.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r070.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r071.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r072.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r073.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r074.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r075.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r076.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r077.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r078.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r079.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r080.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r081.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r082.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r083.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r084.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r085.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r086.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r087.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r088.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r089.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r090.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r091.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r092.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r093.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r094.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r095.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r096.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r097.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r098.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r099.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r100.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r101.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r102.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r103.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r104.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r105.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r106.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r107.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r108.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r109.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r110.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r111.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r112.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r113.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r114.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r115.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r116.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r117.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r118.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r119.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r120.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r121.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r122.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r123.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r124.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r125.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r126.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r127.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r128.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r129.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r130.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r131.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r132.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r133.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r134.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r135.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r136.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r137.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r138.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r139.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r140.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r141.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r142.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r143.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r144.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r145.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r146.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r147.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r148.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r149.txt
+================================================================================
+
+================================================================================
+PHASE 2 - Translating: r150.txt
+================================================================================
+
+================================================================================
+PHASE 3 - Encoding: r001.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r002.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r003.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r004.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r005.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r006.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r007.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r008.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r009.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r010.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r011.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r012.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r013.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r014.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r015.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r016.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r017.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r018.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r019.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r020.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r021.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r022.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 0: unknown constant Let")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r023.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r024.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r025.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r026.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r027.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r028.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 636 column 0: invalid assert command, ')
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r029.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r030.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r031.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r032.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r033.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r034.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r035.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r036.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r037.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r038.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r039.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r040.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r041.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r042.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r043.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r044.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r045.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r046.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r047.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r048.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r049.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r050.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r051.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r052.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r053.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r054.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r055.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r056.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r057.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r058.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r059.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r060.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 640 column 0: invalid assert command, ') | (error "line 654 column 9: unexpected character") | (error "line 654 column 38: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r061.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r062.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r063.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r064.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r065.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r066.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r067.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r068.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r069.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r070.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 655 column 0: invalid assert command, ') | (error "line 655 column 32: unexpected character") | (error "line 655 column 65: unexpected character") | (error "line 655 column 144: unexpected character") | (error "line 655 column 206: unexpected character") | (error "line 667 column 9: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r071.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r072.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 643 column 0: invalid assert command, ') | (error "line 643 column 145: unexpected character") | (error "line 643 column 178: unexpected character") | (error "line 643 column 426: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r073.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r074.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r075.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r076.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r077.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 640 column 43: unknown constant approaching_intersection (Vehicle Vehicle Int) 
+declared: (declare-fun approaching_intersection (Vehicle Intersection Int) Bool) ")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r078.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r079.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r080.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r081.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r082.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r083.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r084.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r085.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r086.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r087.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r088.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r089.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r090.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r091.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r092.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r093.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r094.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 632 column 44: unknown constant ft_5")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r095.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r096.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r097.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r098.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r099.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r100.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r101.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r102.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r103.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 0: invalid assert command, ') | (error "line 637 column 115: unexpected character") | (error "line 637 column 131: unexpected character") | (error "line 637 column 138: unexpected character") | (error "line 637 column 158: unexpected character") | (error "line 637 column 170: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r104.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 632 column 42: unknown constant parked (Vehicle Roadway Int) 
+declared: (declare-fun parked (Vehicle Int) Bool) ")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r105.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r106.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r107.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r108.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r109.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r110.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r111.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r112.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r113.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r114.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r115.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r116.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r117.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r118.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r119.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r120.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r121.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r122.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r123.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r124.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r125.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r126.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 633 column 42: unknown constant eq (Vehicle Vehicle) ")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r127.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 637 column 0: invalid assert command, ') | (error "line 639 column 261: unexpected character") | (error "line 639 column 282: unexpected character") | (error "line 639 column 288: unexpected character") | (error "line 639 column 306: unexpected character") | (error "line 639 column 340: unexpected character")
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r128.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r129.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r130.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r131.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r132.txt
+================================================================================
+      ⚠ Attempt 1 failed:
+         Error: (error "line 636 column 0: invalid assert command, ')
+      🔧 Requesting repair (attempt 2)...
+      ✓ Repaired successfully after 1 attempt(s)
+
+================================================================================
+PHASE 3 - Encoding: r133.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r134.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r135.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r136.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r137.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r138.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r139.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r140.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r141.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r142.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r143.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r144.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r145.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r146.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r147.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r148.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r149.txt
+================================================================================
+      ✓ Valid on first attempt
+
+================================================================================
+PHASE 3 - Encoding: r150.txt
+================================================================================
+      ✓ Valid on first attempt

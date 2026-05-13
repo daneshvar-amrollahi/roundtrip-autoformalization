@@ -1,0 +1,22 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_flow r) FK_TwoWay)
+           (>= (roadway_lane_count r) 4)
+           (= (roadway_pos v r t) RP_LeftHalf))
+      (or
+        (in_authorized_lane v t)
+
+        (and (obstruction_present v r t)
+             (yield_right_of_way_to_pedestrian v t))
+
+        (and (crossing_center_line v r t)
+             (or
+               (intends_turn v TD_Left t)
+               (executing_turn v TD_Left t)
+               (exists ((a Access))
+                 (and (access_on_roadway a r)
+                      (or (= (access_kind a) AK_Alley)
+                          (= (access_kind a) AK_PrivateRoad)
+                          (= (access_kind a) AK_Driveway))
+                      (or (turning_into v a t)
+                          (emerging_from v a t)))))))))

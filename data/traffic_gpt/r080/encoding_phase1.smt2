@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (a Access) (t Int))
+  (=> (and (emerging_from v a t)
+           (or (= (access_kind a) AK_Alley)
+               (= (access_kind a) AK_Driveway)
+               (= (access_kind a) AK_Building))
+           (crossing_sidewalk v t)
+           (pedestrian_present_on_sidewalk v t))
+      (yield_right_of_way_to_pedestrian v t)))

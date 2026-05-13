@@ -1,0 +1,6 @@
+(forall ((v_pass Vehicle) (v_passed Vehicle) (r Roadway) (t Int))
+  (=> (and (passing v_pass v_passed t)
+           (same_roadway_as_bus v_pass v_passed r t)
+           (= (passing_side v_pass v_passed t) PS_Left)
+           (on_roadway v_pass r t))
+      (= (roadway_pos v_pass r t) RP_LeftHalf)))

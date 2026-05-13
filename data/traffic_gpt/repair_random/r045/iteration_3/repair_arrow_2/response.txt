@@ -1,0 +1,1 @@
+If a streetcar’s operator signals a vehicle that is in front of the streetcar, and at that time the vehicle is on a roadway and is positioned on the streetcar track, then the vehicle must move off the track as soon as possible.

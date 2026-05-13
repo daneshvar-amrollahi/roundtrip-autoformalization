@@ -1,0 +1,8 @@
+(forall ((v_pass Vehicle) (v_passed Vehicle) (r Roadway) (t Int))
+  (=> (and (passing v_pass v_passed t)
+           (= (passing_side v_pass v_passed t) PS_Right)
+           (on_roadway v_pass r t)
+           (or (= (roadway_pos v_pass r t) RP_ShoulderRight)
+               (= (roadway_pos v_pass r t) RP_ShoulderLeft))
+           (not (shoulder_use_necessary_and_safe v_pass t)))
+      (not (= (shoulder_reason v_pass t) SR_PassSlowingOrStoppedOrDisabledOrLeftTurning))))

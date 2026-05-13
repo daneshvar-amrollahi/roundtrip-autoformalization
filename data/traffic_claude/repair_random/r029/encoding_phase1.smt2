@@ -1,0 +1,12 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_pos v r t) RP_CenterLane)
+           (= (roadway_lane_count r) 3)
+           (= (roadway_flow r) FK_TwoWay))
+      (or
+        (exists ((v2 Vehicle))
+          (and (not (= v v2))
+               (passing v v2 t)
+               (left_side_clear_for_passing v r t)))
+        (intends_turn v TD_Left t)
+        (directed_by_traffic_control_device v t))))

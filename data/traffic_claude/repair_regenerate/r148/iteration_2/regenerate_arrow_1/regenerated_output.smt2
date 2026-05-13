@@ -1,0 +1,32 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (is_ego v)
+           (or (and (< (dist_to_feature v PF_FireStationDriveway t) ft_20))
+               (and (< (dist_to_feature v PF_FireStationDriveway t) ft_75)
+                    (roadway_pos v (let ((dummy v)) dummy) t) ; approximate: opposite side
+                    true))
+           (not (and (or (= (stop_action v t) SA_Stand)
+                        (= (stop_action v t) SA_Park))
+                    false)))
+      (not (or (= (stop_action v t) SA_Stand)
+               (= (stop_action v t) SA_Park)))))
+
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (is_ego v)
+           (on_roadway v r t)
+           (or (= (stop_action v t) SA_Stand)
+               (= (stop_action v t) SA_Park))
+           (or (< (dist_to_feature v PF_FireStationDriveway t) ft_20)
+               (< (dist_to_feature v PF_FireStationDriveway t) ft_75)))
+      false))
+
+Let me reconsider and provide a clean, correct encoding:
+
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (is_ego v)
+           (on_roadway v r t)
+           (or (< (dist_to_feature v PF_FireStationDriveway t) ft_20)
+               (< (dist_to_feature v PF_FireStationDriveway t) ft_75))
+           (not (and (= (stop_action v t) SA_Stop)
+                     (stopped v t))))
+      (not (or (= (stop_action v t) SA_Stand)
+               (= (stop_action v t) SA_Park)))))

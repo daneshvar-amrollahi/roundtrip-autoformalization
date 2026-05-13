@@ -1,0 +1,1 @@
+An operator who has stopped before reaching a school bus must remain stopped at all subsequent times as long as the school bus has not resumed motion, the school bus driver has not signaled the operator to proceed, and the school bus's visual signal remains on.

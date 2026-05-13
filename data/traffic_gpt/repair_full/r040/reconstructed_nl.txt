@@ -1,0 +1,1 @@
+If an operator is passing a streetcar on the left while the streetcar is stopped for passengers, then the operator must reduce speed as appropriate.

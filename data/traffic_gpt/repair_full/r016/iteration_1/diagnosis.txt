@@ -1,0 +1,16 @@
+================================================================================
+DIAGNOSIS
+================================================================================
+
+First Failed Arrow: 1
+
+Reasoning:
+The Phase 1 SMT does not match the rule because it forbids driving on the left only when the vehicle is on the roadway and either the roadway is a no-passing zone, **or** a no-passing marking is visible **and** the operator is **not** obeying it; however, the rule prohibits driving on the left side in a no-passing zone regardless of any “obeyed” status, and also prohibits driving on the left side of pavement striping marking a no-passing zone (i.e., the marking itself), not only in the special case where the marking is visible and the operator is not obeying it.
+
+================================================================================
+FULL LLM RESPONSE
+================================================================================
+
+FIRST_FAILED_ARROW: 1
+REASONING:
+The Phase 1 SMT does not match the rule because it forbids driving on the left only when the vehicle is on the roadway and either the roadway is a no-passing zone, **or** a no-passing marking is visible **and** the operator is **not** obeying it; however, the rule prohibits driving on the left side in a no-passing zone regardless of any “obeyed” status, and also prohibits driving on the left side of pavement striping marking a no-passing zone (i.e., the marking itself), not only in the special case where the marking is visible and the operator is not obeying it.

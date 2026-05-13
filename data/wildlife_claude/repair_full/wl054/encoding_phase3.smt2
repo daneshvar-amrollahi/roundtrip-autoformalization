@@ -1,0 +1,6 @@
+(forall ((p Person) (a Animal) (b Land) (t Int))
+  (=> (and (on_land p b t)
+           (land_kind b LK_BridgeOrCauseway)
+           (or (is_kind a AK_Fish) (is_kind a AK_Crab))
+           (not (is_alive a t)))
+      (not (deposits_on_bridge p a t))))

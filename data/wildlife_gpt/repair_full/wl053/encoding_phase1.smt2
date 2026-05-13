@@ -1,0 +1,5 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (fishes p a t)
+           (is_kind a AK_Fish)
+           (on_bridge_maintained_by_txdot p t))
+      (not (fishes p a t))))

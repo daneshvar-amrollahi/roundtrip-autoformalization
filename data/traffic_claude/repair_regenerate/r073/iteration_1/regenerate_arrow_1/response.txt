@@ -1,0 +1,22 @@
+(forall ((v_feeder Vehicle) (v_highway Vehicle) (r Roadway) (t Int))
+  (=> (and (is_ego v_feeder)
+           (not (= v_feeder v_highway))
+           (on_roadway v_feeder r t)
+           (on_roadway v_highway r t)
+           (= (roadway_access_control r) AC_Limited)
+           (or (entering_main_lane v_highway t)
+               (at_established_entrance_or_exit v_highway r t)))
+      (yield_right_of_way_to_pedestrian v_feeder t)))
+
+SCHEMA_INSUFFICIENT: The schema lacks a general "yield_right_of_way_to_vehicle" predicate between two vehicles. The only yield predicate is yield_right_of_way_to_pedestrian which is for pedestrians. Additionally, there is no predicate to distinguish a feeder/access road from the main limited-access highway, nor predicates for "entering from highway onto access road" vs "leaving access road to enter highway." I will provide the best approximation possible using available predicates.
+
+(forall ((v_feeder Vehicle) (v_highway Vehicle) (r Roadway) (t Int))
+  (=> (and (is_ego v_feeder)
+           (not (= v_feeder v_highway))
+           (on_roadway v_feeder r t)
+           (= (roadway_access_control r) AC_Limited)
+           (or (entering_main_lane v_highway t)
+               (at_established_entrance_or_exit v_highway r t)))
+      (and (yield_right_of_way_to_pedestrian v_feeder t)
+           (sufficient_space_for_vehicle_to_enter v_feeder v_highway t)
+           (assured_clear_distance v_feeder v_highway t))))

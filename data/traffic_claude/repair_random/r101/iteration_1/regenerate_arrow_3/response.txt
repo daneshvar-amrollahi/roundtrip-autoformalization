@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (is_ego v)
+           (< (dist_to_feature v PF_Crosswalk t) ft_20)
+           (not (and (stopped v t)
+                     (= (stop_action v t) SA_Stop))))
+      (and (not (= (stop_action v t) SA_Stand))
+           (not (= (stop_action v t) SA_Park)))))

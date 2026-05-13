@@ -1,0 +1,15 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (is_kind a AK_Wolf)
+           (or (possesses p a t) (transports p a t))
+           (or
+             (and
+               (or (is_licensed_circus_zoo_owner p)
+                   (exists ((owner Person))
+                     (and (is_licensed_circus_zoo_owner owner)
+                          (is_agent_of p owner))))
+               (or (for_exhibition p t)
+                   (for_scientific_purpose p t)))
+             (and (is_state_or_county_official p)
+                  (transports p a t)
+                  (on_official_duty p t))))
+      (not (protected_by_code a))))

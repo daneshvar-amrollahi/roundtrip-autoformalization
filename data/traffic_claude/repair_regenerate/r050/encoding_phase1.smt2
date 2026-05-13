@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (approaching_crossing v c t)
+           (or (= (gate_state c t) GS_Closed)
+               (= (gate_state c t) GS_Closing)
+               (= (gate_state c t) GS_Opening))
+           (drove_around_under_through_gate v c t))
+      false))

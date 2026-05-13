@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_access_control r) AC_Limited)
+           (entering_main_lane v t))
+      (at_established_entrance_or_exit v r t)))

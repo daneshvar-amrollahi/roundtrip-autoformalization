@@ -1,0 +1,652 @@
+================================================================================
+NLI COMPARISON ANALYSIS
+Timestamp: 2026-05-06 01:16:05
+================================================================================
+Comparing: original_nl.txt vs reconstructed_nl.txt (iteration_0)
+Model: facebook/bart-large-mnli (bidirectional)
+
+Key signals:
+  E_min = min(E1, E2): Both directions must entail for equivalence
+  C_max = max(C1, C2): Any contradiction is concerning
+  E1 = P(original entails reconstructed)
+  E2 = P(reconstructed entails original)
+
+Categories:
+  CONTRADICTION: C_max ≥ 0.6 (genuine semantic conflict)
+  EQUIVALENT:    E_min ≥ 0.7 and C_max < 0.2
+  STRENGTHENED:  E1 ≥ 0.6, E2 < 0.4 (recon adds constraints)
+  WEAKENED:      E2 ≥ 0.6, E1 < 0.4 (recon drops constraints)
+  RELATED:       E_min ≥ 0.3, C_max < 0.3
+  UNRELATED:     otherwise
+
+
+================================================================================
+CONTRADICTION (6 rules)
+--------------------------------------------------------------------------------
+
+Rule: wl014
+  E1=0.029 (orig→recon), E2=0.004 (recon→orig)
+  E_min=0.004, C_max=0.992, Score=-0.988
+  Original:      This section does not authorize a person to fish by any means or method or at any time or place that is otherwise prohibited by this code.
+  Reconstructed: A person who is authorized under the applicable subchapter and is fishing for fish may not use any device that is not permitted by code, may not fish outside the open season for fish, and may not use any device that is not permitted by code while on a water body.
+  Rationale: High contradiction (C_max=0.99 ≥ 0.6)
+
+Rule: wl018
+  E1=0.018 (orig→recon), E2=0.677 (recon→orig)
+  E_min=0.018, C_max=0.979, Score=-0.961
+  Original:      It is an offense if a person while hunting kills or wounds a desert bighorn sheep, pronghorn antelope, mule deer, or white-tailed deer in violation of Section 61.022 , 62.003 , 62.0031 , 62.004 , or 62.005 and intentionally or knowingly fails to make a reasonable effort to retrieve the animal or intentionally, knowingly, recklessly, or with criminal negligence fails to keep the edible parts of the animal in an edible condition.
+  Reconstructed: A person who, while hunting, kills or wounds a desert bighorn sheep, pronghorn antelope, mule deer, or white-tailed deer shall not intentionally or knowingly fail to make a reasonable effort to retrieve the animal, and shall not intentionally, knowingly, recklessly, or with criminal negligence fail to keep the animal in edible condition.
+  Rationale: High contradiction (C_max=0.98 ≥ 0.6); asymmetric: backward stronger (0.68 vs 0.02)
+
+Rule: wl027
+  E1=0.793 (orig→recon), E2=0.090 (recon→orig)
+  E_min=0.090, C_max=0.789, Score=-0.700
+  Original:      Except as provided in Subsections (e) and (f) of this section, no person may possess an exotic animal or the carcass of an exotic animal.
+  Reconstructed: A person who possesses an exotic animal, or a carcass that is part of an exotic animal, must have authorization under the applicable subchapter.
+  Rationale: High contradiction (C_max=0.79 ≥ 0.6); asymmetric: forward stronger (0.79 vs 0.09)
+
+Rule: wl034
+  E1=0.006 (orig→recon), E2=0.845 (recon→orig)
+  E_min=0.006, C_max=0.965, Score=-0.960
+  Original:      A person may place and maintain, or possess, in a cold storage or processing facility lawfully killed game birds and game animals not in excess of the number permitted to be possessed by law.
+  Reconstructed: A person who places in cold storage or possesses a lawfully killed game bird or game animal that is in cold storage or in the person's possession shall not possess game birds in excess of the possession limit for game birds, nor possess game animals in excess of the possession limit for game animals.
+  Rationale: High contradiction (C_max=0.97 ≥ 0.6); asymmetric: backward stronger (0.85 vs 0.01)
+
+Rule: wl043
+  E1=0.997 (orig→recon), E2=0.000 (recon→orig)
+  E_min=0.000, C_max=0.999, Score=-0.999
+  Original:      This section does not apply to: (1) the sale of an animal by or to a zoo; (2) the sale of an animal to an educational institution or a medical or research center for scientific purposes as authorized by a permit issued under Subchapter C, Chapter 43 , of this code; or (3) the sale to a commercial dealer who in turn resells for purposes authorized in Subdivisions (1) and (2) of this subsection.
+  Reconstructed: A person may not sell an animal if the sale involves a zoo entity as either the seller or the buyer, if the buyer is an educational institution or research institution acting for a scientific purpose with subchapter authorization, or if the buyer is acquiring the animal for a commercial purpose and subsequently sells the animal to a zoo entity or to an educational or research institution acting for a scientific purpose with subchapter authorization.
+
+Wait—I need to re-read the formula carefully. The outer structure is:
+
+`sells => NOT (A ∨ B ∨ C)`
+
+This means: if a person sells, then none of these conditions hold. In other words, a sale **cannot** occur when any of those conditions are true. But that seems semantically odd—it would prohibit sales *to* zoos and research institutions.
+
+Re-examining: the formula says that whenever a sale occurs, it is **not** the case that any of these three scenarios hold. This is a prohibition on sales under those circumstances.
+
+A person may not sell an animal to or as a zoo entity, may not sell an animal to an educational institution or research institution that is acting for a scientific purpose and holds subchapter authorization, and may not sell an animal to a buyer acquiring it for a commercial purpose where that buyer will later resell the animal to a zoo entity or to an educational or research institution acting for a scientific purpose with subchapter authorization.
+  Rationale: High contradiction (C_max=1.00 ≥ 0.6); asymmetric: forward stronger (1.00 vs 0.00)
+
+Rule: wl051
+  E1=0.010 (orig→recon), E2=0.003 (recon→orig)
+  E_min=0.003, C_max=0.903, Score=-0.900
+  Original:      No person may possess or use for the purpose of catching finfish a seine, strike net, gill net, or trammel net in or on the public water of this state unless the seine, strike net, gill net, or trammel net is equipped with floats at intervals of six feet or less and of sufficient buoyancy to maintain the seine, strike net, gill net, or trammel net in an upright position in the water so that the floats are visible on the surface of the water thereby avoiding a hazard to motorboat traffic. (c)(1) No person may possess a seine, strike net, gill net, or trammel net on or within 500 yards of any public coastal water of this state where the use of the seine or net for the catching of fish is not permitted by this code or by a proclamation of the commission under this code. (2) It is a defense to prosecution under this subsection that the seine, strike net, gill net, or trammel net was possessed within 500 yards of a public coastal water of this state for a lawful fishing activity.
+  Reconstructed: A person who is on any public freshwater, public saltwater, public water, coastal water, Gulf of Mexico, or bay or estuary and who possesses or uses a seine, strike net, gill net, or trammel net to fish for, catch, or attempt to catch finfish must ensure that the net has float spacing of no more than six feet and meets required buoyancy standards. A person who possesses a seine, strike net, gill net, or trammel net on or within one-half mile of coastal water, unless the net is permitted by code, may do so only if the person is fishing for fish on that coastal water.
+  Rationale: High contradiction (C_max=0.90 ≥ 0.6)
+
+================================================================================
+UNRELATED (14 rules)
+--------------------------------------------------------------------------------
+
+Rule: wl003
+  E1=0.117 (orig→recon), E2=0.009 (recon→orig)
+  E_min=0.009, C_max=0.024, Score=-0.015
+  Original:      A person may capture by nonlethal means reptiles and amphibians on the shoulder of a road, as defined by Section 541.302 , Transportation Code, or the unpaved area of a public right-of-way if the person: (1) possesses a reptile and amphibian stamp issued to the person by the department and does not use a trap; or (2) is described by Section 43.905 .
+  Reconstructed: A person who captures a reptile or amphibian by nonlethal means while on a road shoulder or road right-of-way must either possess a reptile and amphibian stamp and not use a crab trap, or hold authorization under the applicable subchapter.
+  Rationale: Low mutual entailment (E_min=0.01), no clear relationship
+
+Rule: wl007
+  E1=0.115 (orig→recon), E2=0.124 (recon→orig)
+  E_min=0.115, C_max=0.018, Score=0.097
+  Original:      Except as provided by Section 62.0055 or 62.0056 , no person may hunt a game animal or bird protected by this code with the aid of an artificial light that casts or reflects a beam of light onto or otherwise illuminates the game animal or bird, including the headlights of a motor vehicle.
+  Reconstructed: No person may hunt any game animal or game bird protected by this code while using an artificial light to illuminate the animal, unless that person has authorization under the applicable subchapter.
+  Rationale: Low mutual entailment (E_min=0.12), no clear relationship
+
+Rule: wl016
+  E1=0.464 (orig→recon), E2=0.135 (recon→orig)
+  E_min=0.135, C_max=0.587, Score=-0.452
+  Original:      Except as provided by Subsection (c), it is an offense if a person while hunting kills or wounds a game bird or game animal and intentionally or knowingly fails to make a reasonable effort to retrieve the animal or bird and include it in the person's daily or seasonal bag limit.
+  Reconstructed: If a person who is hunting intentionally kills or wounds a game bird or game animal and does not have authorization under the applicable subchapter, that person must, at all times thereafter until the animal is retrieved, make a reasonable effort to retrieve the animal.
+  Rationale: Low mutual entailment (E_min=0.13), no clear relationship; asymmetric: forward stronger (0.46 vs 0.13)
+
+Rule: wl017
+  E1=0.568 (orig→recon), E2=0.279 (recon→orig)
+  E_min=0.279, C_max=0.495, Score=-0.216
+  Original:      Except as provided by Subsection (c), it is an offense if a person intentionally takes or possesses a game bird, game animal, or fish and intentionally, knowingly, recklessly, or with criminal negligence fails to keep the edible portions of the bird, animal, or fish in an edible condition.
+  Reconstructed: A person who intentionally takes or possesses any game bird, game animal, game fish, or fish must keep such animal in edible condition, unless that person has authorization to act under the relevant subchapter.
+  Rationale: Low mutual entailment (E_min=0.28), no clear relationship
+
+Rule: wl036
+  E1=0.032 (orig→recon), E2=0.168 (recon→orig)
+  E_min=0.032, C_max=0.022, Score=0.010
+  Original:      No person may: (1) sell or offer for sale, or transport or consign for transportation in this state, including interstate commerce in this state, a dangerous wild animal that is to be used for controlled killing prohibited by Section 62.102 (1); or (2) sell or offer for sale a part of or a product made from a dangerous wild animal that is used in a controlled kill prohibited by Section 62.102 (1).
+  Reconstructed: No person may sell, offer to sell, transport, or consign for transport a dangerous wild animal that has been released for killing, and no person may sell or offer to sell any part of a dangerous wild animal that has been released for killing and killed.
+  Rationale: Low mutual entailment (E_min=0.03), no clear relationship
+
+Rule: wl037
+  E1=0.002 (orig→recon), E2=0.153 (recon→orig)
+  E_min=0.002, C_max=0.032, Score=-0.030
+  Original:      No person may possess a live game animal in this state for any purpose not authorized by this code.
+  Reconstructed: No person may possess a live game animal unless authorized by the commission.
+  Rationale: Low mutual entailment (E_min=0.00), no clear relationship
+
+Rule: wl038
+  E1=0.562 (orig→recon), E2=0.247 (recon→orig)
+  E_min=0.247, C_max=0.015, Score=0.232
+  Original:      Except as provided by Subsections (b) and (c), no person may: (1) hunt a bat; or (2) sell, offer for sale, purchase, offer to purchase, or possess after purchase a bat or any part of a bat, dead or alive.
+  Reconstructed: A person may not hunt, sell, offer to sell, buy, offer to buy, or possess after purchase any bat unless that person has authorization under the applicable subchapter.
+  Rationale: Low mutual entailment (E_min=0.25), no clear relationship; asymmetric: forward stronger (0.56 vs 0.25)
+
+Rule: wl045
+  E1=0.136 (orig→recon), E2=0.404 (recon→orig)
+  E_min=0.136, C_max=0.005, Score=0.131
+  Original:      No person may place in the water of this state an explosive, poison, or other substance or thing deleterious to fish.
+  Reconstructed: No person may place any explosive, poison, or substance deleterious to fish into any water body, whether public fresh water, public salt water, coastal water, public water, the Gulf of Mexico, navigation district water, a bay or estuary, nonpublic water, a man-made waterway, private water, or any other water body.
+  Rationale: Low mutual entailment (E_min=0.14), no clear relationship
+
+Rule: wl046
+  E1=0.916 (orig→recon), E2=0.004 (recon→orig)
+  E_min=0.004, C_max=0.463, Score=-0.459
+  Original:      Subsection (a) of this section does not apply to the use of explosives necessary for construction purposes when the use is authorized in writing by the department.
+  Reconstructed: A person who places an explosive substance in a water body for construction purposes and with written authorization may not do so unless it is for construction purposes and with written authorization.
+
+Hmm, let me re-examine the formula more carefully.
+
+The formula says: for all p, s, w, t, if (s is explosive AND person places s in water w AND for_construction AND has_written_authorization), then NOT (s is explosive AND places_in_water AND NOT(for_construction AND has_written_authorization)).
+
+The consequent is actually a tautology given the antecedent — if you have construction purpose and written authorization, then it's trivially true that it's not the case that you lack both. This formula is logically valid (always true), but it's encoding the rule that placing explosives in water without construction purpose and written authorization is prohibited.
+
+The intended rule is:
+
+A person may not place an explosive substance in a water body unless the person is doing so for construction purposes and has written authorization.
+  Rationale: Low mutual entailment (E_min=0.00), no clear relationship; asymmetric: forward stronger (0.92 vs 0.00)
+
+Rule: wl060
+  E1=0.150 (orig→recon), E2=0.045 (recon→orig)
+  E_min=0.045, C_max=0.001, Score=0.044
+  Original:      No person may import, possess, sell, or place into the public water of this state exotic harmful or potentially harmful fish or shellfish except as authorized by rule or permit issued by the department.
+  Reconstructed: No person may import into this state, possess, sell, or place into any public water any exotic harmful fish or shellfish unless that person is authorized by the commission or holds a permit.
+  Rationale: Low mutual entailment (E_min=0.04), no clear relationship
+
+Rule: wl062
+  E1=0.037 (orig→recon), E2=0.015 (recon→orig)
+  E_min=0.015, C_max=0.000, Score=0.015
+  Original:      No person may place any species of fish, shellfish, or aquatic plant into the public water of the state without a permit issued by the department.
+  Reconstructed: No person may place any fish, game fish, nongame fish, finfish, shellfish, or aquatic plant into public water unless that person holds an introduction permit.
+  Rationale: Low mutual entailment (E_min=0.02), no clear relationship
+
+Rule: wl066
+  E1=0.039 (orig→recon), E2=0.420 (recon→orig)
+  E_min=0.039, C_max=0.000, Score=0.039
+  Original:      It is unlawful for a person to sell or offer to sell any imported fish described by Subsection (a) of this section unless it is tagged, packaged, invoiced, and labeled for identification as provided by this section.
+  Reconstructed: A person may not sell or offer to sell any imported fish that is named in the protected fish list unless the fish is tagged, packaged, invoiced, and labeled.
+  Rationale: Low mutual entailment (E_min=0.04), no clear relationship; asymmetric: backward stronger (0.42 vs 0.04)
+
+Rule: wl068
+  E1=0.018 (orig→recon), E2=0.026 (recon→orig)
+  E_min=0.018, C_max=0.331, Score=-0.313
+  Original:      A person commits an offense if the person possesses a fish described by Subsection 66.020(a) of this code under Subsection 66.020(b) of this code and: (1) fails to keep with the fish a document or documents that verify the place of origin of the fish; or (2) fails, on the request of a game warden, to present to the game warden without delay a document or documents that verify the place of origin of the fish.
+  Reconstructed: A person who possesses an imported fish that is named in the protected fish list must keep an origin verification document with the fish and must display an origin verification document on request to any peace officer who is a department employee.
+  Rationale: Low mutual entailment (E_min=0.02), no clear relationship
+
+Rule: wl075
+  E1=0.950 (orig→recon), E2=0.050 (recon→orig)
+  E_min=0.050, C_max=0.433, Score=-0.382
+  Original:      No person may place a crab trap in public water unless a crab trap tag is attached to the trap unless a proclamation under Subchapter B , Chapter 78 , requires a license that does not require the use of crab trap tags.
+  Reconstructed: A person who uses a crab trap on a public water body must ensure that the trap has an attached tag, unless the person has subchapter authorization and the trap does not have an attached tag.
+
+Wait, let me re-analyze the formula more carefully.
+
+The formula states:
+
+If (crab trap) ∧ (uses device) ∧ (on public water) ∧ ¬(has_subchapter_authorization ∧ ¬has_attached_tag) → has_attached_tag
+
+The negated condition `¬(has_subchapter_authorization ∧ ¬has_attached_tag)` is equivalent to `(¬has_subchapter_authorization ∨ has_attached_tag)`.
+
+So the antecedent requires: crab trap ∧ uses ∧ public water ∧ (¬has_subchapter_authorization ∨ has_attached_tag).
+
+Case 1: If has_attached_tag is true, the consequent is trivially satisfied.
+Case 2: If has_attached_tag is false, then the antecedent requires ¬has_subchapter_authorization. In that case, the consequent demands has_attached_tag — contradiction. So has_attached_tag must be true.
+Case 3: If has_subchapter_authorization is true and has_attached_tag is false, the inner negation fails, so the antecedent is false — no constraint.
+
+So effectively: a person using a crab trap on public water must have an attached tag on the trap, unless the person has subchapter authorization.
+
+A person who uses a crab trap on a public water body must ensure that the trap has an attached tag, unless the person has subchapter authorization.
+  Rationale: Low mutual entailment (E_min=0.05), no clear relationship; asymmetric: forward stronger (0.95 vs 0.05)
+
+================================================================================
+WEAKENED (7 rules)
+--------------------------------------------------------------------------------
+
+Rule: wl001
+  E1=0.209 (orig→recon), E2=0.939 (recon→orig)
+  E_min=0.209, C_max=0.017, Score=0.192
+  Original:      Except as provided in Subsection (b), no person may hunt any wild bird or wild animal, other than an alligator, frog, or turtle, from any type of aircraft or airborne device, motor vehicle, powerboat, or sailboat, or from any other floating device.
+  Reconstructed: A person may not hunt any wild bird, wild game bird, wild fowl, wild game animal, game animal, game bird, nongame animal, reptile, amphibian, bat, wolf, armadillo, dangerous wild animal, deer, mule deer, white-tailed deer, desert bighorn sheep, or pronghorn antelope—other than an alligator, frog, or turtle—while using and riding inside an aircraft, airborne device, motor vehicle, powerboat, sailboat, or other floating device, unless that person has authorization under the applicable subchapter.
+  Rationale: Recon→Orig strong (0.94), Orig→Recon weak (0.21): reconstruction drops constraints
+
+Rule: wl005
+  E1=0.021 (orig→recon), E2=0.934 (recon→orig)
+  E_min=0.021, C_max=0.006, Score=0.015
+  Original:      A person may not use an artificial light from a motor vehicle in locating, capturing, or attempting to capture a reptile or amphibian under Subsection (c).
+  Reconstructed: No person may pursue, capture, or attempt to kill any reptile or amphibian using an artificial light that is mounted on a motor vehicle, even if the person has subchapter authorization.
+  Rationale: Recon→Orig strong (0.93), Orig→Recon weak (0.02): reconstruction drops constraints
+
+Rule: wl013
+  E1=0.113 (orig→recon), E2=0.877 (recon→orig)
+  E_min=0.113, C_max=0.011, Score=0.103
+  Original:      Except as provided by Subsection (b), a person may not hunt or take any wild animal or wild bird when the person is on or over privately owned land that is: (1) submerged under: (A) public fresh water due to seasonal or occasional innundation; or (B) public salt water and located above the mean high tide line of the Gulf of Mexico and its bays and estuaries; and (2) conspicuously marked as privately owned by a sign or signs that are substantially similar to the following: POSTED. PRIVATE PROPERTY. NO HUNTING.
+  Reconstructed: No person may hunt or take any wild game animal, wild bird, wild game bird, wild fowl, or nongame animal while on or over private land that is conspicuously marked as private and is submerged under public fresh water or is submerged under public salt water above the mean high tide line, unless that person has authorization under the applicable subchapter.
+  Rationale: Recon→Orig strong (0.88), Orig→Recon weak (0.11): reconstruction drops constraints
+
+Rule: wl019
+  E1=0.344 (orig→recon), E2=0.986 (recon→orig)
+  E_min=0.344, C_max=0.060, Score=0.285
+  Original:      A person commits an offense if: (1) the person, while hunting or engaging in recreational shooting, knowingly discharges a firearm; and (2) the projectile from the firearm travels across a property line.
+  Reconstructed: No person may knowingly discharge a firearm while hunting or engaging in recreational shooting if the projectile crosses a property line.
+  Rationale: Recon→Orig strong (0.99), Orig→Recon weak (0.34): reconstruction drops constraints
+
+Rule: wl031
+  E1=0.101 (orig→recon), E2=0.985 (recon→orig)
+  E_min=0.101, C_max=0.004, Score=0.097
+  Original:      No person may bring into this state any bird or animal protected by this code during the closed season for that bird or animal except as provided by this code.
+  Reconstructed: A person may not import into this state any animal protected by this code during the closed season for that animal's kind, including wild birds, wild game birds, game animals, or game birds, unless the person is authorized to act under the applicable subchapter.
+  Rationale: Recon→Orig strong (0.99), Orig→Recon weak (0.10): reconstruction drops constraints
+
+Rule: wl040
+  E1=0.001 (orig→recon), E2=0.910 (recon→orig)
+  E_min=0.001, C_max=0.036, Score=-0.035
+  Original:      No person may possess, transport, receive, or release a live wolf in this state.
+  Reconstructed: No person may possess, transport, or receive from another state any living wolf, nor may any living wolf be released for killing.
+  Rationale: Recon→Orig strong (0.91), Orig→Recon weak (0.00): reconstruction drops constraints
+
+Rule: wl057
+  E1=0.199 (orig→recon), E2=0.981 (recon→orig)
+  E_min=0.199, C_max=0.001, Score=0.197
+  Original:      No person may set any net in the mouth of a canal or waterway described in this section that interferes with or impedes the free movement of fish into or out of the canal or waterway.
+  Reconstructed: A person may not use a seine, strike net, gill net, or trammel net that is set at the mouth of a canal on a man-made waterway if the device impedes the movement of fish.
+  Rationale: Recon→Orig strong (0.98), Orig→Recon weak (0.20): reconstruction drops constraints
+
+================================================================================
+STRENGTHENED (26 rules)
+--------------------------------------------------------------------------------
+
+Rule: wl004
+  E1=0.924 (orig→recon), E2=0.039 (recon→orig)
+  E_min=0.039, C_max=0.000, Score=0.039
+  Original:      A person must wear reflective clothing when engaging in the capture by nonlethal means of a reptile or amphibian under a stamp issued by the department. The clothing must have at least 144 square inches of reflective material on both the front and back of the clothing.
+  Reconstructed: If a person captures a reptile or amphibian by nonlethal means while holding a reptile and amphibian stamp, that person must wear reflective clothing with at least 144 square inches of reflective material.
+  Rationale: Orig→Recon strong (0.92), Recon→Orig weak (0.04): reconstruction adds constraints
+
+Rule: wl006
+  E1=0.934 (orig→recon), E2=0.004 (recon→orig)
+  E_min=0.004, C_max=0.008, Score=-0.004
+  Original:      No person may hunt any wild bird, wild game bird, wild fowl, or wild game animal protected by this code at any season of the year between one-half hour after sunset and one-half hour before sunrise.
+  Reconstructed: No person may hunt any wild bird, wild game bird, wild fowl, or wild game animal protected by this code during the nighttime, that is, between one-half hour after sunset and one-half hour before sunrise.
+  Rationale: Orig→Recon strong (0.93), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: wl028
+  E1=0.986 (orig→recon), E2=0.002 (recon→orig)
+  E_min=0.002, C_max=0.001, Score=0.001
+  Original:      Except as authorized by the commission under this subchapter, no person may hunt a wild animal, wild bird, or wild fowl in a state park, fort, or historic site under the jurisdiction of the department.
+  Reconstructed: No person may hunt any wild game animal, wild bird, or wild fowl on a state park unless that person is authorized by the commission or has authorization under the applicable subchapter.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: wl030
+  E1=0.664 (orig→recon), E2=0.122 (recon→orig)
+  E_min=0.122, C_max=0.010, Score=0.112
+  Original:      Except as provided by Subsection (c), no person may sell, offer for sale, purchase, offer to purchase, or possess after purchase a wild bird, game bird, or game animal, dead or alive, or part of the bird or animal.
+  Reconstructed: No person may sell, offer to sell, buy, offer to buy, or possess after purchase any wild bird, game bird, or game animal unless that person has authorization under the applicable subchapter.
+  Rationale: Orig→Recon strong (0.66), Recon→Orig weak (0.12): reconstruction adds constraints
+
+Rule: wl032
+  E1=0.813 (orig→recon), E2=0.078 (recon→orig)
+  E_min=0.078, C_max=0.012, Score=0.067
+  Original:      No person may bring into this state a bird or animal protected by this code for sale, barter, exchange, or shipment for sale during the open season for that bird or animal except as provided in Section 62.026 of this code.
+  Reconstructed: No person may import into this state any wild bird, wild game bird, wild fowl, game bird, game animal, or wild game animal protected by this code for the purpose of sale, barter, exchange, or consignment for transport during the open season for that species, unless that person has authorization under the applicable subchapter.
+  Rationale: Orig→Recon strong (0.81), Recon→Orig weak (0.08): reconstruction adds constraints
+
+Rule: wl035
+  E1=0.982 (orig→recon), E2=0.135 (recon→orig)
+  E_min=0.135, C_max=0.001, Score=0.133
+  Original:      No person may: (1) kill or attempt to injure a dangerous wild animal that is: (A) in captivity in this state; or (B) released from captivity in this state for the purpose of being killed; or (2) conduct, promote, assist, or advertise an activity prohibited by Subdivision (1).
+  Reconstructed: A person may not kill, attempt to kill, or attempt to injure a dangerous wild animal while it is in captivity or after it has been released for killing, nor may a person participate in any killing activity involving a dangerous wild animal that is in captivity or has been released for killing.
+  Rationale: Orig→Recon strong (0.98), Recon→Orig weak (0.13): reconstruction adds constraints
+
+Rule: wl042
+  E1=0.998 (orig→recon), E2=0.327 (recon→orig)
+  E_min=0.327, C_max=0.001, Score=0.326
+  Original:      No person may sell or possess for the purpose of sale in this state a living armadillo.
+  Reconstructed: No person may sell a live armadillo or possess a live armadillo for the purpose of sale.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.33): reconstruction adds constraints
+
+Rule: wl047
+  E1=0.927 (orig→recon), E2=0.024 (recon→orig)
+  E_min=0.024, C_max=0.009, Score=0.015
+  Original:      Except as provided by Subsection (d) of this section, no person may catch fish by using an electricity-producing device designed to shock fish.
+  Reconstructed: No person may catch any fish using an electricity device unless that person has authorization under the applicable subchapter.
+  Rationale: Orig→Recon strong (0.93), Recon→Orig weak (0.02): reconstruction adds constraints
+
+Rule: wl048
+  E1=0.993 (orig→recon), E2=0.000 (recon→orig)
+  E_min=0.000, C_max=0.002, Score=-0.002
+  Original:      No person may manufacture or sell an electricity-producing device designed to shock fish.
+  Reconstructed: No person may manufacture or sell an electricity device.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: wl052
+  E1=0.974 (orig→recon), E2=0.265 (recon→orig)
+  E_min=0.265, C_max=0.001, Score=0.264
+  Original:      On leaving any public or private body of water in this state, a person shall immediately remove and lawfully dispose of any exotic aquatic plant on the list of prohibited plants adopted under Section 66.0072 that is clinging or attached to the person's: (1) vessel or watercraft; or (2) trailer, motor vehicle, or other mobile device used to transport or launch a vessel or watercraft.
+  Reconstructed: When a person leaves any water body and has an exotic harmful aquatic plant clinging to them, that person must remove the plant and lawfully dispose of it.
+  Rationale: Orig→Recon strong (0.97), Recon→Orig weak (0.26): reconstruction adds constraints
+
+Rule: wl053
+  E1=0.980 (orig→recon), E2=0.127 (recon→orig)
+  E_min=0.127, C_max=0.005, Score=0.122
+  Original:      No person may fish from the deck or road surface of any bridge or causeway on a road maintained by the Texas Department of Transportation.
+  Reconstructed: No person may fish from a bridge maintained by the Texas Department of Transportation.
+  Rationale: Orig→Recon strong (0.98), Recon→Orig weak (0.13): reconstruction adds constraints
+
+Rule: wl054
+  E1=0.996 (orig→recon), E2=0.000 (recon→orig)
+  E_min=0.000, C_max=0.001, Score=-0.000
+  Original:      No person may deposit or leave any dead fish, crab, or bait on the deck or road surface of any bridge or causeway on a road maintained by the Texas Department of Transportation.
+  Reconstructed: No person may deposit any dead fish or crab on a bridge or causeway.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: wl055
+  E1=0.635 (orig→recon), E2=0.026 (recon→orig)
+  E_min=0.026, C_max=0.014, Score=0.011
+  Original:      No person may use a seine or net of any type, trotline, or other mechanical or physical device, except hook and line, to catch fish in a channel, turning basin, or other water of a navigation district operating under Chapter 63 , Water Code.
+  Reconstructed: A person who catches fish on navigation district water using a device other than hook and line may not use a seine, strike net, gill net, trammel net, trotline, or other fishing device.
+  Rationale: Orig→Recon strong (0.63), Recon→Orig weak (0.03): reconstruction adds constraints
+
+Rule: wl056
+  E1=0.988 (orig→recon), E2=0.015 (recon→orig)
+  E_min=0.015, C_max=0.013, Score=0.002
+  Original:      No person may take or attempt to take fish of any variety by the use of nets, except hand-cast nets or minnow seines, from any canal or other artificial or man-made waterway within any platted subdivision platted under Chapter 231, Acts of the 40th Legislature, Regular Session, 1927 (Article 974a, Vernon's Texas Civil Statutes), if two or more residences abut onto the canal or waterway.
+  Reconstructed: A person who takes or attempts to catch any fish on a canal or artificial waterway that is a man-made waterway using a seine, strike net, gill net, trammel net, or other fishing device may only use hands only or a seine.
+  Rationale: Orig→Recon strong (0.99), Recon→Orig weak (0.01): reconstruction adds constraints
+
+Rule: wl059
+  E1=0.995 (orig→recon), E2=0.117 (recon→orig)
+  E_min=0.117, C_max=0.000, Score=0.116
+  Original:      A person holding the required fishing license and freshwater fishing stamp issued to the person by the department may engage in handfishing in the public fresh water of this state.
+  Reconstructed: If a person holds a fishing license and a freshwater fishing stamp while on a body of public fresh water, that person handfishes.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.12): reconstruction adds constraints
+
+Rule: wl061
+  E1=0.997 (orig→recon), E2=0.056 (recon→orig)
+  E_min=0.056, C_max=0.092, Score=-0.036
+  Original:      No person may transport any aquatic product for commercial purposes unless the person clearly identifies the motor vehicle, trailer, or semitrailer as a vehicle that carries aquatic products. The commission shall prescribe by proclamation the identification requirements for a motor vehicle, trailer, or semitrailer transporting aquatic products, and the commission may prescribe that the identification shall list the state of origin of the aquatic products. In this subsection, "motor vehicle," "trailer," and "semitrailer" have the meanings assigned by Section 541.201 , Transportation Code.
+  Reconstructed: A person who transports an aquatic product for a commercial purpose must have their vehicle marked as an aquatic carrier.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.06): reconstruction adds constraints
+
+Rule: wl064
+  E1=0.723 (orig→recon), E2=0.052 (recon→orig)
+  E_min=0.052, C_max=0.003, Score=0.050
+  Original:      It is unlawful for any person to buy or offer to buy, sell or offer to sell, possess for the purpose of sale, transport or ship for the purpose of sale, barter, or exchange bass of the genus Micropterus, blue marlin, crappie, flathead catfish, jewfish, longbill spearfish, muskellunge, northern pike, red drum, sailfish, sauger, snook, spotted sea trout, striped bass, tarpon, walleye, white bass, white marlin, yellow bass, or hybrids of any of those fish.
+  Reconstructed: No person may buy, offer to buy, sell, offer to sell, possess for sale, transport for sale, ship for sale, barter, or exchange any fish that is named in the protected fish list.
+  Rationale: Orig→Recon strong (0.72), Recon→Orig weak (0.05): reconstruction adds constraints
+
+Rule: wl065
+  E1=0.937 (orig→recon), E2=0.002 (recon→orig)
+  E_min=0.002, C_max=0.001, Score=0.001
+  Original:      It is unlawful for any person to receive directly from another state or foreign country, import, transport, or sell bass of the genus Micropterus, blue marlin, crappie, flathead catfish, jewfish, longbill spearfish, muskellunge, northern pike, red drum, sailfish, sauger, snook, spotted sea trout, striped bass, tarpon, walleye, white bass, white marlin, yellow bass, or a hybrid of any of those fish unless the person holds a Texas finfish import license issued by the department.
+  Reconstructed: No person may receive from another state, import into this state, transport, or sell any fish that is named in the protected fish list unless that person holds a finfish import license.
+  Rationale: Orig→Recon strong (0.94), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: wl067
+  E1=0.980 (orig→recon), E2=0.002 (recon→orig)
+  E_min=0.002, C_max=0.001, Score=0.001
+  Original:      A person possessing more than three times the possession limit, as provided by this code or by a proclamation of the commission under this code, of fish described by Subsection (a) of this section without lawful documentation commits an offense. An offense under this subsection is a Class A Parks and Wildlife Code misdemeanor.
+  Reconstructed: No person may possess fish in a quantity exceeding three times the possession limit for fish unless the person has lawful documentation for the fish.
+  Rationale: Orig→Recon strong (0.98), Recon→Orig weak (0.00): reconstruction adds constraints
+
+Rule: wl069
+  E1=0.996 (orig→recon), E2=0.038 (recon→orig)
+  E_min=0.038, C_max=0.000, Score=0.037
+  Original:      A person may not uproot or dig out any rooted seagrass plant from a bay bottom or other saltwater bottom area in the jurisdiction of this state by means of a propeller, except as that uprooting or digging out may be authorized by a commercial license or permit issued by the department.
+  Reconstructed: No person may uproot or dig seagrass by propeller unless that person holds a commercial seagrass permit.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.04): reconstruction adds constraints
+
+Rule: wl070
+  E1=0.940 (orig→recon), E2=0.201 (recon→orig)
+  E_min=0.201, C_max=0.004, Score=0.197
+  Original:      Except as provided by Subsection (b), no person may buy or offer to buy, sell or offer to sell, possess for the purpose of sale, transport or ship for the purpose of sale, or barter or exchange any fish taken from the public fresh water of this state.
+  Reconstructed: A person on a public freshwater body may not buy, offer to buy, sell, offer to sell, possess for sale, transport for sale, ship for sale, barter, or exchange any fish, unless that person has authorization under the applicable subchapter.
+  Rationale: Orig→Recon strong (0.94), Recon→Orig weak (0.20): reconstruction adds constraints
+
+Rule: wl071
+  E1=0.999 (orig→recon), E2=0.400 (recon→orig)
+  E_min=0.400, C_max=0.000, Score=0.399
+  Original:      No person may possess a finfish of any species taken from coastal water, except broadbill swordfish, shark, or king mackerel, that has the head removed unless the fish has been finally processed and delivered to the final destination or to a certified wholesale or retail dealer.
+  Reconstructed: A person who possesses a finfish other than a shark that has had its head removed while on a coastal water body must have finally processed the fish and either delivered it to its final destination or delivered it to a certified dealer.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.40): reconstruction adds constraints
+
+Rule: wl072
+  E1=0.976 (orig→recon), E2=0.005 (recon→orig)
+  E_min=0.005, C_max=0.009, Score=-0.003
+  Original:      No person may possess a finfish of any species taken from coastal water, except broadbill swordfish or king mackerel, that has the tail removed unless the fish has been finally processed and delivered to the final destination or to a certified wholesale or retail dealer.
+  Reconstructed: No person may possess a finfish that has had its tail removed when coastal water exists, unless the finfish has been finally processed and has been either delivered to its final destination or delivered to a certified dealer.
+
+Wait, let me re-examine the formula more carefully.
+
+Looking at the structure: the implication leads to `false`, meaning the conjunction of all those conditions can never hold. The negation in the last condition means the person does NOT have the final-processing-and-delivery exception satisfied.
+
+Let me re-translate:
+
+No person may possess a finfish that has had its tail removed in the presence of coastal water unless the finfish has been finally processed and either delivered to its final destination or delivered to a certified dealer.
+
+Hmm, the coastal water condition is odd — it's just `(exists ((w WaterBody)) (water_kind w WK_CoastalWater))`, which asserts that some coastal water body exists, not that the person is on it. Let me translate literally:
+
+A person may not possess a finfish whose tail has been removed, where a coastal water body exists, unless the finfish has been finally processed and has either been delivered to its final destination or delivered to a certified dealer.
+  Rationale: Orig→Recon strong (0.98), Recon→Orig weak (0.01): reconstruction adds constraints
+
+Rule: wl073
+  E1=0.999 (orig→recon), E2=0.183 (recon→orig)
+  E_min=0.183, C_max=0.000, Score=0.183
+  Original:      A person may process in a place of business or restaurant a shark carcass into steaks or fillets only if: (1) the steaks and fillets do not contain any portion of a shark fin; and (2) each of the shark's fins is destroyed and discarded in the manner prescribed by the department immediately on detaching the fins from the remainder of the carcass.
+  Reconstructed: If a person processes a shark carcass into steaks or fillets, the resulting steaks or fillets must not have any fins attached, and all fins of the shark must be destroyed at the time of processing.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.18): reconstruction adds constraints
+
+Rule: wl074
+  E1=0.833 (orig→recon), E2=0.246 (recon→orig)
+  E_min=0.246, C_max=0.018, Score=0.228
+  Original:      A person commits an offense if the person: (1) fails to immediately destroy and discard a shark fin as required by Subsection (b) or otherwise violates that subsection; (2) buys or offers to buy, sells or offers to sell, possesses for the purpose of sale, transports or ships for the purpose of sale, or advertises for sale a shark fin regardless of where the shark was taken or caught; or (3) violates a proclamation or rule adopted under this section.
+  Reconstructed: No person may possess a shark fin unless the fin has been destroyed, buy or offer to buy a shark fin, sell or offer to sell a shark fin, possess, transport, or ship a shark fin for the purpose of sale, or advertise a shark fin for sale.
+  Rationale: Orig→Recon strong (0.83), Recon→Orig weak (0.25): reconstruction adds constraints
+
+Rule: wl076
+  E1=0.998 (orig→recon), E2=0.073 (recon→orig)
+  E_min=0.073, C_max=0.000, Score=0.073
+  Original:      No person may use a trotline in public salt water unless the trotline has attached to it the proper number of trotline tags.
+  Reconstructed: A person who uses a trotline on public salt water must ensure that the trotline has an attached tag.
+  Rationale: Orig→Recon strong (1.00), Recon→Orig weak (0.07): reconstruction adds constraints
+
+================================================================================
+RELATED (7 rules)
+--------------------------------------------------------------------------------
+
+Rule: wl002
+  E1=0.753 (orig→recon), E2=0.635 (recon→orig)
+  E_min=0.635, C_max=0.037, Score=0.598
+  Original:      Except as provided by Subsections (b) and (c), a person may not hunt a wild animal or bird when the person is on a public road or right-of-way.
+  Reconstructed: No person may hunt any wild game animal, wild bird, wild game bird, wild fowl, nongame animal, or game animal from a public road or right-of-way unless that person has authorization under the applicable subchapter.
+  Rationale: Some mutual entailment (E_min=0.64), low contradiction
+
+Rule: wl012
+  E1=0.990 (orig→recon), E2=0.620 (recon→orig)
+  E_min=0.620, C_max=0.004, Score=0.617
+  Original:      No person may employ another person or be employed by another person for compensation or promise of compensation to hunt any bird, wild fowl, or game animal protected by this code.
+  Reconstructed: No person may employ another person to hunt, nor may any person be employed by another person to hunt, any wild bird, wild fowl, or game animal protected by this code for compensation.
+  Rationale: Some mutual entailment (E_min=0.62), low contradiction; asymmetric: forward stronger (0.99 vs 0.62)
+
+Rule: wl021
+  E1=0.699 (orig→recon), E2=0.843 (recon→orig)
+  E_min=0.699, C_max=0.050, Score=0.648
+  Original:      To be valid, the written consent required by Subsection (b) of this section must: (1) contain the name of the person permitted to hunt or engage in target shooting on the land; (2) identify the land on which hunting or target shooting is permitted; (3) be signed by the owner of the land or by an agent, lessee, or legal representative of the owner; and (4) show the address and phone number of the person signing the consent.
+  Reconstructed: A written consent document is valid only if it names the grantee, identifies the land to which it applies, is signed by the grantor, shows the address and phone number of the grantor, and the grantor is either the landowner of the identified land or is an agent or employee of the landowner of that land.
+  Rationale: Some mutual entailment (E_min=0.70), low contradiction
+
+Rule: wl050
+  E1=0.539 (orig→recon), E2=0.689 (recon→orig)
+  E_min=0.539, C_max=0.021, Score=0.519
+  Original:      No person may possess a device designed to catch fish or other aquatic wildlife in or on the public water of this state where the use of the device is not permitted by this code or by a proclamation of the commission under this code unless the device is on board a vessel that is in public coastal water and is: (1) in port; or (2) in a marked channel and the vessel is going directly to or from public water in this state where the use of the device is permitted.
+  Reconstructed: A person who possesses a seine, strike net, gill net, trammel net, trotline, hook and line, crab trap, or other fishing device on public water, where such device is not otherwise permitted by code, must have that device on board a powerboat, sailboat, or other vessel while on coastal water, and either an animal must be inside or on a building or the person must be on a canal or artificial waterway with the device permitted by code.
+  Rationale: Some mutual entailment (E_min=0.54), low contradiction
+
+Rule: wl058
+  E1=0.992 (orig→recon), E2=0.583 (recon→orig)
+  E_min=0.583, C_max=0.003, Score=0.580
+  Original:      A person commits an offense if the person leaves edible fish or bait fish taken from the public waters of this state to die without the intent to retain the fish for consumption or bait.
+  Reconstructed: No person may take a fish from public water and leave it to die while the fish is in edible condition, unless the person has the intent to retain the fish.
+  Rationale: Some mutual entailment (E_min=0.58), low contradiction; asymmetric: forward stronger (0.99 vs 0.58)
+
+Rule: wl063
+  E1=0.620 (orig→recon), E2=0.895 (recon→orig)
+  E_min=0.620, C_max=0.008, Score=0.612
+  Original:      A person violates this section if fish, shellfish, or aquatic plants the person possesses or has placed in nonpublic water escape into the public water of the state and the person does not hold a permit issued under this section.
+  Reconstructed: A person who possesses any fish, shellfish, or aquatic plant, or whose fish, shellfish, or aquatic plant originally was in nonpublic water, must not allow such fish, shellfish, or aquatic plant to escape into public water unless that person holds an introduction permit.
+  Rationale: Some mutual entailment (E_min=0.62), low contradiction
+
+Rule: wl077
+  E1=0.949 (orig→recon), E2=0.698 (recon→orig)
+  E_min=0.698, C_max=0.010, Score=0.689
+  Original:      Except as provided in Subsection (b) of this section, no person may place or use in the coastal water of this state a net or seine unless there is attached to the net or seine a tag that discloses the name and address of the owner of the net or seine.
+  Reconstructed: If a person uses or possesses a seine, gill net, trammel net, or strike net while on a coastal water body and does not have authorization under the applicable subchapter, the device must have an attached tag that discloses the owner of the device.
+  Rationale: Some mutual entailment (E_min=0.70), low contradiction
+
+================================================================================
+EQUIVALENT (17 rules)
+--------------------------------------------------------------------------------
+
+Rule: wl008
+  E1=0.987 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.987, C_max=0.001, Score=0.986
+  Original:      A legally blind hunter may use a laser sighting device during regular hunting hours when assisted by a person who: (1) is not legally blind; (2) has a hunting license; and (3) is at least 13 years of age.
+  Reconstructed: A legally blind person who uses a laser sighting device while hunting must do so only during regular hunting hours and must be assisted by another person who is not legally blind, who holds a hunting license, and who is at least thirteen years of age.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: wl009
+  E1=0.997 (orig→recon), E2=0.994 (recon→orig)
+  E_min=0.994, C_max=0.001, Score=0.993
+  Original:      The legally blind hunter must carry proof of being legally blind.
+  Reconstructed: A person who is legally blind must carry proof of blindness while hunting.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: wl010
+  E1=0.998 (orig→recon), E2=0.996 (recon→orig)
+  E_min=0.996, C_max=0.000, Score=0.996
+  Original:      A hunter who is a person with a physical disability may use a laser sighting device during lawful hunting hours in open seasons when assisted by a person who: (1) is not a person with a physical disability; (2) has a hunting license; and (3) is at least 13 years of age.
+  Reconstructed: A person with a physical disability may use a laser sighting device while hunting an animal during the open season for that animal and during lawful hunting hours, provided that the person is assisted by another person who does not have a physical disability, who holds a hunting license, and who is at least thirteen years of age.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: wl011
+  E1=0.887 (orig→recon), E2=0.997 (recon→orig)
+  E_min=0.887, C_max=0.001, Score=0.887
+  Original:      The hunter who is a person with a physical disability must carry proof of the disability.
+  Reconstructed: A person who is engaged in hunting and has a physical disability must carry proof of disability at all times while hunting.
+  Rationale: Strong mutual entailment (E_min=0.89), low contradiction (C_max=0.00)
+
+Rule: wl015
+  E1=0.989 (orig→recon), E2=0.746 (recon→orig)
+  E_min=0.746, C_max=0.003, Score=0.743
+  Original:      Except as provided by Subsection (d), a person may not recklessly use a dog to hunt or pursue a deer in this state.
+  Reconstructed: No person may recklessly use a dog to hunt or pursue deer unless that person has subchapter authorization.
+  Rationale: Strong mutual entailment (E_min=0.75), low contradiction (C_max=0.00)
+
+Rule: wl020
+  E1=0.993 (orig→recon), E2=0.785 (recon→orig)
+  E_min=0.785, C_max=0.019, Score=0.766
+  Original:      Except as provided by Subsection (d) of this section, no person possessing a firearm may hunt a wild animal or wild bird, or engage in target shooting on land owned by another unless the person has in his immediate possession the written consent of the owner of the land to hunt or engage in target shooting on the land.
+  Reconstructed: A person who possesses a firearm on land owned by another person and is engaged in hunting a wild game animal, wild bird, wild game bird, or wild fowl, or is engaged in target shooting, must have the written consent of the landowner.
+  Rationale: Strong mutual entailment (E_min=0.79), low contradiction (C_max=0.02)
+
+Rule: wl022
+  E1=0.997 (orig→recon), E2=0.989 (recon→orig)
+  E_min=0.989, C_max=0.001, Score=0.988
+  Original:      No person may intentionally interfere with another person lawfully engaged in the process of hunting or catching wildlife.
+  Reconstructed: No person may intentionally interfere with another person who is lawfully hunting or catching wildlife.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: wl023
+  E1=0.995 (orig→recon), E2=0.974 (recon→orig)
+  E_min=0.974, C_max=0.001, Score=0.974
+  Original:      No person may intentionally harass, drive, or disturb any wildlife for the purpose of disrupting a person lawfully engaged in the process of hunting or catching wildlife.
+  Reconstructed: No person may intentionally harass or pursue any animal with the intent to disrupt another person who is lawfully engaged in hunting or catching wildlife.
+  Rationale: Strong mutual entailment (E_min=0.97), low contradiction (C_max=0.00)
+
+Rule: wl024
+  E1=0.998 (orig→recon), E2=0.994 (recon→orig)
+  E_min=0.994, C_max=0.000, Score=0.994
+  Original:      No person may enter or remain on public land or enter or remain on private land without the landowner's or his agent's consent if the person intends to disrupt another person lawfully engaged in the process of hunting or catching wildlife.
+  Reconstructed: A person who is present on land with the intent to disrupt another person who is lawfully hunting or catching wildlife may not remain present on that land if the land is public land, and may not be present on that land if the land is private land unless the person has the consent of the landowner or the landowner's agent.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: wl025
+  E1=0.999 (orig→recon), E2=0.997 (recon→orig)
+  E_min=0.997, C_max=0.000, Score=0.997
+  Original:      No person on a public road or on the right-of-way of a public road may hunt an exotic animal.
+  Reconstructed: A person may not hunt an exotic animal while on a road or right-of-way.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: wl026
+  E1=0.998 (orig→recon), E2=0.994 (recon→orig)
+  E_min=0.994, C_max=0.000, Score=0.994
+  Original:      No person may hunt on the land of another for an exotic animal without the express consent of the owner of the land to hunt for exotic animals.
+  Reconstructed: A person who hunts an exotic animal on land owned by another person must have the consent of the landowner.
+  Rationale: Strong mutual entailment (E_min=0.99), low contradiction (C_max=0.00)
+
+Rule: wl029
+  E1=0.977 (orig→recon), E2=0.773 (recon→orig)
+  E_min=0.773, C_max=0.023, Score=0.749
+  Original:      Except as provided in Section 62.082 of this code, no person may hunt with, possess, or shoot a firearm, bow, crossbow, slingshot, or any other weapon on or across the land of the Lower Colorado River Authority.
+  Reconstructed: A person on LCRA land who does not have subchapter authorization may not hunt using, possess, or shoot a firearm, bow, crossbow, slingshot, or other device.
+  Rationale: Strong mutual entailment (E_min=0.77), low contradiction (C_max=0.02)
+
+Rule: wl033
+  E1=0.993 (orig→recon), E2=0.913 (recon→orig)
+  E_min=0.913, C_max=0.001, Score=0.913
+  Original:      A person may transport or ship to and from a taxidermist or tannery for mounting or preserving purposes or to his home, a specimen or part of a specimen of a wild bird or wild animal of this state, if the bird or animal was lawfully taken by the person, and if the specimen is not for sale.
+  Reconstructed: A person who transports or ships any wild bird, wild game animal, wild game bird, or wild fowl for taxidermy or for home destination must ensure that the animal was lawfully taken and may not transport or ship it for the purpose of sale.
+  Rationale: Strong mutual entailment (E_min=0.91), low contradiction (C_max=0.00)
+
+Rule: wl039
+  E1=0.999 (orig→recon), E2=0.998 (recon→orig)
+  E_min=0.998, C_max=0.000, Score=0.998
+  Original:      A bat may be removed or hunted if the bat is inside or on a building occupied by people.
+  Reconstructed: If a bat is inside or on a building that is occupied by people, then some person may remove the bat or some person may hunt the bat.
+  Rationale: Strong mutual entailment (E_min=1.00), low contradiction (C_max=0.00)
+
+Rule: wl041
+  E1=0.966 (orig→recon), E2=0.957 (recon→orig)
+  E_min=0.957, C_max=0.017, Score=0.940
+  Original:      Subsection (a) does not apply to the transportation of a wolf by a state or county official while performing an official duty or to the possession or transportation of a wolf by the owner or agent of a licensed circus, zoo, or menagerie for exhibition or scientific purposes.
+  Reconstructed: A person may possess or transport a wolf if the person is a licensed circus or zoo owner, or an agent of a licensed circus or zoo owner, and does so for exhibition or scientific purposes; or a state or county official acting on official duty may transport a wolf, and in either case the general prohibition under subsection (a) shall not apply.
+  Rationale: Strong mutual entailment (E_min=0.96), low contradiction (C_max=0.02)
+
+Rule: wl044
+  E1=0.992 (orig→recon), E2=0.715 (recon→orig)
+  E_min=0.715, C_max=0.002, Score=0.713
+  Original:      No person may catch, take, or attempt to catch or take any aquatic animal life by any means or method from any privately owned waters without the consent of the landowner or the landowner's agent.
+  Reconstructed: A person may not catch, take, or attempt to catch any aquatic animal life from privately owned waters unless that person has the consent of the owner of the water or the consent of the owner's agent.
+  Rationale: Strong mutual entailment (E_min=0.71), low contradiction (C_max=0.00)
+
+Rule: wl049
+  E1=0.951 (orig→recon), E2=0.725 (recon→orig)
+  E_min=0.725, C_max=0.026, Score=0.700
+  Original:      Except as provided by Subsection (d) of this section, no person may possess an electricity-producing device commonly used to shock fish. The possession of an electricity-producing device commonly used to shock fish, in a boat or within one-half mile of any water of this state, is a violation of this section by the person in possession of the device.
+  Reconstructed: A person may not possess an electricity device unless that person has subchapter authorization, and in particular, a person without subchapter authorization may not possess an electricity device on board a powerboat, other vessel, or floating device, or within one-half mile of water.
+  Rationale: Strong mutual entailment (E_min=0.73), low contradiction (C_max=0.03)
+
+================================================================================
+SUMMARY:
+  CONTRADICTION: 6 (C_max ≥ 0.6 - semantic conflict)
+  UNRELATED:     14 (no mutual entailment)
+  WEAKENED:      7 (recon drops constraints)
+  STRENGTHENED:  26 (recon adds constraints)
+  RELATED:       7 (some mutual entailment)
+  EQUIVALENT:    17 (strong mutual entailment)
+  ERROR:         0
+  Total:         77
+
+  Score (E_min - C_max) statistics:
+    Min:    -0.999
+    Max:    0.998
+    Median: 0.112
+    Mean:   0.207
+================================================================================

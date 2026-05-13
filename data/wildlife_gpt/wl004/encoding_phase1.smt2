@@ -1,0 +1,6 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (captures_by_nonlethal_means p a t)
+           (or (is_kind a AK_Reptile) (is_kind a AK_Amphibian))
+           (has_document_kind p DOK_ReptileAmphibianStamp t))
+      (and (wears_reflective_clothing p t)
+           (>= (reflective_material_area p t) 144.0))))

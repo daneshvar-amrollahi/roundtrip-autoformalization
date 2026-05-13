@@ -1,0 +1,8 @@
+(forall ((hunter Person) (owner Person) (l Land) (a Animal) (t Int))
+  (=> (and (hunts hunter a t)
+           (present_on hunter l t)
+           (is_landowner_of owner l)
+           (not (= hunter owner))
+           (is_kind a AK_ExoticAnimal)
+           (not (has_consent_of hunter owner t)))
+      (not (hunts hunter a t))))

@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (or (= (stop_action v t) SA_Stand) (= (stop_action v t) SA_Park))
+           (<= (dist_to_feature v PF_FireHydrant t) ft_15))
+      (or (not (or (= (stop_action v t) SA_Stand) (= (stop_action v t) SA_Park)))
+          (> (dist_to_feature v PF_FireHydrant t) ft_15))))))

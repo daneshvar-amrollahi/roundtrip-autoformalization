@@ -1,0 +1,1 @@
+A vehicle must not position itself on the streetcar track when it is in front of a streetcar that is crossing an intersection, provided both the vehicle and the streetcar are within the same intersection on the same roadway.

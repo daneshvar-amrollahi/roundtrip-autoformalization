@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (bus Vehicle) (t Int))
+  (=> (and (approaching_bus v bus t)
+           (bus_stopped_for_students bus t)
+           (bus_visual_signal_on bus t))
+      (stopped_before_reaching v bus t)))

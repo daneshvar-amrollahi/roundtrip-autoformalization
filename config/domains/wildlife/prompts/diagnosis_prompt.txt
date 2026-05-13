@@ -1,0 +1,65 @@
+You are analyzing a 3-arrow translation pipeline for converting natural language Texas Parks and Wildlife Code rules into SMT-LIB formal specifications:
+
+ARROW 1: Original NL → Phase 1 SMT encoding
+ARROW 2: Phase 1 SMT → Reconstructed NL (reconstruction from formal spec back to natural language)
+ARROW 3: Reconstructed NL → Phase 3 SMT encoding
+
+EQUIVALENCE CHECK:
+We use Z3 theorem prover to check if Phase 1 and Phase 3 encodings are equivalent by asserting:
+  (assert (not (= phase1_encoding phase3_encoding)))
+
+If Z3 returns SAT, it means the encodings are NOT equivalent - they produce different truth values for some inputs. This indicates that at least one arrow in the pipeline introduced an error.
+
+CURRENT SITUATION:
+Z3 returned SAT for this rule, meaning Phase 1 and Phase 3 encodings differ.
+
+YOUR TASK:
+Check the arrows ONE BY ONE in sequential order (Arrow 1, then Arrow 2, then Arrow 3) and identify the FIRST arrow where an error occurred.
+
+STEP-BY-STEP ANALYSIS PROCEDURE:
+1. FIRST, check Arrow 1: Does Phase 1 SMT correctly encode the Original NL?
+   - Compare Original NL semantics with what Phase 1 SMT actually encodes
+   - If they differ → Arrow 1 is the FIRST failure. STOP HERE and report Arrow 1.
+   - If they match correctly → Arrow 1 is correct. Continue to step 2.
+
+2. NEXT, check Arrow 2: Does Reconstructed NL accurately describe what Phase 1 SMT encodes?
+   - Compare what Phase 1 SMT encodes with what Reconstructed NL states
+   - If they differ → Arrow 2 is the FIRST failure. STOP HERE and report Arrow 2.
+   - If they match correctly → Arrow 2 is correct. Continue to step 3.
+
+3. FINALLY, check Arrow 3: Does Phase 3 SMT correctly encode the Reconstructed NL?
+   - Compare Reconstructed NL semantics with what Phase 3 SMT actually encodes
+   - If they differ → Arrow 3 is the FIRST failure. Report Arrow 3.
+
+CRITICAL: The FIRST arrow that fails is the ROOT CAUSE of the equivalence failure. Do not skip arrows! You MUST check in sequential order: 1 → 2 → 3. Even if you see obvious differences in later arrows, you must start from Arrow 1 and proceed in order.
+
+ARTIFACTS:
+-----------
+
+Original NL:
+{original_nl}
+
+Phase 1 SMT Encoding:
+{phase1_smt}
+
+Reconstructed NL:
+{reconstructed_nl}
+
+Phase 3 SMT Encoding:
+{phase3_smt}
+
+
+
+IMPORTANT INSTRUCTIONS FOR YOUR RESPONSE:
+
+You must provide your answer in EXACTLY this format:
+
+FIRST_FAILED_ARROW: [1, 2, or 3]
+REASONING:
+[Write a single paragraph explaining why this arrow failed. CRITICAL: Only use information that is appropriate for repairing this specific arrow:
+- If Arrow 1 failed: Only reference Original NL and Phase 1 SMT (do NOT mention Reconstructed NL or Phase 3 SMT)
+- If Arrow 2 failed: Only reference Phase 1 SMT and Reconstructed NL (do NOT mention Original NL or Phase 3 SMT)
+- If Arrow 3 failed: Only reference Reconstructed NL and Phase 3 SMT (do NOT mention Original NL or Phase 1 SMT)
+This reasoning will be used as feedback for the repair prompt, so only include information that arrow's repair should see.]
+
+Begin your analysis:

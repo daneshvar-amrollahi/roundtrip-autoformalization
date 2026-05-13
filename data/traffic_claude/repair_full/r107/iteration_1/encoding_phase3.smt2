@@ -1,0 +1,8 @@
+(forall ((v_ego Vehicle) (v_other Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v_ego r t)
+           (= (roadway_kind r) RK_Highway)
+           (not (= v_ego v_other))
+           (or (on_roadway v_other r t)
+               (entering_main_lane v_other t))
+           (assured_clear_distance v_ego v_other t))
+      (speed_reasonable_and_prudent v_ego r t)))

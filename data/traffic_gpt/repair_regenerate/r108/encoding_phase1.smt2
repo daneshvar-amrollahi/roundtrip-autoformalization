@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (i Intersection) (c Crossing) (t Int))
+  (=> (or (approaching_intersection v i t)
+          (in_intersection v i t)
+          (approaching_crossing v c t))
+      (reduced_speed_appropriate v t)))

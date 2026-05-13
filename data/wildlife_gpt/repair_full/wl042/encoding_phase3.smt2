@@ -1,0 +1,12 @@
+(and
+  (forall ((seller Person) (a Animal) (t Int))
+    (=> (and (sells seller a t)
+             (is_kind a AK_Armadillo)
+             (is_alive a t))
+        (not true)))
+  (forall ((p Person) (a Animal) (t Int))
+    (=> (and (possesses p a t)
+             (for_sale p a t)
+             (is_kind a AK_Armadillo)
+             (is_alive a t))
+        (not true))))

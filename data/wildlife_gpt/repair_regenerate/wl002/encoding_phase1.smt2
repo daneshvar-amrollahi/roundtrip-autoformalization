@@ -1,0 +1,6 @@
+(forall ((hunter Person) (a Animal) (t Int))
+  (=> (and (hunts hunter a t)
+           (or (is_kind a AK_WildGameAnimal)
+               (is_kind a AK_WildBird))
+           (on_road_or_right_of_way hunter t))
+      false))

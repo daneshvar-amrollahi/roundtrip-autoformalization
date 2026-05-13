@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (or (not (= (no_passing_kind r t) NPK_None))
+               (no_passing_marking_visible v r t))
+           (not (no_passing_obeyed v r t)))
+      (and (not (= (roadway_pos v r t) RP_LeftHalf))
+           (not (= (roadway_pos v r t) RP_LeftLane)))))

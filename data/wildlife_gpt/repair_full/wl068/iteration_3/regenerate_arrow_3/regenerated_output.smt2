@@ -1,0 +1,12 @@
+(forall ((p Person) (fish Animal) (t_pos Int))
+  (=> (and (possesses p fish t_pos)
+           (is_kind fish AK_Fish)
+           (is_named_in_protected_fish_list fish)
+           (protected_by_code fish))
+      (not
+        (exists ((doc Document) (officer Person) (t_req Int))
+          (and (document_kind doc DOK_OriginVerification)
+               (is_law_enforcement officer t_req)
+               (<= t_req t_pos)
+               (keeps_with p doc fish t_req)
+               (not (displays_on_request p doc t_req)))))))

@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (parked_on_roadway v r t)
+           (or (= (stop_action v t) SA_Stand)
+               (= (stop_action v t) SA_Park))
+           (<= (dist_to_feature v PF_FlashingSignal t) ft_30)
+           (not (directed_by_police v t))
+           (not (directed_by_traffic_control_device v t)))
+      false))

@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (in_front_of_driveway v t)
+           (or (= (stop_action v t) SA_Stand)
+               (= (stop_action v t) SA_Park)))
+      (exists ((t2 Int))
+        (and (= t2 t)
+             (= (stop_action v t2) SA_Stop)))))

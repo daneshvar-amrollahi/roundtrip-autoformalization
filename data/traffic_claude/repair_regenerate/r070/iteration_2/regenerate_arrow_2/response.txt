@@ -1,0 +1,9 @@
+An operator executing a left turn at an intersection, or executing a left turn into an alley, private road, or driveway, must yield the right-of-way to a pedestrian when another vehicle approaching from the opposite direction is within the intersection or constitutes an immediate hazard.
+
+Wait, let me re-read the formula more carefully. The conclusion is `yield_right_of_way_to_pedestrian`, but the conditions involve an oncoming vehicle. Let me re-examine.
+
+Looking again at the formula: the conclusion is `(yield_right_of_way_to_pedestrian v_turner t)` — yielding to a pedestrian. But the antecedent conditions involve an oncoming vehicle being in the intersection or being an immediate hazard. This seems like the formula is encoding that when turning left with an oncoming vehicle present, the operator must yield right-of-way (to pedestrians). But actually, this likely represents a general "yield right of way" concept that was mapped to the pedestrian predicate, or the formula may be encoding the rule about yielding to oncoming vehicles using the available predicate.
+
+Given the instruction to translate literally:
+
+An operator executing a left turn at an intersection, or executing a left turn into an alley, private road, or driveway, must yield the right-of-way to pedestrians when a distinct oncoming vehicle approaching from the opposite direction is either within the intersection or constitutes an immediate hazard to the operator.

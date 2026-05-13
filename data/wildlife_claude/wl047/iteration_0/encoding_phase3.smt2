@@ -1,0 +1,7 @@
+(forall ((p Person) (a Animal) (d Device) (t Int))
+  (=> (and (catches p a t)
+           (is_kind a AK_Fish)
+           (uses_device p d t)
+           (device_kind d DK_ElectricityDevice)
+           (not (has_subchapter_authorization p t)))
+      false))

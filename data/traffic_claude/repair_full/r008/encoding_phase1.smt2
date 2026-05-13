@@ -1,0 +1,11 @@
+(forall ((v1 Vehicle) (v2 Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v1 r t)
+           (on_roadway v2 r t)
+           (not (= v1 v2))
+           (approaching_opposite v1 v2 t)
+           (= (roadway_lane_count r) 2))
+      (and
+        (or (= (roadway_pos v1 r t) RP_RightHalf)
+            (close_to_right_edge_practicable v1 r t))
+        (or (= (roadway_pos v2 r t) RP_RightHalf)
+            (close_to_right_edge_practicable v2 r t)))))

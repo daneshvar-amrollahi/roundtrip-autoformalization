@@ -1,0 +1,6 @@
+(forall ((angler Person) (a Animal) (w WaterBody) (t Int))
+  (=> (and (handfishes angler a t)
+           (on_water_body angler w t)
+           (water_kind w WK_PublicFreshWater))
+      (and (has_document_kind angler DOK_FishingLicense t)
+           (has_document_kind angler DOK_FreshwaterFishingStamp t))))

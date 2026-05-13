@@ -1,0 +1,2 @@
+Result: SAT
+Counterexample: SAT (counterexample exists)

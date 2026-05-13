@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (or (is_kind a AK_WildBird)
+               (is_kind a AK_WildGameBird)
+               (is_kind a AK_WildFowl)
+               (is_kind a AK_WildGameAnimal))
+           (protected_by_code a)
+           (during_night t))
+      (not (hunts p a t))))

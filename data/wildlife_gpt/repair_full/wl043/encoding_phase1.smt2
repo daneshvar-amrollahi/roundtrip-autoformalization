@@ -1,0 +1,21 @@
+(forall ((seller Person) (buyer Person) (a Animal) (t Int))
+  (=
+    (and (sells seller a t) (buys buyer a t))
+    (and (sells seller a t)
+         (buys buyer a t)
+         (not
+           (or
+             (or (is_zoo_entity seller) (is_zoo_entity buyer))
+             (and (or (is_educational_institution buyer) (is_research_institution buyer))
+                  (for_scientific_purpose buyer t)
+                  (has_subchapter_authorization buyer t))
+             (exists ((t2 Int))
+               (and (> t2 t)
+                    (sells buyer a t2)
+                    (or (is_zoo_entity buyer)
+                        (exists ((endBuyer Person))
+                          (and (buys endBuyer a t2)
+                               (or (is_zoo_entity endBuyer)
+                                   (and (or (is_educational_institution endBuyer) (is_research_institution endBuyer))
+                                        (for_scientific_purpose endBuyer t2)
+                                        (has_subchapter_authorization endBuyer t2)))))))))))))

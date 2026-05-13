@@ -1,0 +1,1 @@
+A vehicle that is stopped, standing, or parked must not accelerate unless the movement can be made safely.

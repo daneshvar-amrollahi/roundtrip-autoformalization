@@ -1,0 +1,8 @@
+(forall ((v_op Vehicle) (v_bus Vehicle) (r_op Roadway) (r_bus Roadway) (t Int))
+  (=> (and (on_roadway v_op r_op t)
+           (= (roadway_kind r_op) RK_Highway)
+           (= (roadway_divided r_op) DK_Divided)
+           (on_roadway v_bus r_bus t)
+           (= (kind v_bus) VK_SchoolBus)
+           (not (= r_op r_bus)))
+      (not (stopped_before_reaching v_op v_bus t))))

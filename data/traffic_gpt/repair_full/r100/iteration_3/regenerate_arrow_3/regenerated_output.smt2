@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (or (standing_vehicle v t) (parked v t))
+           (< (dist_to_feature v PF_FireHydrant t) ft_15))
+      (exists ((t2 Int))
+        (and (> t2 t)
+             (not (standing_vehicle v t2))))))

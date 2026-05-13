@@ -1,0 +1,1 @@
+If a vehicle is following another vehicle that is an ambulance with emergency signals active, then the operator must not follow closer than 500 feet unless the operator is on official business.

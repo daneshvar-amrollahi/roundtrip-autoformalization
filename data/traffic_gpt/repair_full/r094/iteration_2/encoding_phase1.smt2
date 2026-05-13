@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (or (stopped v t) (standing_vehicle v t) (parked v t))
+           (= (stop_action v t) SA_Stop)
+           (on_sidewalk_or_trail v t))
+      false))

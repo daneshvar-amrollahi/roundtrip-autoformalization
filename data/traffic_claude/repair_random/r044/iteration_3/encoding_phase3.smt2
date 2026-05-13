@@ -1,0 +1,12 @@
+(forall ((v Vehicle) (sc Vehicle) (z Zone) (t Int))
+  (=> (and (is_ego v)
+           (= (kind sc) VK_Streetcar)
+           (safety_zone_established_for_streetcar_stop sc z t))
+      (and
+        (= (passing_side v sc t) PS_Right)
+        (not (stopped v t))
+        (forall ((t2 Int))
+          (=> (and (<= t t2)
+                   (passing v sc t2)
+                   (= (passing_side v sc t2) PS_Right))
+              (proceeded_with_due_caution v t2))))))

@@ -1,0 +1,656 @@
+You are an expert in formalizing Texas Parks and Wildlife Code rules (hunting, fishing, and protected-species regulations) into SMT-LIB format.
+
+I will give you a schema in SMT-LIB, consisting of some sorts and functions over them. The context is wildlife law: people who hunt, fish, take, or trade animals; the animals themselves; the bodies of water and land they inhabit; and the devices used by hunters and anglers.
+I have a rule written in natural language, and would like to encode it as an SMT-LIB formula using the exact schema I have given you.
+
+THE SCHEMA IS COMPREHENSIVE:
+The schema includes helper predicates and functions for actions (hunts, fishes, takes, sells, transports, possesses), animal classification (is_kind, protected_by_code), location (on_water_body, on_land, on_state_park), devices (uses_device, device_kind), seasons (during_open_season, during_night), consent (has_consent_of), and more. Review the schema carefully and use these predicates creatively.
+
+SCHEMA INSUFFICIENCY - LAST RESORT ONLY:
+Only flag schema insufficiency if it is ABSOLUTELY IMPOSSIBLE to encode the rule. If you can encode even an approximate version using the schema, DO IT.
+
+To flag insufficiency (USE SPARINGLY):
+SCHEMA_INSUFFICIENT: <brief explanation of what's fundamentally missing>
+
+CRITICAL REQUIREMENTS (when encoding):
+1. ONLY use functions and predicates explicitly defined in the schema
+2. Use them with the CORRECT number and types of parameters
+3. Ensure all expressions are well-typed
+4. Do NOT use 'select' or 'lambda'
+5. Do NOT invent functions that don't exist in the schema
+
+CRITICAL OUTPUT FORMAT (when encoding):
+- Provide ONLY the raw SMT-LIB formula
+- NO markdown code blocks (no ```, no ```smt)
+- NO comments (no ; lines)
+- NO explanations or text before/after
+- Do NOT wrap in (assert ...)
+- Just the pure formula
+
+ENCODING STYLE GUIDELINES (MANDATORY - apply to ALL encodings, both initial and reconstruction):
+
+CHECKLIST: Before submitting your encoding, verify ALL of these:
+
+1. TEMPORAL PROPERTIES - Use nested quantifiers when tracking from event start:
+
+   Canonical template for "until" / "while ongoing" constraints:
+   (forall ((entity1 Type1) (entity2 Type2) (t Int))
+     (=> (event_starts entity1 entity2 t)
+         (forall ((t2 Int))
+           (=> (and (<= t t2)
+                    (not (event_ends entity1 entity2 t2)))
+               (constraint entity1 entity2 t2)))))
+
+   Example: "a hunter must keep retrieving until the animal is recovered"
+   ✓ CORRECT:
+   (forall ((p Person) (a Animal) (t Int))
+     (=> (and (kills p a t) (is_kind a AK_GameAnimal))
+         (forall ((t2 Int))
+           (=> (and (<= t t2) (not (retrieves p a t2)))
+               (makes_reasonable_effort_to_retrieve p a t2)))))
+
+2. MODAL VERBS - Map to correct quantifiers:
+   - "may" / "is allowed" → Existential: (exists ((p Person) ...) ...)
+   - "must not" / "may not" / "shall not" / "no person may" → Universal negation: (forall ((p Person) ...) (=> ... (not ...)))
+   - "must" / "shall" / "is required" → Universal affirmative: (forall ((p Person) ...) (=> ... ...))
+
+3. SEMANTIC COMPLETENESS - Ensure logical constraints are complete:
+
+   □ ENTITY RELATIONSHIPS (when quantifying over multiple entities of same type):
+      If rule refers to "another person" / "the landowner" / "a different hunter":
+      → MUST ensure the entities are distinct using appropriate constraints
+      → Example: "a person may not employ another person to hunt" requires ensuring they are different entities
+
+   □ PREDICATE DEPENDENCIES (check schema for predicate preconditions):
+      Some predicates have logical dependencies on other predicates:
+      → Review schema for predicate preconditions
+      → If predicate P requires context predicate Q, include Q when using P
+      → Example pattern: action predicates may require location predicates
+
+   □ TYPE CONSTRAINTS (when rule specifies a species or device kind):
+      If natural language specifies a kind ("game bird", "exotic animal", "firearm"):
+      → Use (is_kind a AK_GameBird), (device_kind d DK_Firearm), etc.
+      → For multiple possible kinds, enumerate explicitly with disjunction
+      → Don't assume a single kind when rule allows multiple
+
+   □ PROPERTY EXISTENCE (when using value-returning functions):
+      If using a function that returns a value (not just Bool):
+      → Verify the property exists before querying its value
+      → Example pattern: check existence predicate before value function
+
+   PRINCIPLE: Semantic gaps lead to over-general formulas. Include all constraints
+   that make the formula match the natural language meaning precisely.
+
+4. QUANTIFICATION DISCIPLINE - Match quantifiers to natural language scope:
+
+   RULE: Natural language determines quantifier type:
+   - "All animals" / "Every species" / "Any wild bird" (universal) → (forall ((a Animal)) ...)
+   - "Some" / "Another" / "A different" → (exists ((a Animal)) ...)
+   - "None" / "No person" → (forall ((p Person)) (=> ... (not ...)))
+
+   MULTIPLE ENTITIES of same type:
+   - If rule refers to multiple distinct entities, use multiple quantified variables
+   - Example: "a person hunting on the land of another person" → two Person variables, distinct
+
+   SAFETY RULES - when rule protects "any" or "all":
+   - "may not hunt any wild bird" → universal over animals, restricted by kind
+   - Don't use existential when rule applies to all instances
+
+5. EXCEPTION HANDLING - Encode "except when" / "unless" correctly:
+
+   PATTERN: "Prohibited EXCEPT when X"
+   ✓ CORRECT: (=> (and ... (not X)) (not action))
+   ✓ ALTERNATIVE: (=> ... (or X (not action)))
+   ✗ WRONG: (=> ... (not action)) ← exception lost!
+
+   EXAMPLE: "may not hunt at night except during regular hunting hours"
+   (forall ((p Person) (a Animal) (t Int))
+     (=> (and (during_night t)
+              (not (during_regular_hunting_hours t)))
+         (not (hunts p a t))))
+
+6. DISJUNCTION PATTERNS - Use appropriate logical structure:
+
+   □ "not A until B" → (or (not A) B) or equivalently (=> A B)
+   □ "not A unless B" → (or (not A) B) or equivalently (=> A B)
+   □ "either...or" → (or ...) with flat structure
+   □ NEVER use nested implications for simple alternatives
+
+   EXAMPLE: "a person may not catch fish from private water without consent of the landowner"
+   (forall ((p Person) (a Animal) (w WaterBody) (owner Person) (t Int))
+     (=> (and (catches p a t)
+              (on_water_body p w t)
+              (water_kind w WK_PrivateWater)
+              (is_owner_of_water owner w))
+         (has_consent_of p owner t)))
+
+7. VARIABLE NAMING - Use descriptive names for clarity:
+
+   GUIDELINE: Choose variable names that clarify roles:
+   - For person-person interactions, use names indicating roles (hunter/landowner, grantor/grantee)
+   - For spatial entities, use single letters (l for Land, w for WaterBody, b for Building)
+   - For time, use t for current, t2/t3 for future time points
+   - Avoid ambiguous generic names (p1/p2) when roles are clear from context
+
+   EXAMPLE: "a hunter must have written consent from the landowner"
+   ✓ CLEAR: (has_written_consent hunter landowner t)
+   ✓ ACCEPTABLE: (has_written_consent p owner t) [if roles obvious from context]
+   ✗ UNCLEAR: (has_written_consent p1 p2 t) [requires reader to infer which is which]
+
+FINAL VERIFICATION: Before submitting, review sections 1-7 for completeness.
+
+
+SCHEMA:
+; ============================================================
+; COMPREHENSIVE SMT-LIB SCHEMA FOR PARKS AND WILDLIFE RULES ENCODING
+; Texas Parks and Wildlife Code Chapters 62, 63, 66 — 77 Rules
+; ============================================================
+
+; ============================================================
+; SECTION 1: CORE SORTS
+; ============================================================
+(declare-sort Person 0)
+(declare-sort Animal 0)
+(declare-sort WaterBody 0)
+(declare-sort Land 0)
+(declare-sort Device 0)
+(declare-sort Substance 0)
+(declare-sort Document 0)
+(declare-sort Building 0)
+
+; ============================================================
+; SECTION 2: TEMPORAL SEMANTICS NOTES
+; ============================================================
+; Predicates in this schema have different temporal persistence:
+;
+; INSTANT predicates (true at specific time t only):
+;   - kills, wounds, discharges_firearm, places_in_water, etc.
+;
+; DURATIVE predicates (true during time interval):
+;   - hunts, fishes, possesses, on_water_body, in_captivity, etc.
+;
+; PERSISTENT predicates (remain true after established):
+;   - lawfully_taken, has_been_finally_processed, fin_destroyed, etc.
+;
+; STATIC properties (time-independent):
+;   - is_kind(Animal), device_kind(Device), protected_by_code(Animal), etc.
+;
+; When encoding rules:
+; - INSTANT: check at specific time point
+; - DURATIVE: may need (forall t2 ...) for "while" / "during"
+; - PERSISTENT: once established, assume holds at future times
+; - STATIC: evaluate once, no time parameter needed
+
+; ============================================================
+; SECTION 3: FINITE ENUMERATIONS (DATATYPES)
+; ============================================================
+
+; --- Animal taxonomy (includes processed parts and products) ---
+(declare-datatypes ()
+  ((AnimalKind
+     AK_WildBird
+     AK_WildGameBird
+     AK_WildFowl
+     AK_WildGameAnimal
+     AK_GameAnimal
+     AK_GameBird
+     AK_NongameAnimal
+     AK_Reptile
+     AK_Amphibian
+     AK_Fish
+     AK_GameFish
+     AK_NongameFish
+     AK_Finfish
+     AK_Shark
+     AK_Crab
+     AK_Shellfish
+     AK_AquaticAnimalLife
+     AK_AquaticPlant
+     AK_Seagrass
+     AK_Bat
+     AK_Wolf
+     AK_Armadillo
+     AK_DangerousWildAnimal
+     AK_Deer
+     AK_MuleDeer
+     AK_WhiteTailedDeer
+     AK_DesertBighornSheep
+     AK_PronghornAntelope
+     AK_Alligator
+     AK_Frog
+     AK_Turtle
+     AK_ExoticAnimal
+     AK_ExoticLivestock
+     AK_ExoticFowl
+     AK_Carcass
+     AK_Fillet
+     AK_Steak
+     AK_Fin
+     AK_Other)))
+
+; --- Device / weapon taxonomy ---
+(declare-datatypes ()
+  ((DeviceKind
+     DK_Firearm
+     DK_Bow
+     DK_Crossbow
+     DK_Slingshot
+     DK_LaserSightingDevice
+     DK_ArtificialLight
+     DK_MotorVehicle
+     DK_Aircraft
+     DK_AirborneDevice
+     DK_Powerboat
+     DK_Sailboat
+     DK_FloatingDevice
+     DK_VesselOther
+     DK_Trailer
+     DK_Dog
+     DK_ElectricityDevice
+     DK_Seine
+     DK_StrikeNet
+     DK_GillNet
+     DK_TrammelNet
+     DK_Trotline
+     DK_HookAndLine
+     DK_HandsOnly
+     DK_CrabTrap
+     DK_OtherFishingDevice
+     DK_Other)))
+
+; --- Water taxonomy ---
+(declare-datatypes ()
+  ((WaterKind
+     WK_PublicFreshWater
+     WK_PublicSaltWater
+     WK_PrivateWater
+     WK_CoastalWater
+     WK_PublicWater
+     WK_GulfOfMexico
+     WK_NavigationDistrictWater
+     WK_BayOrEstuary
+     WK_NonpublicWater
+     WK_ManMadeWaterway
+     WK_Other)))
+
+; --- Land taxonomy ---
+(declare-datatypes ()
+  ((LandKind
+     LK_PublicRoad
+     LK_RightOfWay
+     LK_RoadShoulder
+     LK_StatePark
+     LK_FortOrHistoricSite
+     LK_LCRALand
+     LK_BridgeOrCauseway
+     LK_PrivateProperty
+     LK_SchoolOrStateDedicated
+     LK_Other)))
+
+; --- Document taxonomy ---
+(declare-datatypes ()
+  ((DocumentKind
+     DOK_HuntingLicense
+     DOK_FishingLicense
+     DOK_FreshwaterFishingStamp
+     DOK_ReptileAmphibianStamp
+     DOK_FinfishImportLicense
+     DOK_CommercialFishingLicense
+     DOK_WrittenConsent
+     DOK_Permit
+     DOK_Tag
+     DOK_Invoice
+     DOK_OriginVerification
+     DOK_ProofOfDisability
+     DOK_ProofOfBlindness
+     DOK_Other)))
+
+; --- Substance taxonomy ---
+(declare-datatypes ()
+  ((SubstanceKind
+     SK_Explosive
+     SK_Poison
+     SK_DeleteriousToFish
+     SK_Other)))
+
+; ============================================================
+; SECTION 4: STATIC CLASSIFICATION
+; ============================================================
+(declare-fun is_kind (Animal AnimalKind) Bool)
+(declare-fun device_kind (Device DeviceKind) Bool)
+(declare-fun water_kind (WaterBody WaterKind) Bool)
+(declare-fun land_kind (Land LandKind) Bool)
+(declare-fun document_kind (Document DocumentKind) Bool)
+(declare-fun substance_kind (Substance SubstanceKind) Bool)
+(declare-fun protected_by_code (Animal) Bool)
+(declare-fun is_indigenous (Animal) Bool)
+
+; Whether the species is named in a specific protected list referenced by the code
+(declare-fun is_named_in_protected_fish_list (Animal) Bool)
+(declare-fun is_exotic_harmful (Animal) Bool)
+
+; Whether one animal-entity is a part of another (e.g., a fin is part of a shark)
+(declare-fun is_part_of (Animal Animal) Bool)
+
+; ============================================================
+; SECTION 5: ANIMAL LIFECYCLE STATE
+; ============================================================
+(declare-fun is_alive (Animal Int) Bool)
+(declare-fun in_captivity (Animal Int) Bool)
+(declare-fun released_for_killing (Animal Int) Bool)
+(declare-fun lawfully_taken (Animal) Bool)
+(declare-fun lawfully_killed (Animal) Bool)
+(declare-fun has_been_finally_processed (Animal Int) Bool)
+(declare-fun delivered_to_final_destination (Animal Int) Bool)
+(declare-fun delivered_to_certified_dealer (Animal Int) Bool)
+(declare-fun has_head_removed (Animal) Bool)
+(declare-fun has_tail_removed (Animal) Bool)
+(declare-fun is_in_edible_condition (Animal Int) Bool)
+(declare-fun fin_destroyed (Animal Int) Bool)
+(declare-fun is_aquatic_product (Animal) Bool)
+
+; ============================================================
+; SECTION 6: PERSON STATE / ROLE
+; ============================================================
+(declare-fun has_document (Person Document Int) Bool)
+(declare-fun has_document_kind (Person DocumentKind Int) Bool)
+(declare-fun carries_proof_of (Person DocumentKind Int) Bool)
+(declare-fun is_legally_blind (Person Int) Bool)
+(declare-fun has_physical_disability (Person Int) Bool)
+(declare-fun age_of (Person) Int)
+(declare-fun is_landowner_of (Person Land) Bool)
+(declare-fun is_owner_of_water (Person WaterBody) Bool)
+(declare-fun is_agent_of (Person Person) Bool)
+(declare-fun is_peace_officer (Person Int) Bool)
+(declare-fun is_department_employee (Person Int) Bool)
+(declare-fun is_state_or_county_official (Person) Bool)
+(declare-fun is_animal_control_officer (Person) Bool)
+(declare-fun is_health_official (Person) Bool)
+(declare-fun is_law_enforcement (Person Int) Bool)
+(declare-fun is_armed_forces_member (Person Int) Bool)
+(declare-fun is_licensed_circus_zoo_owner (Person) Bool)
+(declare-fun is_employee_of (Person Person) Bool)
+(declare-fun is_zoo_entity (Person) Bool)
+(declare-fun is_educational_institution (Person) Bool)
+(declare-fun is_research_institution (Person) Bool)
+(declare-fun on_official_duty (Person Int) Bool)
+(declare-fun assisted_by (Person Person Int) Bool)
+
+; ============================================================
+; SECTION 7: HUNTING / TAKING ACTIONS
+; ============================================================
+(declare-fun hunts (Person Animal Int) Bool)
+
+; True if person is engaged in hunting at time t (some animal)
+(declare-fun is_hunting (Person Int) Bool)
+
+(declare-fun pursues (Person Animal Int) Bool)
+(declare-fun takes (Person Animal Int) Bool)
+(declare-fun captures (Person Animal Int) Bool)
+(declare-fun captures_by_nonlethal_means (Person Animal Int) Bool)
+(declare-fun kills (Person Animal Int) Bool)
+(declare-fun wounds (Person Animal Int) Bool)
+(declare-fun attempts_to_injure (Person Animal Int) Bool)
+(declare-fun attempts_to_kill (Person Animal Int) Bool)
+(declare-fun retrieves (Person Animal Int) Bool)
+(declare-fun makes_reasonable_effort_to_retrieve (Person Animal Int) Bool)
+(declare-fun keeps_in_edible_condition (Person Animal Int) Bool)
+(declare-fun engages_in_target_shooting (Person Int) Bool)
+(declare-fun engages_in_recreational_shooting (Person Int) Bool)
+(declare-fun discharges_firearm (Person Int) Bool)
+
+; True if a projectile resulting from the person's discharge crosses a property line
+(declare-fun projectile_crosses_property_line (Person Int) Bool)
+
+; True if the person is processing source animal A1 into product animal A2
+(declare-fun processes_into (Person Animal Animal Int) Bool)
+
+; ============================================================
+; SECTION 8: MENTAL-STATE QUALIFIERS
+; ============================================================
+(declare-fun acts_recklessly (Person Int) Bool)
+(declare-fun acts_intentionally (Person Int) Bool)
+(declare-fun acts_knowingly (Person Int) Bool)
+(declare-fun acts_with_criminal_negligence (Person Int) Bool)
+
+; ============================================================
+; SECTION 9: FISHING ACTIONS
+; ============================================================
+(declare-fun fishes (Person Animal Int) Bool)
+(declare-fun catches (Person Animal Int) Bool)
+(declare-fun attempts_to_catch (Person Animal Int) Bool)
+(declare-fun handfishes (Person Animal Int) Bool)
+(declare-fun leaves_to_die (Person Animal Int) Bool)
+(declare-fun has_intent_to_retain (Person Animal Int) Bool)
+(declare-fun deposits_on_bridge (Person Animal Int) Bool)
+
+; ============================================================
+; SECTION 10: COMMERCE ACTIONS
+; ============================================================
+(declare-fun sells (Person Animal Int) Bool)
+(declare-fun offers_to_sell (Person Animal Int) Bool)
+(declare-fun buys (Person Animal Int) Bool)
+(declare-fun offers_to_buy (Person Animal Int) Bool)
+(declare-fun barters (Person Animal Int) Bool)
+(declare-fun exchanges (Person Animal Int) Bool)
+(declare-fun transports (Person Animal Int) Bool)
+(declare-fun ships (Person Animal Int) Bool)
+(declare-fun consigns_for_transport (Person Animal Int) Bool)
+(declare-fun imports_to_state (Person Animal Int) Bool)
+(declare-fun receives_from_other_state (Person Animal Int) Bool)
+(declare-fun possesses (Person Animal Int) Bool)
+(declare-fun possesses_after_purchase (Person Animal Int) Bool)
+(declare-fun possesses_carcass (Person Animal Int) Bool)
+(declare-fun advertises_for_sale (Person Animal Int) Bool)
+(declare-fun participates_in_killing_activity (Person Int) Bool)
+(declare-fun was_imported (Animal Int) Bool)
+
+; ============================================================
+; SECTION 11: PURPOSE / INTENT QUALIFIERS
+; ============================================================
+
+; Each is true if the person's action involving the animal is for the named purpose
+(declare-fun for_sale (Person Animal Int) Bool)
+(declare-fun for_compensation (Person Person Int) Bool)
+(declare-fun for_commercial_purpose (Person Animal Int) Bool)
+(declare-fun for_construction (Person Int) Bool)
+(declare-fun for_taxidermy (Person Animal Int) Bool)
+(declare-fun for_home_destination (Person Animal Int) Bool)
+(declare-fun for_exhibition (Person Int) Bool)
+(declare-fun for_scientific_purpose (Person Int) Bool)
+(declare-fun for_laboratory_testing (Person Animal Int) Bool)
+
+; ============================================================
+; SECTION 12: BAG / POSSESSION LIMITS
+; ============================================================
+(declare-fun count_in_possession (Person AnimalKind Int) Int)
+(declare-fun possession_limit (AnimalKind) Int)
+(declare-fun in_cold_storage (Animal Int) Bool)
+(declare-fun places_in_cold_storage (Person Animal Int) Bool)
+
+; ============================================================
+; SECTION 13: DEVICE / WEAPON USAGE
+; ============================================================
+(declare-fun uses_device (Person Device Int) Bool)
+(declare-fun possesses_device (Person Device Int) Bool)
+(declare-fun manufactures_device (Person Device Int) Bool)
+(declare-fun sells_device (Person Device Int) Bool)
+(declare-fun shoots_device (Person Device Int) Bool)
+
+; True if the person is inside a device (e.g., motor vehicle, boat) at time t
+(declare-fun inside_device (Person Device Int) Bool)
+
+; True if device d1 is on board / mounted on device d2 (e.g., shock device on a boat)
+(declare-fun on_device (Device Device Int) Bool)
+
+; True if the person uses device d to perform an action targeting an animal
+(declare-fun illuminates (Device Animal Int) Bool)
+
+; True if the device is licensed at time t (e.g., licensed commercial fishing vessel)
+(declare-fun is_licensed (Device Int) Bool)
+
+(declare-fun is_permitted_by_code (Device Int) Bool)
+(declare-fun within_half_mile_of_water (Device Int) Bool)
+(declare-fun has_attached_tag (Device Int) Bool)
+(declare-fun tag_discloses_owner (Device) Bool)
+
+; True if the device's float spacing (in feet) is at most the given threshold
+(declare-fun float_spacing_feet (Device) Real)
+
+(declare-fun has_required_buoyancy (Device) Bool)
+(declare-fun set_at_canal_mouth (Device WaterBody Int) Bool)
+(declare-fun impedes_fish_movement (Device WaterBody Int) Bool)
+
+; ============================================================
+; SECTION 14: SUBSTANCES IN WATER
+; ============================================================
+(declare-fun places_in_water (Person Substance WaterBody Int) Bool)
+(declare-fun has_written_authorization (Person Int) Bool)
+
+; ============================================================
+; SECTION 15: LOCATION / ENVIRONMENT
+; ============================================================
+(declare-fun on_land (Person Land Int) Bool)
+(declare-fun on_water_body (Person WaterBody Int) Bool)
+(declare-fun on_road_or_right_of_way (Person Int) Bool)
+(declare-fun on_road_shoulder (Person Int) Bool)
+(declare-fun on_state_park (Person Int) Bool)
+(declare-fun on_lcra_land (Person Int) Bool)
+(declare-fun on_bridge_maintained_by_txdot (Person Int) Bool)
+(declare-fun on_navigation_district_water (Person Int) Bool)
+
+; True if person is positioned over (above) the land at time t (e.g., flying / on stilts)
+(declare-fun over_land (Person Land Int) Bool)
+
+(declare-fun submerged_under (Land WaterKind Int) Bool)
+(declare-fun above_mean_high_tide (Land) Bool)
+(declare-fun conspicuously_marked_as_private (Land) Bool)
+(declare-fun owned_by_school_fund_or_state (Land) Bool)
+
+; True at time t if the surrounding county's population is at least the given Int
+(declare-fun population_at_least (Int Int) Bool)
+
+(declare-fun in_designated_waterway_county (Int) Bool)
+(declare-fun on_canal_or_artificial_waterway (Person WaterBody Int) Bool)
+(declare-fun inside_or_on_building (Animal Building Int) Bool)
+(declare-fun occupied_by_people (Building Int) Bool)
+
+; True if the person is present (entered or remains) on land at time t
+(declare-fun present_on (Person Land Int) Bool)
+
+(declare-fun leaves_water_body (Person WaterBody Int) Bool)
+(declare-fun has_aquatic_plant_clinging_to (Person Animal Int) Bool)
+
+; ============================================================
+; SECTION 16: TIME / SEASONAL PREDICATES
+; ============================================================
+
+; True between one-half hour after sunset and one-half hour before sunrise
+(declare-fun during_night (Int) Bool)
+
+(declare-fun during_open_season (AnimalKind Int) Bool)
+(declare-fun during_closed_season (AnimalKind Int) Bool)
+(declare-fun during_regular_hunting_hours (Int) Bool)
+(declare-fun during_lawful_hunting_hours (Int) Bool)
+
+; ============================================================
+; SECTION 17: HARASSMENT-OF-HUNTERS
+; ============================================================
+
+; True if person is lawfully engaged in the process of hunting or catching wildlife
+(declare-fun lawfully_hunting_or_catching (Person Int) Bool)
+
+(declare-fun interferes_with (Person Person Int) Bool)
+(declare-fun harasses (Person Animal Int) Bool)
+(declare-fun intends_to_disrupt (Person Person Int) Bool)
+(declare-fun is_public_land (Land) Bool)
+(declare-fun is_private_land (Land) Bool)
+
+; ============================================================
+; SECTION 18: GENERAL CONSENT / AUTHORIZATION
+; ============================================================
+
+; True if grantee has the consent of grantor at time t (any consent kind)
+(declare-fun has_consent_of (Person Person Int) Bool)
+
+; True if grantee holds in immediate possession a written consent from grantor
+(declare-fun has_written_consent (Person Person Int) Bool)
+
+; Properties of a consent document
+(declare-fun signed_by (Document Person) Bool)
+(declare-fun identifies_land (Document Land) Bool)
+(declare-fun names_grantee (Document Person) Bool)
+(declare-fun shows_address_and_phone_of (Document Person) Bool)
+
+; True if document is a valid consent from grantor to grantee at time t
+(declare-fun is_valid_consent (Document Person Person Int) Bool)
+
+(declare-fun authorized_by_commission (Person Int) Bool)
+
+; True if the person is authorized to act under a relevant subchapter at time t
+(declare-fun has_subchapter_authorization (Person Int) Bool)
+
+; ============================================================
+; SECTION 19: REMOVAL / DISPOSAL
+; ============================================================
+(declare-fun removes (Person Animal Int) Bool)
+(declare-fun lawfully_disposes_of (Person Animal Int) Bool)
+
+; ============================================================
+; SECTION 20: SEAGRASS UPROOTING
+; ============================================================
+(declare-fun uproots_or_digs_by_propeller (Person Animal Int) Bool)
+(declare-fun has_commercial_seagrass_permit (Person Int) Bool)
+
+; ============================================================
+; SECTION 21: FISH / SHELLFISH / PLANT INTRODUCTION
+; ============================================================
+(declare-fun places_in_public_water (Person Animal Int) Bool)
+(declare-fun has_introduction_permit (Person Int) Bool)
+(declare-fun escaped_into_public_water (Animal Int) Bool)
+(declare-fun originally_in_nonpublic_water (Animal Int) Bool)
+
+; ============================================================
+; SECTION 22: REFLECTIVE-CLOTHING REQUIREMENT
+; ============================================================
+(declare-fun wears_reflective_clothing (Person Int) Bool)
+
+; Square inches of reflective material on the person's clothing at time t
+(declare-fun reflective_material_area (Person Int) Real)
+
+; ============================================================
+; SECTION 23: VEHICLE IDENTIFICATION (FOR AQUATIC TRANSPORT)
+; ============================================================
+(declare-fun vehicle_marked_as_aquatic_carrier (Person Int) Bool)
+
+; ============================================================
+; SECTION 24: ANIMAL DISEASE / EXPOSURE
+; ============================================================
+(declare-fun is_injured_or_diseased (Animal Int) Bool)
+(declare-fun exposed_to_rabies (Animal Int) Bool)
+
+; ============================================================
+; SECTION 25: HIRE FOR HUNTING
+; ============================================================
+(declare-fun employs_to_hunt (Person Person Int) Bool)
+(declare-fun is_employed_to_hunt (Person Person Int) Bool)
+
+; ============================================================
+; SECTION 26: ITEM-PACKAGING / TAGGING / LABELING
+; ============================================================
+(declare-fun is_tagged (Animal Int) Bool)
+(declare-fun is_packaged (Animal Int) Bool)
+(declare-fun is_invoiced (Animal Int) Bool)
+(declare-fun is_labeled (Animal Int) Bool)
+
+; True if person keeps the document with the animal at time t
+(declare-fun keeps_with (Person Document Animal Int) Bool)
+
+(declare-fun displays_on_request (Person Document Int) Bool)
+(declare-fun has_lawful_documentation (Person Animal Int) Bool)
+
+
+NATURAL LANGUAGE RULE:
+If a person is present on land and intends to disrupt another person who is lawfully hunting or catching wildlife, that person may not do so when the land is public land, and the person also may not do so on private land unless the person has the consent of the landowner or the landowner’s agent.
+
+Provide the SMT-LIB encoding:

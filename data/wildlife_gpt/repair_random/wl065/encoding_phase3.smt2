@@ -1,0 +1,7 @@
+(forall ((p Person) (f Animal) (t Int))
+  (=> (and (is_kind f AK_Finfish)
+           (or (receives_from_other_state p f t)
+               (imports_to_state p f t)
+               (transports p f t)
+               (sells p f t)))
+      (has_document_kind p DOK_FinfishImportLicense t)))

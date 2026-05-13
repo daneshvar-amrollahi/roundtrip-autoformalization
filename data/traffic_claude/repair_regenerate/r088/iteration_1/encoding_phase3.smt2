@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (c Crossing) (r Roadway) (t Int))
+  (=> (and (cargo_is_explosive_or_flammable v)
+           (approaching_crossing v c t)
+           (on_roadway v r t)
+           (= (district_of_roadway r) DK_Urban))
+      (and (stopped v t)
+           (>= (dist_to_nearest_rail_sq v c t) (* ft_15 ft_15))
+           (<= (dist_to_nearest_rail_sq v c t) (* ft_50 ft_50)))))

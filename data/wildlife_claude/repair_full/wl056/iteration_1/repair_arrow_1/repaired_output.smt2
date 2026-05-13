@@ -1,0 +1,15 @@
+(forall ((p Person) (a Animal) (d Device) (w WaterBody) (t Int))
+  (=> (and (is_kind a AK_Fish)
+           (or (takes p a t) (attempts_to_catch p a t))
+           (uses_device p d t)
+           (or (device_kind d DK_Seine)
+               (device_kind d DK_StrikeNet)
+               (device_kind d DK_GillNet)
+               (device_kind d DK_TrammelNet)
+               (device_kind d DK_OtherFishingDevice))
+           (on_canal_or_artificial_waterway p w t)
+           (water_kind w WK_ManMadeWaterway)
+           (population_at_least 2 t))
+      false))
+
+SCHEMA_INSUFFICIENT: The schema lacks predicates to express: (1) that a waterway is within a platted subdivision platted under Chapter 231, Acts of the 40th Legislature (no predicate like `in_platted_subdivision`); (2) that two or more residences abut onto a canal or waterway (no predicate like `residences_abutting_count` or `two_or_more_residences_abut`); (3) distinguishing hand-cast nets from general seines/nets (no `DK_HandCastNet` or `DK_MinnowSeine` device kinds to properly encode the exceptions). The encoding above is an approximation but cannot faithfully represent the platted subdivision condition, the two-or-more-residences condition, or the hand-cast net and minnow seine exceptions using only the available schema.

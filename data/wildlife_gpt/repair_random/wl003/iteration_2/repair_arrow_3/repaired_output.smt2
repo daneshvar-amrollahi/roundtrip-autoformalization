@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (captures_by_nonlethal_means p a t)
+           (or (is_kind a AK_Reptile) (is_kind a AK_Amphibian))
+           (or (on_road_shoulder p t) (on_road_or_right_of_way p t))
+           (not (or (is_legally_blind p t) (has_physical_disability p t))))
+      (and (has_document_kind p DOK_ReptileAmphibianStamp t)
+           (forall ((d Device))
+             (not (uses_device p d t))))))

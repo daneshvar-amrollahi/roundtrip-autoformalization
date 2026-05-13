@@ -1,0 +1,6 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (is_kind a AK_Armadillo)
+           (is_alive a t))
+      (and (not (sells p a t))
+           (not (and (possesses p a t)
+                     (for_sale p a t))))))

@@ -1,0 +1,12 @@
+(and
+  (forall ((v Vehicle) (d TurnDir) (t Int))
+    (=> (intends_turn v d t)
+        (turn_signal_on v d t)))
+  (forall ((v Vehicle) (d TurnDir) (t Int))
+    (=> (intends_lane_change v d t)
+        (turn_signal_on v d t)))
+  (forall ((v Vehicle) (t Int))
+    (=> (and (parked v t)
+             (is-moving v (+ t 1)))
+        (or (turn_signal_on v TD_Left t)
+            (turn_signal_on v TD_Right t)))))

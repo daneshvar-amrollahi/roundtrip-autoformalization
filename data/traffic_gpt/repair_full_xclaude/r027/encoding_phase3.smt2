@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (roadway_has_marked_lanes r)
+           (>= (roadway_lane_count r) 2))
+      (practicable_within_single_lane v r t)))

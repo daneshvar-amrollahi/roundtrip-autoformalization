@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (t Int))
+  (=> (<= (dist_to_feature v PF_Crosswalk t) 0.0)
+      (and (not (stopped v t))
+           (not (standing_vehicle v t))
+           (not (parked v t)))))

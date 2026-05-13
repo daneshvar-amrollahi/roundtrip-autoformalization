@@ -1,0 +1,13 @@
+(forall ((sc Vehicle) (ev Vehicle) (t Int))
+  (=> (and (= (kind sc) VK_Streetcar)
+           (is_authorized_emergency_vehicle ev)
+           (emergency_signals_active ev t)
+           (emergency_vehicle_approaching ev sc t))
+      (and
+        (stopped sc t)
+        (forall ((i Intersection)) (not (in_intersection sc i t)))
+        (forall ((t2 Int))
+          (=> (and (<= t t2)
+                   (not (completely_passed ev sc t2)))
+              (and (stopped sc t2)
+                   (forall ((i Intersection)) (not (in_intersection sc i t2)))))))))

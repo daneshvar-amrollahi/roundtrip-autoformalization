@@ -1,0 +1,6 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (or (transports p a t) (ships p a t))
+           (or (is_kind a AK_WildBird) (is_kind a AK_WildGameAnimal) (is_kind a AK_WildGameBird) (is_kind a AK_WildFowl))
+           (or (for_taxidermy p a t) (for_home_destination p a t)))
+       (and (lawfully_taken a)
+            (not (for_sale p a t)))))

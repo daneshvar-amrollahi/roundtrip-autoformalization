@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (cargo_is_explosive_or_flammable v)
+           (approaching_crossing v c t)
+           (not (safe_to_proceed v c t)))
+      (not (permitted_to_proceed v c t))))

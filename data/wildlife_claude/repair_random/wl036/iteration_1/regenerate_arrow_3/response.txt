@@ -1,0 +1,7 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (is_kind a AK_DangerousWildAnimal)
+           (released_for_killing a t))
+      (and (not (sells p a t))
+           (not (offers_to_sell p a t))
+           (not (transports p a t))
+           (not (consigns_for_transport p a t)))))

@@ -1,0 +1,8 @@
+(forall ((v_passer Vehicle) (v_passed Vehicle) (t Int))
+  (=> (and (audible_signal v_passer v_passed t)
+           (passing v_passer v_passed t))
+      (forall ((r Roadway))
+        (=> (and (on_roadway v_passer r t)
+                 (on_roadway v_passed r t))
+            (or (= (roadway_pos v_passed r t) RP_RightHalf)
+                (= (roadway_pos v_passed r t) RP_RightLane))))))

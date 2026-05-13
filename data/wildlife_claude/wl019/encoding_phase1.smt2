@@ -1,0 +1,8 @@
+(forall ((p Person) (d Device) (t Int))
+  (=> (and (or (is_hunting p t) (engages_in_recreational_shooting p t))
+           (acts_knowingly p t)
+           (discharges_firearm p t)
+           (uses_device p d t)
+           (device_kind d DK_Firearm)
+           (projectile_crosses_property_line p t))
+      false))

@@ -1,0 +1,6 @@
+(forall ((v_police Vehicle) (v_target Vehicle) (t Int))
+  (=> (and (= (kind v_police) VK_PoliceVehicle)
+           (police_signal_given v_police v_target t)
+           (or (audible_signal v_police v_target t)
+               (emergency_signals_active v_police t)))
+      (not (stopped v_target t))))

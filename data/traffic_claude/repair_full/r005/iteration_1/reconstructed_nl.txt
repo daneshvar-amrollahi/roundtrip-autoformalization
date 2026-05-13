@@ -1,0 +1,1 @@
+If the ego vehicle is on a roadway and is moving slower than the normal speed of traffic, and is not currently passing another vehicle, and does not intend to turn left, then the ego vehicle must drive as close to the right edge of the roadway as practicable.

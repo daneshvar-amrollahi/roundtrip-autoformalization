@@ -1,0 +1,1 @@
+A bat may be removed or hunted if the bat is inside or on a building occupied by people.

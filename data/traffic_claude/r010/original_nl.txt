@@ -1,0 +1,1 @@
+An operator passing another vehicle may not move back to the right side until safely clear of the passed vehicle.

@@ -1,0 +1,1 @@
+A vehicle being passed by another vehicle must not accelerate until the passing vehicle has completely passed.

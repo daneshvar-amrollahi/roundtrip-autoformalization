@@ -1,0 +1,12 @@
+(forall ((p Person) (k AnimalKind) (t Int))
+  (=> (and (or (= k AK_Fish) (= k AK_GameFish) (= k AK_NongameFish) (= k AK_Finfish))
+           (> (count_in_possession p k t) (* 3 (possession_limit k))))
+      (or
+        (forall ((a Animal))
+          (=> (and (possesses p a t)
+                   (is_kind a k))
+              (has_lawful_documentation p a t)))
+        (exists ((a Animal))
+          (and (possesses p a t)
+               (is_kind a k)
+               (not (has_lawful_documentation p a t)))))))

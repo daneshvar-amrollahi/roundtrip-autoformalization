@@ -1,0 +1,8 @@
+(forall ((v_op Vehicle) (v_hazard Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v_op r t)
+           (obstruction_present v_op r t)
+           (crossing_center_line v_op r t)
+           (on_roadway v_hazard r t)
+           (not (crossing_center_line v_hazard r t))
+           (is_immediate_hazard v_hazard v_op (Intersection) t))
+      (yield_right_of_way_to_pedestrian v_op t)))

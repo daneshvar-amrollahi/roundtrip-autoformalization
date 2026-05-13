@@ -1,0 +1,7 @@
+(forall ((actor Person) (target Person) (a Animal) (t Int))
+  (=> (and (acts_intentionally actor t)
+           (lawfully_hunting_or_catching target t)
+           (intends_to_disrupt actor target t)
+           (or (harasses actor a t)
+               (pursues actor a t)))
+      false))

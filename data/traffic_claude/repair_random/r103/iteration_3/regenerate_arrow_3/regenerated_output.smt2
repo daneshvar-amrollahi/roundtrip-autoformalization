@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (approaching_crossing v c t)
+           (< (dist_to_nearest_rail_sq v c t) (* ft_50 ft_50))
+           (not (and (standing_vehicle v t)
+                     (= (stop_action v t) SA_Stand))))
+      (not (parked v t))))

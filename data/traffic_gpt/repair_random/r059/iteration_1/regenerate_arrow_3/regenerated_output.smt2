@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (r_from Roadway) (r_to Roadway) (i Intersection) (t Int))
+  (=> (and (on_roadway v r_from t)
+           (= (roadway_flow r_from) FK_OneWay)
+           (executing_turn_at_intersection v TD_Left i t)
+           (intersection_on_roadway i r_from)
+           (intersection_on_roadway i r_to)
+           (= (roadway_flow r_to) FK_OneWay))
+      (close_to_left_curb v r_from t)))

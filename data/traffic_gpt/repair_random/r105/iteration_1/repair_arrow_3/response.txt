@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_flow r) FK_OneWay)
+           (or (stopped v t) (parked v t)))
+      (and (parallel_to_curb v r t)
+           (=> (= (heading v t) (roadway_direction r))
+               (or (right_wheels_within_18in v r t)
+                   (left_wheels_within_18in v r t))))))

@@ -1,0 +1,11 @@
+A person may not sell an animal if the sale involves a zoo entity as either the seller or the buyer, if the buyer is an educational institution or research institution acting for a scientific purpose with subchapter authorization, or if the buyer is acquiring the animal for a commercial purpose and subsequently sells the animal to a zoo entity or to an educational or research institution acting for a scientific purpose with subchapter authorization.
+
+Wait—I need to re-read the formula carefully. The outer structure is:
+
+`sells => NOT (A ∨ B ∨ C)`
+
+This means: if a person sells, then none of these conditions hold. In other words, a sale **cannot** occur when any of those conditions are true. But that seems semantically odd—it would prohibit sales *to* zoos and research institutions.
+
+Re-examining: the formula says that whenever a sale occurs, it is **not** the case that any of these three scenarios hold. This is a prohibition on sales under those circumstances.
+
+A person may not sell an animal to or as a zoo entity, may not sell an animal to an educational institution or research institution that is acting for a scientific purpose and holds subchapter authorization, and may not sell an animal to a buyer acquiring it for a commercial purpose where that buyer will later resell the animal to a zoo entity or to an educational or research institution acting for a scientific purpose with subchapter authorization.

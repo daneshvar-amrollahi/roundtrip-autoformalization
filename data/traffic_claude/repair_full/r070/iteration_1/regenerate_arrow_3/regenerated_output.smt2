@@ -1,0 +1,20 @@
+(forall ((v_turner Vehicle) (v_other Vehicle) (i Intersection) (t Int))
+  (=> (and
+        (is_ego v_turner)
+        (not (= v_turner v_other))
+        (or
+          (executing_turn_at_intersection v_turner TD_Left i t)
+          (and
+            (executing_turn v_turner TD_Left t)
+            (exists ((a Access))
+              (and
+                (turning_into v_turner a t)
+                (or
+                  (= (access_kind a) AK_Alley)
+                  (= (access_kind a) AK_PrivateRoad)
+                  (= (access_kind a) AK_Driveway))))))
+        (approaching_opposite v_turner v_other t)
+        (or
+          (in_intersection v_other i t)
+          (is_immediate_hazard v_other v_turner i t)))
+    (not (entering_intersection v_turner i t))))

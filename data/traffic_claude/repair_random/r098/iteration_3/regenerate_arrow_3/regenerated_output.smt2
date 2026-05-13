@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (approaching_crossing v c t)
+      (and (not (stopped v t))
+           (not (standing_vehicle v t))
+           (not (parked v t)))))

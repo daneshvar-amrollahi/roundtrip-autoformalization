@@ -1,0 +1,7 @@
+(forall ((p Person) (fish Animal) (d Device) (t Int))
+  (=> (and (catches p fish t)
+           (is_kind fish AK_Fish)
+           (uses_device p d t)
+           (device_kind d DK_ElectricityDevice)
+           (not (is_permitted_by_code d t)))
+      (not (catches p fish t))))

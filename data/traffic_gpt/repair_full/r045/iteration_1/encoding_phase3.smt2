@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (sc Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_pos v r t) RP_StreetcarTrack)
+           (in_front_of v sc t)
+           (exists ((t0 Int))
+             (and (<= t0 t)
+                  (streetcar_operator_signaled sc v t0))))
+      (moved_off_track_asap v t)))

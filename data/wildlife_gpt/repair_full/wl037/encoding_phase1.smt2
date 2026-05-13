@@ -1,0 +1,6 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (possesses p a t)
+           (is_kind a AK_GameAnimal)
+           (is_alive a t)
+           (not (has_subchapter_authorization p t)))
+      (not (possesses p a t))))

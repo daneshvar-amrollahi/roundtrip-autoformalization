@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (stopping_or_sudden_decrease_speed v t)
+           (opportunity_to_signal v t))
+      (forall ((v_rear Vehicle))
+        (=> (and (vehicle_immediately_to_rear v_rear v t)
+                 (not (= v_rear v)))
+            (stop_signal_given v t)))))

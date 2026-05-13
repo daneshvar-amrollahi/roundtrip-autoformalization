@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (moving_slower_than_normal v r t)
+           (not (exists ((u Vehicle)) (and (not (= v u)) (passing v u t))))
+           (not (intends_turn v TD_Left t)))
+      (close_to_right_edge_practicable v r t)))

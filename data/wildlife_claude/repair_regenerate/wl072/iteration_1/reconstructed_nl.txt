@@ -1,0 +1,13 @@
+No person may possess a finfish that has had its tail removed when coastal water exists, unless the finfish has been finally processed and has been either delivered to its final destination or delivered to a certified dealer.
+
+Wait, let me re-examine the formula more carefully.
+
+Looking at the structure: the implication leads to `false`, meaning the conjunction of all those conditions can never hold. The negation in the last condition means the person does NOT have the final-processing-and-delivery exception satisfied.
+
+Let me re-translate:
+
+No person may possess a finfish that has had its tail removed in the presence of coastal water unless the finfish has been finally processed and either delivered to its final destination or delivered to a certified dealer.
+
+Hmm, the coastal water condition is odd — it's just `(exists ((w WaterBody)) (water_kind w WK_CoastalWater))`, which asserts that some coastal water body exists, not that the person is on it. Let me translate literally:
+
+A person may not possess a finfish whose tail has been removed, where a coastal water body exists, unless the finfish has been finally processed and has either been delivered to its final destination or delivered to a certified dealer.

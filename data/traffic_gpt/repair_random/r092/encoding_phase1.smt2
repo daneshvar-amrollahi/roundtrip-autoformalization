@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (t Int))
+  (=> (on_sidewalk v t)
+      (not (or (= (stop_action v t) SA_Stop)
+               (= (stop_action v t) SA_Stand)
+               (= (stop_action v t) SA_Park)))))

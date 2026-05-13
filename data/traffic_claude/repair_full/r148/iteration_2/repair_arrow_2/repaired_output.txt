@@ -1,0 +1,1 @@
+The ego vehicle may not stand or park within 75 feet of a fire station driveway entrance, unless the ego vehicle is performing a stop action and is momentarily stopped rather than standing or parking.

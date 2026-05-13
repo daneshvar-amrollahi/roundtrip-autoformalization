@@ -1,0 +1,1 @@
+If a vehicle intends to turn left, turn right, make a U-turn, change lanes to the left, change lanes to the right, or is parked, then the operator must have either the left turn signal on, the right turn signal on, or a stop signal given.

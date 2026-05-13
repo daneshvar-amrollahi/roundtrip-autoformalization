@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (not (roadway_free_of_obstructions r t))
+           (not (width_unobstructed v r t)))
+      (and (not (= (stop_action v t) SA_Stop))
+           (not (= (stop_action v t) SA_Stand))
+           (not (= (stop_action v t) SA_Park)))))

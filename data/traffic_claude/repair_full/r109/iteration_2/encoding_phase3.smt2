@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (is_ego v)
+           (or (approaching_curve v r t)
+               (executing_turn v TD_Left t)
+               (executing_turn v TD_Right t)))
+      (reduced_speed_appropriate v t)))

@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (m Vehicle) (l Lane) (t Int))
+  (=> (and (not (= v m))
+           (= (kind m) VK_Motorcycle)
+           (on_lane v l t)
+           (on_lane m l t)
+           (interfered_or_impeded v m t))
+      (operating_abreast v m l t)))

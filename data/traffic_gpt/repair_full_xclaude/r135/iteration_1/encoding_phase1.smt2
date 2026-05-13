@@ -1,0 +1,7 @@
+(exists ((v Vehicle) (pursuer Vehicle) (t Int))
+  (and (not (= v pursuer))
+       (police_signal_given pursuer v t)
+       (or (audible_signal pursuer v t)
+           (emergency_signals_active pursuer t))
+       (or (fleeing_police v t)
+           (not (stopped v t)))))

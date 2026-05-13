@@ -1,0 +1,160 @@
+You are an expert in formalizing Texas Parks and Wildlife Code rules (hunting, fishing, and protected-species regulations) into SMT-LIB format.
+
+I will give you a schema in SMT-LIB, consisting of some sorts and functions over them. The context is wildlife law: people who hunt, fish, take, or trade animals; the animals themselves; the bodies of water and land they inhabit; and the devices used by hunters and anglers.
+I have a rule written in natural language, and would like to encode it as an SMT-LIB formula using the exact schema I have given you.
+
+CONTEXT - WHY THIS REPAIR IS NEEDED:
+A previous attempt to encode this rule had errors. Below is diagnostic feedback explaining what went wrong with the encoding:
+
+DIAGNOSTIC FEEDBACK:
+{reasoning}
+
+CRITICAL REQUIREMENT - ADDRESSING THE DIAGNOSIS:
+The diagnostic feedback above identifies SPECIFIC issues with your previous encoding.
+Your repair MUST directly address EVERY issue mentioned in the diagnostic feedback.
+
+⚠️ WARNING: Do not introduce NEW differences while fixing the diagnosed issues.
+- Change ONLY what is necessary to address the specific problems identified
+- Preserve all other aspects of the encoding that were correct
+- Verify your repair directly resolves each point in the DIAGNOSTIC FEEDBACK
+
+VERIFICATION CHECKLIST before submitting your encoding:
+□ Does your repair address each specific issue mentioned in the diagnostic feedback?
+□ Have you avoided introducing new conditions or removing necessary ones?
+□ Does your encoding stay as close as possible to the correct interpretation while fixing the identified errors?
+
+THE SCHEMA IS COMPREHENSIVE:
+The schema includes helper predicates and functions for actions (hunts, fishes, takes, sells, transports, possesses), animal classification (is_kind, protected_by_code), location (on_water_body, on_land, on_state_park), devices (uses_device, device_kind), seasons (during_open_season, during_night), consent (has_consent_of), and more. Review the schema carefully and use these predicates creatively.
+
+SCHEMA INSUFFICIENCY - LAST RESORT ONLY:
+Only flag schema insufficiency if it is ABSOLUTELY IMPOSSIBLE to encode the rule. If you can encode even an approximate version using the schema, DO IT.
+
+To flag insufficiency (USE SPARINGLY):
+SCHEMA_INSUFFICIENT: <brief explanation of what's fundamentally missing>
+
+CRITICAL REQUIREMENTS (when encoding):
+1. ONLY use functions and predicates explicitly defined in the schema
+2. Use them with the CORRECT number and types of parameters
+3. Ensure all expressions are well-typed
+4. Do NOT use 'select' or 'lambda'
+5. Do NOT invent functions that don't exist in the schema
+
+CRITICAL OUTPUT FORMAT (when encoding):
+- Provide ONLY the raw SMT-LIB formula
+- NO markdown code blocks (no ```, no ```smt)
+- NO comments (no ; lines)
+- NO explanations or text before/after
+- Do NOT wrap in (assert ...)
+- Just the pure formula
+
+ENCODING STYLE GUIDELINES (MANDATORY - apply to ALL encodings, both initial and reconstruction):
+
+CHECKLIST: Before submitting your encoding, verify ALL of these:
+
+1. TEMPORAL PROPERTIES - Use nested quantifiers when tracking from event start:
+
+   Canonical template for "until" / "while ongoing" constraints:
+   (forall ((entity1 Type1) (entity2 Type2) (t Int))
+     (=> (event_starts entity1 entity2 t)
+         (forall ((t2 Int))
+           (=> (and (<= t t2)
+                    (not (event_ends entity1 entity2 t2)))
+               (constraint entity1 entity2 t2)))))
+
+   Example: "a hunter must keep retrieving until the animal is recovered"
+   ✓ CORRECT:
+   (forall ((p Person) (a Animal) (t Int))
+     (=> (and (kills p a t) (is_kind a AK_GameAnimal))
+         (forall ((t2 Int))
+           (=> (and (<= t t2) (not (retrieves p a t2)))
+               (makes_reasonable_effort_to_retrieve p a t2)))))
+
+2. MODAL VERBS - Map to correct quantifiers:
+   - "may" / "is allowed" → Existential: (exists ((p Person) ...) ...)
+   - "must not" / "may not" / "shall not" / "no person may" → Universal negation: (forall ((p Person) ...) (=> ... (not ...)))
+   - "must" / "shall" / "is required" → Universal affirmative: (forall ((p Person) ...) (=> ... ...))
+
+3. SEMANTIC COMPLETENESS - Ensure logical constraints are complete:
+
+   □ ENTITY RELATIONSHIPS (when quantifying over multiple entities of same type):
+      If rule refers to "another person" / "the landowner" / "a different hunter":
+      → MUST ensure the entities are distinct using appropriate constraints
+      → Example: "a person may not employ another person to hunt" requires ensuring they are different entities
+
+   □ PREDICATE DEPENDENCIES (check schema for predicate preconditions):
+      Some predicates have logical dependencies on other predicates:
+      → Review schema for predicate preconditions
+      → If predicate P requires context predicate Q, include Q when using P
+      → Example pattern: action predicates may require location predicates
+
+   □ TYPE CONSTRAINTS (when rule specifies a species or device kind):
+      If natural language specifies a kind ("game bird", "exotic animal", "firearm"):
+      → Use (is_kind a AK_GameBird), (device_kind d DK_Firearm), etc.
+      → For multiple possible kinds, enumerate explicitly with disjunction
+      → Don't assume a single kind when rule allows multiple
+
+   □ PROPERTY EXISTENCE (when using value-returning functions):
+      If using a function that returns a value (not just Bool):
+      → Verify the property exists before querying its value
+      → Example pattern: check existence predicate before value function
+
+   PRINCIPLE: Semantic gaps lead to over-general formulas. Include all constraints
+   that make the formula match the natural language meaning precisely.
+
+4. QUANTIFICATION DISCIPLINE - Match quantifiers to natural language scope:
+
+   RULE: Natural language determines quantifier type:
+   - "All animals" / "Every species" / "Any wild bird" (universal) → (forall ((a Animal)) ...)
+   - "Some" / "Another" / "A different" → (exists ((a Animal)) ...)
+   - "None" / "No person" → (forall ((p Person)) (=> ... (not ...)))
+
+   MULTIPLE ENTITIES of same type:
+   - If rule refers to multiple distinct entities, use multiple quantified variables
+   - Example: "a person hunting on the land of another person" → two Person variables, distinct
+
+   SAFETY RULES - when rule protects "any" or "all":
+   - "may not hunt any wild bird" → universal over animals, restricted by kind
+   - Don't use existential when rule applies to all instances
+
+5. EXCEPTION HANDLING - Encode "except when" / "unless" correctly:
+
+   PATTERN: "Prohibited EXCEPT when X"
+   ✓ CORRECT: (=> (and ... (not X)) (not action))
+   ✓ ALTERNATIVE: (=> ... (or X (not action)))
+   ✗ WRONG: (=> ... (not action)) ← exception lost!
+
+   EXAMPLE: "may not hunt at night except during regular hunting hours"
+   (forall ((p Person) (a Animal) (t Int))
+     (=> (and (during_night t)
+              (not (during_regular_hunting_hours t)))
+         (not (hunts p a t))))
+
+6. DISJUNCTION PATTERNS - Use appropriate logical structure:
+
+   □ "not A until B" → (or (not A) B) or equivalently (=> A B)
+   □ "not A unless B" → (or (not A) B) or equivalently (=> A B)
+   □ "either...or" → (or ...) with flat structure
+   □ NEVER use nested implications for simple alternatives
+
+   EXAMPLE: "a person may not catch fish from private water without consent of the landowner"
+   (forall ((p Person) (a Animal) (w WaterBody) (owner Person) (t Int))
+     (=> (and (catches p a t)
+              (on_water_body p w t)
+              (water_kind w WK_PrivateWater)
+              (is_owner_of_water owner w))
+         (has_consent_of p owner t)))
+
+7. VARIABLE NAMING - Use descriptive names for clarity:
+
+   GUIDELINE: Choose variable names that clarify roles:
+   - For person-person interactions, use names indicating roles (hunter/landowner, grantor/grantee)
+   - For spatial entities, use single letters (l for Land, w for WaterBody, b for Building)
+   - For time, use t for current, t2/t3 for future time points
+   - Avoid ambiguous generic names (p1/p2) when roles are clear from context
+
+   EXAMPLE: "a hunter must have written consent from the landowner"
+   ✓ CLEAR: (has_written_consent hunter landowner t)
+   ✓ ACCEPTABLE: (has_written_consent p owner t) [if roles obvious from context]
+   ✗ UNCLEAR: (has_written_consent p1 p2 t) [requires reader to infer which is which]
+
+FINAL VERIFICATION: Before submitting, review sections 1-7 for completeness.

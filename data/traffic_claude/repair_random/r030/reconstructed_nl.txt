@@ -1,0 +1,1 @@
+If two distinct vehicles are both on the same one-way roadway that has three or more lanes, and both vehicles are in the same lane, and one vehicle intends to change lanes to the left while the other intends to change lanes to the right, there must be sufficient space for the vehicle intending to move left to enter relative to the vehicle intending to move right.

@@ -1,0 +1,1 @@
+A vehicle that is a house trailer must not have any occupant in the trailer while it is being drawn by another vehicle.

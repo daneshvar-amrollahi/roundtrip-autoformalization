@@ -1,0 +1,133 @@
+You are an expert in translating formal SMT-LIB formulas into natural language traffic rules for autonomous vehicles.
+
+I will provide you with:
+1. An SMT-LIB formula that encodes a traffic rule
+2. The schema that defines the predicates and functions used in the formula
+
+Your task is to translate the SMT formula back into clear, natural language that describes the traffic rule.
+
+CONTEXT - WHY THIS REPAIR IS NEEDED:
+A previous attempt to reconstruct the natural language from this SMT formula had errors. Below is diagnostic feedback explaining what went wrong:
+
+DIAGNOSTIC FEEDBACK:
+{reasoning}
+
+CRITICAL REQUIREMENT - ADDRESSING THE DIAGNOSIS:
+The diagnostic feedback above identifies SPECIFIC issues with your previous reconstruction.
+Your repair MUST directly address EVERY issue mentioned in the diagnostic feedback.
+
+⚠️ WARNING: Do not introduce NEW differences while fixing the diagnosed issues.
+- Change ONLY what is necessary to address the specific problems identified
+- Preserve all other aspects of the reconstruction that were correct
+- Verify your repair directly resolves each point in the DIAGNOSTIC FEEDBACK
+
+VERIFICATION CHECKLIST before submitting your reconstruction:
+□ Does your repair address each specific issue mentioned in the diagnostic feedback?
+□ Have you avoided adding or removing information that wasn't identified as problematic?
+□ Does your natural language unambiguously represent the SMT encoding?
+
+CRITICAL: PRESERVE ALL INFORMATION AND AVOID AMBIGUITY
+
+When translating SMT to natural language, you must preserve ALL semantic information without introducing ambiguity:
+
+1. TIMING AND SCOPE:
+   - If SMT has conditions at time t, state that timing clearly
+   - If SMT has nested quantifiers over time, reflect that temporal structure
+   - Example: (forall t. P(t)) → "at all times when"
+   - Example: (forall t. forall t2. (>= t2 t) => Q(t2)) → "from that time onward"
+
+2. MULTIPLE ENTITIES:
+   - If SMT quantifies over multiple entities, specify ALL of them clearly
+   - AVOID AMBIGUOUS: "a vehicle is passing another vehicle on a roadway"
+     (unclear if both must be on roadway, or just one)
+   - PREFER EXPLICIT: "a vehicle is passing another vehicle, and both vehicles are on the same roadway"
+   - Example: (and (on_roadway v r t) (on_roadway u r t)) → "both vehicles are on the roadway"
+
+3. PREDICATE CONDITIONS:
+   - Every predicate in SMT must appear clearly in natural language
+   - If SMT has (on_roadway v r t) AND (on_roadway u r t), say "both vehicles on roadway"
+   - If SMT has only (on_roadway v r t), say "the vehicle is on the roadway"
+   - Don't conflate or merge distinct conditions
+
+4. AVOID AMBIGUOUS PHRASING:
+   ✗ BAD: "a vehicle on a roadway" (which vehicle? roadway mentioned once but referenced by multiple predicates?)
+   ✓ GOOD: "when a vehicle is on a roadway, and another vehicle is also on that roadway"
+   
+   ✗ BAD: "from the time X begins" (unclear if conditions at time t are required)
+   ✓ GOOD: "from the time X begins (where at that initial time, conditions A and B hold)"
+   
+   ✗ BAD: "if passing another vehicle" (unclear about roadway requirements)
+   ✓ GOOD: "if a vehicle is passing another vehicle while both are on the same roadway"
+
+5. QUANTIFIER STRUCTURE:
+   - Preserve the nesting and scope of SMT quantifiers
+   - If SMT has conditions in outer quantifier, state them first
+   - If SMT has conditions in inner quantifier, state temporal progression
+   - Be explicit about which conditions apply when
+
+The natural language should be UNAMBIGUOUS - someone reading it should be able to produce an equivalent SMT encoding without guessing.
+
+TRANSLATION REQUIREMENTS:
+- Write as a single-sentence traffic rule (or two sentences if complex)
+- Use modal verbs: "must", "may not", "shall", "must not"
+- Use conditional structure: "If... then...", "unless", "when", "while"
+- Refer to "an operator" or "a vehicle" (not "all vehicles" or mathematical language)
+- Match the style of typical traffic regulations
+- Capture the logical conditions and constraints from the SMT formula
+- Be precise about distances, directions, vehicle types, and conditions
+- Do NOT use mathematical notation or logical symbols
+- Do NOT say "for all", "there exists", or use variable names
+
+CRITICAL SEMANTIC PRESERVATION:
+1. MODAL VERBS - Preserve exact quantifier meaning:
+   - Existential (∃) → "may" / "is allowed to" / "can"
+   - Universal with negation (∀...¬) → "must not" / "shall not" / "may not"
+   - Universal affirmative (∀...) → "must" / "shall" / "is required to"
+
+2. DO NOT ADD CONDITIONS that aren't in the formula:
+   - If formula has (¬A ∨ B), translate as "not A until B"
+   - Do NOT add extra conditions like "or C" if C isn't in the formula
+   - Example: (or (not on_right_half) (safely_clear))
+     ✓ CORRECT: "may not move to the right until safely clear"
+     ✗ WRONG: "may not move to the right until safely clear or completely passed"
+
+3. DO NOT REMOVE CONDITIONS that are in the formula:
+   - Every predicate in the formula MUST appear in the natural language
+   - Don't try to "simplify" by omitting technical details
+   - ESPECIALLY preserve:
+     * Type constraints: (= (kind s) VK_Streetcar) → mention "streetcar"
+     * Context predicates: (on_roadway v r t) → mention "on a roadway"
+     * Existence checks: (speed_limit_posted r t) → mention "posted speed limit"
+     * Distinctness: (distinct v u) → mention "another vehicle" (not just "a vehicle")
+
+4. PRESERVE EXCEPTION CONDITIONS:
+   - If formula has (and ... (not X)), the exception X MUST appear in natural language
+   - Example: (=> (and ... (not (shoulder_use_necessary_and_safe v t))) (not shoulder_position))
+     ✓ CORRECT: "may not use shoulder except when necessary and safe"
+     ✗ WRONG: "may not use shoulder" ← exception lost!
+   - Common pattern: (=> (and A (not exception)) prohibition) → "prohibited unless exception"
+
+5. PRESERVE TEMPORAL STRUCTURE:
+   - Nested quantifiers (∀ t. ∀ t2. (<= t t2) ...) → "once started, for all future times" / "until"
+   - Single quantifier (∀ t. ...) → "at any time when" / "while" / "if"
+   - Existential (∃ t. ...) → "at some point" / "eventually"
+
+6. TRANSLATE LITERALLY - Do NOT interpret or embellish:
+   - Translate what the formula says, not what you think it should say
+   - Don't add context or explanation that isn't in the formula
+
+GRANULARITY BALANCE:
+- NOT too technical: Avoid "for all vehicles v and time t such that..."
+- NOT too vague: Avoid "vehicles should be safe" or "follow traffic rules"
+- JUST RIGHT: Clear, specific conditions and obligations similar to written traffic laws
+
+CRITICAL OUTPUT FORMAT:
+- Provide ONLY the natural language rule
+- NO explanations before or after
+- NO markdown formatting
+- NO labels like "Rule:" or "Translation:"
+- Just the rule text itself
+
+Example style (match this tone):
+"An operator may not follow closer than 500 feet an ambulance that is flashing red lights unless the operator is on official business."
+"An operator intending to turn left within an intersection must yield the right-of-way to any vehicle approaching from the opposite direction."

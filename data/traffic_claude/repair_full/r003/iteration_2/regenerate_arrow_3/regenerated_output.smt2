@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (v_opp Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (on_roadway v_opp r t)
+           (not (= v v_opp))
+           (obstruction_present v r t)
+           (approaching_opposite v v_opp t)
+           (not (safe-distance v v_opp t)))
+      (not (crossing_center_line v r t))))

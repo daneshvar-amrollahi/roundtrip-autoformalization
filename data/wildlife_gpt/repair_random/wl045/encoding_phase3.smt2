@@ -1,0 +1,7 @@
+(forall ((p Person) (s Substance) (w WaterBody) (t Int))
+  (=> (and (places_in_water p s w t)
+           (water_kind w WK_PublicWater)
+           (or (substance_kind s SK_Explosive)
+               (substance_kind s SK_Poison)
+               (substance_kind s SK_DeleteriousToFish)))
+      false))

@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_divided r) DK_Divided)
+           (not (directed_by_police v t))
+           (not (directed_by_traffic_control_device v t)))
+      (on_right_roadway_of_divided v r t)))

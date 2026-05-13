@@ -1,0 +1,56 @@
+You are analyzing a 3-arrow translation pipeline for converting natural language traffic rules into SMT-LIB formal specifications:
+
+ARROW 1: Original NL → Phase 1 SMT encoding
+ARROW 2: Phase 1 SMT → Reconstructed NL (reconstruction from formal spec back to natural language)
+ARROW 3: Reconstructed NL → Phase 3 SMT encoding
+
+EQUIVALENCE CHECK:
+We use Z3 theorem prover to check if Phase 1 and Phase 3 encodings are equivalent by asserting:
+  (assert (not (= phase1_encoding phase3_encoding)))
+
+If Z3 returns SAT, it means the encodings are NOT equivalent - they produce different truth values for some inputs. This indicates that at least one arrow in the pipeline introduced an error.
+
+CURRENT SITUATION:
+Z3 returned SAT for this rule, meaning Phase 1 and Phase 3 encodings differ.
+
+YOUR TASK:
+Examine all three arrows together and identify the single arrow most likely to have introduced the divergence. You may inspect any of the artifacts in any order before forming your judgment. There is no required order.
+
+ANALYSIS GUIDANCE:
+- Arrow 1 has a problem when Phase 1 SMT does not faithfully encode the meaning of the Original NL.
+- Arrow 2 has a problem when Reconstructed NL does not accurately describe what Phase 1 SMT encodes.
+- Arrow 3 has a problem when Phase 3 SMT does not faithfully encode the Reconstructed NL.
+- More than one arrow may have problems. If so, pick the arrow whose problem is most clearly responsible for the divergence.
+
+You must select exactly one arrow.
+
+ARTIFACTS:
+-----------
+
+Original NL:
+{original_nl}
+
+Phase 1 SMT Encoding:
+{phase1_smt}
+
+Reconstructed NL:
+{reconstructed_nl}
+
+Phase 3 SMT Encoding:
+{phase3_smt}
+
+
+
+IMPORTANT INSTRUCTIONS FOR YOUR RESPONSE:
+
+You must provide your answer in EXACTLY this format:
+
+FIRST_FAILED_ARROW: [1, 2, or 3]
+REASONING:
+[Write a single paragraph explaining why this arrow failed. CRITICAL: Only use information that is appropriate for repairing this specific arrow:
+- If Arrow 1 failed: Only reference Original NL and Phase 1 SMT (do NOT mention Reconstructed NL or Phase 3 SMT)
+- If Arrow 2 failed: Only reference Phase 1 SMT and Reconstructed NL (do NOT mention Original NL or Phase 3 SMT)
+- If Arrow 3 failed: Only reference Reconstructed NL and Phase 3 SMT (do NOT mention Original NL or Phase 1 SMT)
+This reasoning will be used as feedback for the repair prompt, so only include information that arrow's repair should see.]
+
+Begin your analysis:

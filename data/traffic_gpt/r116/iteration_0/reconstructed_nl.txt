@@ -1,0 +1,1 @@
+If a vehicle is on a beach roadway, then a posted speed limit must be in effect and the posted speed limit value must be 15 miles per hour.

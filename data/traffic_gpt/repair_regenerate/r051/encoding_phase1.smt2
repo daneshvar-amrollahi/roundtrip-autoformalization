@@ -1,0 +1,6 @@
+(forall ((moto Vehicle) (mv Vehicle) (l Lane) (t Int))
+  (=> (and (= (kind moto) VK_Motorcycle)
+           (not (= mv moto))
+           (on_lane moto l t)
+           (on_lane mv l t))
+      (not (passing_in_same_lane mv moto t))))

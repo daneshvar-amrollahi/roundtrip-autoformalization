@@ -1,0 +1,22 @@
+(forall ((v Vehicle) (sc Vehicle) (i Intersection) (t Int))
+  (=> (and (not (= v sc))
+           (= (kind sc) VK_Streetcar)
+           (= (streetcar_state sc t) SCS_CrossingIntersection)
+           (in_intersection sc i t)
+           (in_intersection v i t)
+           (in_front_of v sc t))
+      (and (not (= (roadway_pos v (let ((r_dummy Roadway)) r_dummy) t) RP_StreetcarTrack))
+           (not (crossing_center_line v (let ((r_dummy Roadway)) r_dummy) t)))))
+
+Let me reconsider this encoding more carefully, since the `roadway_pos` and `crossing_center_line` functions require a specific Roadway, and I need to properly quantify.
+
+(forall ((v Vehicle) (sc Vehicle) (i Intersection) (r Roadway) (t Int))
+  (=> (and (not (= v sc))
+           (= (kind sc) VK_Streetcar)
+           (= (streetcar_state sc t) SCS_CrossingIntersection)
+           (in_intersection sc i t)
+           (in_intersection v i t)
+           (in_front_of v sc t)
+           (on_roadway v r t)
+           (intersection_on_roadway i r))
+      (not (= (roadway_pos v r t) RP_StreetcarTrack))))

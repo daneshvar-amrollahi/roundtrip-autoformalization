@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (backing v t)
+           (on_roadway v r t)
+           (or (= (roadway_access_control r) AC_Limited)
+               (= (roadway_access_control r) AC_Normal))
+           (or (= (roadway_pos v r t) RP_ShoulderRight)
+               (= (roadway_pos v r t) RP_ShoulderLeft)))
+      false))

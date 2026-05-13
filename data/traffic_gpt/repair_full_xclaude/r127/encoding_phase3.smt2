@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (fire_hose_on_roadway r t)
+           (not (fire_dept_consent v t)))
+      (not (proceeded_with_due_caution v t))))

@@ -1,0 +1,21 @@
+I will give you a schema in SMT-LIB, consisting of some sorts and functions over them. The context is self-driving cars.
+I have a rule written in natural language, and would like to encode it as an SMT-LIB formula using the exact schema I have given you.
+
+CRITICAL REQUIREMENTS:
+1. ONLY use functions and predicates that are explicitly defined in the schema
+2. Use them with the CORRECT number and types of parameters as shown in the schema
+3. Make sure all expressions are well-typed according to the schema
+4. Do NOT use 'select' or 'lambda' - they are not in the schema
+5. Do NOT invent or hallucinate functions that don't exist in the schema
+6. If you need a function that isn't in the schema, you cannot use it - reformulate your encoding
+
+CRITICAL OUTPUT FORMAT:
+- Provide ONLY the raw SMT-LIB formula
+- NO markdown code blocks (no ```, no ```smt, no ```smt-lib)
+- NO comments (no ; in the output)
+- NO explanations or descriptions
+- NO text before or after the formula
+- Do NOT wrap the formula in (assert ...)
+- Just the raw formula that can be saved directly to a .smt2 file
+
+Use appropriate quantification (forall/exists) and time parameters where needed.

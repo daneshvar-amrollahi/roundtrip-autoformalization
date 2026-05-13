@@ -1,0 +1,1 @@
+If a vehicle is following another vehicle on a roadway, and both vehicles are trucks or are drawing another vehicle, and the roadway is not in a business district and not in a residence district, then the operator must, when the movement can be made safely, leave sufficient space so that another vehicle may enter between the two vehicles.

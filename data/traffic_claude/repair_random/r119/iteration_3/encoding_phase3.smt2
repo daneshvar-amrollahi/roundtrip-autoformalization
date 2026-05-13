@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (is_ego v)
+           (or (stopped v t)
+               (standing_vehicle v t)
+               (parked v t))
+           (not (movement_can_be_made_safely v t)))
+      (not (is-accelerating v t))))

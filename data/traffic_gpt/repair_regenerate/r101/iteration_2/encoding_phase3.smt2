@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (or (standing_vehicle v t) (parked v t))
+           (<= (dist_to_feature v PF_Crosswalk t) ft_20))
+      (or (directed_by_police v t)
+          (directed_by_traffic_control_device v t))))

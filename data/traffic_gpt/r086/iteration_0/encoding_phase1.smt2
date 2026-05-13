@@ -1,0 +1,7 @@
+(forall ((bus Vehicle) (c Crossing) (t Int))
+  (=> (and (= (kind bus) VK_SchoolBus)
+           (approaching_crossing bus c t))
+      (forall ((t2 Int))
+        (=> (and (<= t t2)
+                 (not (safe_to_proceed bus c t2)))
+            (not (permitted_to_proceed bus c t2))))))

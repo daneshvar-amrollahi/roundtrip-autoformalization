@@ -1,0 +1,20 @@
+(forall ((bus Vehicle) (t Int))
+  (=> (and (is_ego bus false)
+           (exists ((ego Vehicle))
+             (and (is_ego ego)
+                 (= (kind bus) VK_SchoolBus)
+                 (bus_stopped_for_students bus t)
+                 (bus_visual_signal_on bus t)
+                 (approaching_bus ego bus t)
+                 (not (stopped_before_reaching ego bus t)))))
+       false))
+
+Let me reconsider and provide a cleaner encoding:
+
+(forall ((ego Vehicle) (bus Vehicle) (t Int))
+  (=> (and (is_ego ego)
+           (= (kind bus) VK_SchoolBus)
+           (bus_stopped_for_students bus t)
+           (bus_visual_signal_on bus t)
+           (approaching_bus ego bus t))
+      (stopped_before_reaching ego bus t)))

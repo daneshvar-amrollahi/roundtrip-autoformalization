@@ -1,0 +1,18 @@
+(forall ((p Person) (a Animal) (d Device) (w WaterBody) (t Int))
+  (=> (and (is_kind a AK_Fish)
+           (or (takes p a t)
+               (attempts_to_catch p a t))
+           (uses_device p d t)
+           (or (device_kind d DK_Seine)
+               (device_kind d DK_StrikeNet)
+               (device_kind d DK_GillNet)
+               (device_kind d DK_TrammelNet))
+           (not (device_kind d DK_HandsOnly))
+           (on_canal_or_artificial_waterway p w t)
+           (water_kind w WK_ManMadeWaterway)
+           (in_designated_waterway_county t)
+           (population_at_least 2 t))
+      (not (or (takes p a t)
+               (attempts_to_catch p a t)))))
+
+SCHEMA_INSUFFICIENT: The schema lacks three critical predicates needed for faithful encoding: (1) a predicate to distinguish hand-cast nets and minnow seines from other nets/seines (the DeviceKind enumeration groups all seines under DK_Seine without distinguishing minnow seines, and has no specific kind for hand-cast nets); (2) a predicate indicating that a waterway is within a platted subdivision platted under Chapter 231, Acts of the 40th Legislature (in_designated_waterway_county is the closest but not semantically equivalent); (3) a predicate indicating that two or more residences abut onto a canal or waterway (population_at_least measures general population, not abutting residences). The encoding above is the best approximation possible with the available schema, using in_designated_waterway_county and population_at_least as proxies, but these do not faithfully capture the original rule's conditions.

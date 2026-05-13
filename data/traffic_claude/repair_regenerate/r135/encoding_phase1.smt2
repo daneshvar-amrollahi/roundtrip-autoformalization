@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (p Vehicle) (t Int))
+  (=> (and (is_ego v)
+           (= (kind p) VK_PoliceVehicle)
+           (police_signal_given p v t)
+           (fleeing_police v t))
+      false))

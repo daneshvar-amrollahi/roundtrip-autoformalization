@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (t Int))
+  (=> (or (intends_turn v TD_Left t)
+          (intends_turn v TD_Right t))
+      (ite (intends_turn v TD_Left t)
+           (signal_continuous_100ft v TD_Left t)
+           (signal_continuous_100ft v TD_Right t))))

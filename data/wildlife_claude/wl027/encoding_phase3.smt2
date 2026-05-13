@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (possesses p a t)
+           (or (is_kind a AK_ExoticAnimal)
+               (exists ((parent Animal))
+                 (and (is_kind parent AK_ExoticAnimal)
+                      (is_kind a AK_Carcass)
+                      (is_part_of a parent)))))
+      (has_subchapter_authorization p t)))

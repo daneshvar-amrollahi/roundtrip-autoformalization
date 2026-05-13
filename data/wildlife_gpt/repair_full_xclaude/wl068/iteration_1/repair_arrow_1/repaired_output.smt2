@@ -1,0 +1,32 @@
+(and
+  (forall ((p Person) (a Animal) (t Int))
+    (=>
+      (and (possesses p a t)
+           (is_kind a AK_Fish)
+           (is_named_in_protected_fish_list a))
+      (=>
+        (or
+          (not (exists ((doc Document))
+                 (and (document_kind doc DOK_OriginVerification)
+                      (keeps_with p doc a t))))
+          (exists ((w Person))
+            (and (is_department_employee w t)
+                 (not (exists ((doc Document))
+                        (and (document_kind doc DOK_OriginVerification)
+                             (displays_on_request p doc t))))))
+        (commits_offense p t)))))
+  (forall ((p Person) (t Int))
+    (=> (commits_offense p t)
+        (exists ((a Animal))
+          (and (possesses p a t)
+               (is_kind a AK_Fish)
+               (is_named_in_protected_fish_list a)
+               (or
+                 (not (exists ((doc Document))
+                        (and (document_kind doc DOK_OriginVerification)
+                             (keeps_with p doc a t))))
+                 (exists ((w Person))
+                   (and (is_department_employee w t)
+                        (not (exists ((doc Document))
+                               (and (document_kind doc DOK_OriginVerification)
+                                    (displays_on_request p doc t))))))))))))

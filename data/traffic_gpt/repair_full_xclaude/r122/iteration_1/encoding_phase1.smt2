@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_kind r) RK_MountainHighway)
+           (approaching_curve v r t)
+           (not (clear_view_200ft v r t)))
+      (gave_horn_warning v t)))

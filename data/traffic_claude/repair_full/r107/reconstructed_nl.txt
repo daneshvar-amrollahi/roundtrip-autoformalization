@@ -1,0 +1,1 @@
+The ego vehicle, when driving on a highway where another distinct vehicle is also on that roadway or is entering the main lane, and the ego vehicle has an assured clear distance ahead with respect to that other vehicle, must maintain a speed that is reasonable and prudent for that roadway at that time.

@@ -1,0 +1,1 @@
+If an operator’s movement cannot be made safely, then the operator must not turn into a private road or a driveway, must not intend to change lanes in any direction, and must not execute a turn in any direction.

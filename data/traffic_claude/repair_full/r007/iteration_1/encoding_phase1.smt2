@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (v_oncoming Vehicle) (r Roadway) (t Int))
+  (=> (and (is_ego v)
+           (on_roadway v r t)
+           (on_roadway v_oncoming r t)
+           (approaching_opposite v v_oncoming t)
+           (not (= v v_oncoming)))
+      (= (roadway_pos v r t) RP_RightHalf)))

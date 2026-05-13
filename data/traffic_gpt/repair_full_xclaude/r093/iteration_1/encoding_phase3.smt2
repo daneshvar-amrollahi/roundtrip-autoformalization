@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (i Intersection) (t Int))
+  (=> (in_intersection v i t)
+      (forall ((t2 Int))
+        (=> (and (<= t t2)
+                 (in_intersection v i t2))
+            (and (not (= (stop_action v t2) SA_Stop))
+                 (not (= (stop_action v t2) SA_Stand))
+                 (not (= (stop_action v t2) SA_Park)))))))

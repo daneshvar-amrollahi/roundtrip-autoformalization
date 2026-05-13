@@ -1,0 +1,1 @@
+An operator approaching a school bus that is stopped for students and displaying its visual signal must stop before reaching the school bus.

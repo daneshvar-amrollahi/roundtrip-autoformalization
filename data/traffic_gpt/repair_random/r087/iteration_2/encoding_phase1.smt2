@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (cargo_is_explosive_or_flammable v)
+           (approaching_crossing v c t)
+           (> (velocity v t) mph_20)
+           (< (dist_to_nearest_rail_sq v c t) ft_200_sq))
+      (<= (velocity v t) mph_20)))

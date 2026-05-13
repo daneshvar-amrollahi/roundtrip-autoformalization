@@ -1,0 +1,12 @@
+(forall ((v Vehicle) (t Int))
+  (=> (not (movement_can_be_made_safely v t))
+      (and
+        (forall ((a Access))
+          (=> (or (= (access_kind a) AK_PrivateRoad)
+                  (= (access_kind a) AK_Driveway))
+              (not (turning_into v a t))))
+        (not (executing_turn v TD_Left t))
+        (not (executing_turn v TD_Right t))
+        (not (executing_turn v TD_UTurn t))
+        (not (intends_lane_change v TD_Left t))
+        (not (intends_lane_change v TD_Right t)))))

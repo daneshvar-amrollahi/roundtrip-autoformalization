@@ -1,0 +1,22 @@
+(or
+  (exists ((p Person) (a Animal) (t Int))
+    (and
+      (is_state_or_county_official p)
+      (on_official_duty p t)
+      (is_kind a AK_Wolf)
+      (transports p a t)))
+  (exists ((p Person) (a Animal) (t Int))
+    (and
+      (is_kind a AK_Wolf)
+      (or
+        (is_licensed_circus_zoo_owner p)
+        (exists ((owner Person))
+          (and
+            (is_licensed_circus_zoo_owner owner)
+            (is_agent_of p owner))))
+      (or
+        (for_exhibition p t)
+        (for_scientific_purpose p t))
+      (or
+        (possesses p a t)
+        (transports p a t)))))

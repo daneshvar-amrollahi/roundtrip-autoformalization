@@ -1,0 +1,1 @@
+A vehicle passing another vehicle must pass on the left side and must maintain a safe distance from the vehicle being passed.

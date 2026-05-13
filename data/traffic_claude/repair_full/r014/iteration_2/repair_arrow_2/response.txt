@@ -1,0 +1,1 @@
+The ego vehicle, when using the opposing direction lane to pass and an oncoming vehicle is approaching from the opposite direction at a distance strictly less than 200 feet, must be in an authorized lane.

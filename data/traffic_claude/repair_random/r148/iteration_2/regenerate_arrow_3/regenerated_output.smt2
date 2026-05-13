@@ -1,0 +1,6 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (or (= (stop_action v t) SA_Stand)
+               (= (stop_action v t) SA_Park))
+           (< (dist_to_feature v PF_FireStationDriveway t) ft_75)
+           (not (stopped v t)))
+      false))

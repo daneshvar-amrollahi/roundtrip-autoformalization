@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (r Roadway) (t Int))
+  (=> (and (on_roadway v r t)
+           (= (roadway_kind r) RK_Highway)
+           (not (= (district_of_roadway r) DK_Urban))
+           (not (special_hazard_exists v r t))
+           (= (velocity v t) mph_70))
+      (speed_reasonable_and_prudent v r t)))

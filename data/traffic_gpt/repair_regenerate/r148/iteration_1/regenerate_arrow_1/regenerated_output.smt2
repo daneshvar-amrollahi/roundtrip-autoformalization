@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (or (= (stop_action v t) SA_Stand) (= (stop_action v t) SA_Park))
+           (or (<= (dist_to_feature v PF_FireStationDriveway t) ft_20)
+               (and (in_front_of_driveway v t)
+                    (<= (dist_to_feature v PF_FireStationDriveway t) ft_75)))
+           (not (directed_by_police v t))
+           (not (directed_by_traffic_control_device v t)))
+      (not (proceeded_with_due_caution v t))))

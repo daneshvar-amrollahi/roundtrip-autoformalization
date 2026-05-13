@@ -1,0 +1,34 @@
+# Model configuration
+# Provider: openai or anthropic
+provider=openai
+
+# Model name (use model appropriate for provider)
+# OpenAI: gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-5.2, etc.
+# Anthropic: claude-opus-4-6, claude-sonnet-4-20250514, claude-3-5-sonnet-20241022
+model=gpt-5.2
+
+# === Quick switch to Claude (uncomment below, comment above) ===
+# provider=anthropic
+# model=claude-opus-4-6
+
+# Sampling parameters
+# Lower values = more deterministic, focused outputs (reduce encoding variation)
+# Previous runs:
+#   - temperature=0.3, top_p=1.0 → 44% SAT rate (baseline)
+#   - temperature=0.1, top_p=0.85 → 40% SAT rate (too deterministic, new regressions)
+# Current: 0.3 for all LLM calls (baseline + repair ablations)
+temperature=0.3
+top_p=0.85
+
+# Rate limiting: delay between API requests (in seconds).
+# We rely primarily on SDK-level exponential backoff (max_retries=8 in
+# src/llm_client.py); request_delay is just a small smoothing buffer.
+# Bump back up if you start seeing repeated 429 chains in pipeline.log.
+# Reference RPMs (provider tier dependent):
+#   gpt-4o-mini    : 500 RPM   → 0.2s safely
+#   gpt-4o / gpt-5.x : 500 RPM → 0.5s safely
+#   Claude Opus 4.6 : 4000 RPM (tier 4) → effectively unconstrained at our volume
+request_delay=1
+
+# Optional: adjust these parameters
+# max_tokens=2000

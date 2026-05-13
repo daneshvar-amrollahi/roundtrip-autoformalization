@@ -1,0 +1,7 @@
+(forall ((sc Vehicle) (r Roadway) (t Int))
+  (=> (and (= (kind sc) VK_Streetcar)
+           (on_roadway sc r t)
+           (= (roadway_pos sc r t) RP_StreetcarTrack)
+           (fire_hose_on_roadway r t))
+      (=> (not (fire_dept_consent sc t))
+          (not (= (streetcar_state sc t) SCS_Moving)))))

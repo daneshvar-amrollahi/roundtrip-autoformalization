@@ -1,0 +1,7 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (is_kind a AK_Fish)
+           (possesses p a t)
+           (> (count_in_possession p AK_Fish t)
+              (* 3 (possession_limit AK_Fish)))
+           (not (has_lawful_documentation p a t)))
+      false))

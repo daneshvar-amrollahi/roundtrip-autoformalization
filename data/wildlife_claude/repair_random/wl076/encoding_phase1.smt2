@@ -1,0 +1,6 @@
+(forall ((p Person) (d Device) (w WaterBody) (t Int))
+  (=> (and (uses_device p d t)
+           (device_kind d DK_Trotline)
+           (on_water_body p w t)
+           (water_kind w WK_PublicSaltWater))
+      (has_attached_tag d t)))

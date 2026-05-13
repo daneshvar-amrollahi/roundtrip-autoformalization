@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (hunts p a t)
+           (on_state_park p t)
+           (or (is_kind a AK_WildGameAnimal)
+               (is_kind a AK_WildBird)
+               (is_kind a AK_WildFowl)))
+      (or (authorized_by_commission p t)
+          (has_subchapter_authorization p t))))

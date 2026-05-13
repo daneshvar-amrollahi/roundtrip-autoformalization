@@ -1,0 +1,7 @@
+(forall ((v_op Vehicle) (v_sc Vehicle) (t Int))
+  (=> (and (passing v_op v_sc t)
+           (= (passing_side v_op v_sc t) PS_Right)
+           (= (kind v_sc) VK_Streetcar)
+           (or (= (streetcar_state v_sc t) SCS_StoppedForPassengers)
+               (= (streetcar_state v_sc t) SCS_AboutToStopForPassengers)))
+      (stopped_at_least_5ft_rear_of_door v_op v_sc t)))

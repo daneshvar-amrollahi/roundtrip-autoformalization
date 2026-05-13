@@ -1,0 +1,7 @@
+(forall ((shooter Person) (t Int))
+  (=> (and (acts_knowingly shooter t)
+           (discharges_firearm shooter t)
+           (or (is_hunting shooter t)
+               (engages_in_recreational_shooting shooter t))
+           (projectile_crosses_property_line shooter t))
+      false))

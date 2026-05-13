@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (a Access) (t Int))
+  (=> (and (is_ego v)
+           (emerging_from v a t)
+           (or (= (access_kind a) AK_Alley)
+               (= (access_kind a) AK_Driveway)
+               (= (access_kind a) AK_Building)))
+      (yield_right_of_way_to_pedestrian v t)))

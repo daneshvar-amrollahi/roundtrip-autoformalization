@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (c Crossing) (t Int))
+  (=> (and (= (kind v) VK_Bus)
+           (approaching_crossing v c t))
+      (exists ((t_stop Int))
+        (and (<= t_stop t)
+             (stopped v t_stop)
+             (<= ft_15_sq (dist_to_nearest_rail_sq v c t_stop))
+             (<= (dist_to_nearest_rail_sq v c t_stop) ft_50_sq)))))

@@ -1,0 +1,1 @@
+The ego vehicle, when traveling on an unpaved roadway and approaching an intersection where that unpaved roadway meets a paved roadway, must stop, and must not enter the intersection while any vehicle on the paved roadway that is either in or approaching the intersection constitutes an immediate hazard, and must maintain an assured clear distance ahead of any such vehicle.

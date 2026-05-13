@@ -1,0 +1,6 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (possesses p a t)
+           (in_cold_storage a t)
+           (or (is_kind a AK_GameBird) (is_kind a AK_GameAnimal))
+           (lawfully_killed a))
+      (<= (count_in_possession p AK_GameBird t) (possession_limit AK_GameBird))))

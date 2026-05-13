@@ -1,0 +1,9 @@
+A person who places an explosive substance in a water body for construction purposes and with written authorization may not do so without both the construction purpose and written authorization.
+
+Hmm, let me re-examine the formula more carefully.
+
+The formula says: for all p, s, w, t, if (s is explosive AND person places s in water AND for construction AND has written authorization), then NOT (s is explosive AND places in water AND NOT (for construction AND has written authorization)).
+
+The consequent is actually a tautology given the antecedent — if the person has construction purpose and written authorization, then it cannot be the case that they lack both. This is logically trivially true, but the intent of the encoding is to express that placing explosives in water is only permitted when done for construction purposes with written authorization.
+
+A person may not place an explosive substance in a water body unless the person is doing so for construction purposes and has written authorization.

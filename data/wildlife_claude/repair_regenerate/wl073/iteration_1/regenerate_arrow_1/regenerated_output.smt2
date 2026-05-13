@@ -1,0 +1,13 @@
+(forall ((p Person) (shark Animal) (carcass Animal) (product Animal) (t Int))
+  (=> (and (is_kind shark AK_Shark)
+           (is_kind carcass AK_Carcass)
+           (is_part_of carcass shark)
+           (or (is_kind product AK_Steak) (is_kind product AK_Fillet))
+           (processes_into p carcass product t))
+      (and
+        (forall ((fin Animal))
+          (=> (and (is_kind fin AK_Fin)
+                   (is_part_of fin shark))
+              (and (not (is_part_of fin product))
+                   (fin_destroyed fin t))))
+        )))

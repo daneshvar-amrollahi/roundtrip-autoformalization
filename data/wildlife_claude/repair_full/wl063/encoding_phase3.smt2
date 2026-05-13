@@ -1,0 +1,7 @@
+(forall ((p Person) (a Animal) (t Int))
+  (=> (and (or (is_kind a AK_Fish) (is_kind a AK_Shellfish) (is_kind a AK_AquaticPlant))
+           (not (has_introduction_permit p t)))
+      (and (=> (escaped_into_public_water a t)
+               (not (possesses p a t)))
+           (=> (originally_in_nonpublic_water a t)
+               (not (places_in_public_water p a t))))))

@@ -1,0 +1,7 @@
+(forall ((v Vehicle) (pursuer Vehicle) (t Int))
+  (=> (and (police_signal_given pursuer v t)
+           (or (audible_signal pursuer v t)
+               (emergency_signals_active pursuer t))
+           (or (not (stopped v t))
+               (fleeing_police v t)))
+      (commits_offense v t)))

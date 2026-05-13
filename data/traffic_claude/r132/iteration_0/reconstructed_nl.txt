@@ -1,0 +1,1 @@
+A vehicle may not open a door on the traffic side unless the door can be opened safely.

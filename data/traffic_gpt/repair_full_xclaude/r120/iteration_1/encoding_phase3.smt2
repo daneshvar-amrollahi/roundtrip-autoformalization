@@ -1,0 +1,5 @@
+(forall ((v Vehicle) (z Zone) (t Int))
+  (=> (and (is_ego v)
+           (is_safety_zone z))
+      (and (not (in_zone v z t))
+           (not (driving_through_safety_zone v z t)))))

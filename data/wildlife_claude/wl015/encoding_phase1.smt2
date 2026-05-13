@@ -1,0 +1,8 @@
+(forall ((p Person) (a Animal) (d Device) (t Int))
+  (=> (and (acts_recklessly p t)
+           (device_kind d DK_Dog)
+           (uses_device p d t)
+           (is_kind a AK_Deer)
+           (or (hunts p a t) (pursues p a t))
+           (not (has_subchapter_authorization p t)))
+      false))

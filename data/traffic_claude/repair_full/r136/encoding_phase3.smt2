@@ -1,0 +1,8 @@
+(forall ((v Vehicle) (t Int))
+  (=> (and (is_ego v)
+           (on_sidewalk_or_trail v t)
+           (not (exists ((a Access))
+                  (and (= (access_kind a) AK_Driveway)
+                       (or (emerging_from v a t)
+                           (turning_into v a t))))))
+      false))

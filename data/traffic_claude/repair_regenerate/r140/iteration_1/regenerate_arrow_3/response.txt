@@ -1,0 +1,10 @@
+(forall ((v_passer Vehicle) (v_passed Vehicle) (r Roadway) (t Int))
+  (=> (and (passing v_passer v_passed t)
+           (= (passing_side v_passer v_passed t) PS_Right)
+           (on_roadway v_passed r t)
+           (not (= v_passer v_passed)))
+      (and
+        (not (=> (audible_signal v_passer v_passed t)
+                 (close_to_right_edge_practicable v_passed r t)))
+        (not (=> (passing v_passer v_passed t)
+                 (not (is-accelerating v_passed t)))))))
